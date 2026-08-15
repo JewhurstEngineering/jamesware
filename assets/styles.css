@@ -303,8 +303,10 @@ h3 {
 }
 
 .logo-swap--footer {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
+  border: 1px solid color-mix(in srgb, var(--phosphor) 40%, transparent);
+  padding: 6px;
 }
 
 /* ---------- hero shell ---------- */
@@ -734,18 +736,34 @@ h3 {
   padding: 4.5rem 0;
 }
 
+main {
+  counter-reset: section;
+}
+
 .section-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.25rem;
-  margin-bottom: 0.6rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
 }
 
 .section-head h2 {
-  color: var(--ink);
-  font-size: 1.5rem;
+  color: var(--phosphor);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   white-space: nowrap;
+}
+
+.section-head h2::before {
+  counter-increment: section;
+  content: counter(section, decimal-leading-zero) " / ";
+  opacity: 0.65;
 }
 
 .section-head a {
@@ -898,23 +916,55 @@ h3 {
   max-width: 66ch;
 }
 
-.workbench-grid,
 .build-grid {
   display: grid;
   gap: 1.75rem 2rem;
-}
-
-.workbench-grid {
-  grid-template-columns: 1fr 1fr;
-}
-
-.build-grid {
   grid-template-columns: repeat(4, 1fr);
+}
+
+.workbench-list {
+  display: grid;
+}
+
+.workbench-row {
+  display: grid;
+  grid-template-columns: 9.5em 15em 1fr;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding: 1.1rem 0;
+  border-top: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+}
+
+.workbench-row:last-child {
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+}
+
+.workbench-row h3 {
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.workbench-row p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
 }
 
 .quiet-card {
   padding: 1.1rem 0 0;
   border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+}
+
+.build-icon {
+  width: 26px;
+  height: 26px;
+  margin-bottom: 0.7rem;
+  color: var(--phosphor);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .quiet-card h3 {
@@ -947,9 +997,17 @@ h3 {
   font-size: 0.98rem;
 }
 
-.about-prose h2 {
+.about-prose .about-lede {
   color: var(--ink);
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.about-prose .about-meta {
+  margin-top: 0.4rem;
+  color: var(--muted);
+  font-size: 0.86rem;
+  letter-spacing: 0.02em;
 }
 
 /* ---------- product pages ---------- */

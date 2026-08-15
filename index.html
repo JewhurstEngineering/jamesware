@@ -299,21 +299,17 @@
             <h2>Workbench</h2>
           </div>
           <p class="lede">Experiments, prototypes, and things I’m figuring out. Not products.</p>
-          <div class="workbench-grid">
-            <article class="quiet-card">
-              <div class="card-meta">
-                <span class="status status--internal">In use · internal</span>
-              </div>
+          <div class="workbench-list">
+            <article class="workbench-row">
+              <span class="status status--internal">In use · internal</span>
               <h3>Product Analysis Pipeline</h3>
               <p>
                 A cited, gated workflow that turns product evidence into a local model, then a
                 Linear dry-run — and only writes tickets when a human says so.
               </p>
             </article>
-            <article class="quiet-card">
-              <div class="card-meta">
-                <span class="status status--planned">Planned</span>
-              </div>
+            <article class="workbench-row">
+              <span class="status status--planned">Planned</span>
               <h3>Scout</h3>
               <p>
                 Always-on research for independent automotive repair. Evidence first. Humans still
@@ -331,18 +327,35 @@
           </div>
           <div class="build-grid">
             <article class="quiet-card">
+              <svg class="build-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="7" y="2" width="10" height="20" rx="2" />
+                <path d="M11 18h2" />
+              </svg>
               <h3>Native Apps</h3>
               <p>macOS, iPhone, iPad, Apple Watch, widgets, and focused utilities.</p>
             </article>
             <article class="quiet-card">
+              <svg class="build-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 6l-5 6 5 6" />
+                <path d="M16 6l5 6-5 6" />
+              </svg>
               <h3>Developer Tools</h3>
               <p>Things that make building, monitoring, or understanding software easier.</p>
             </article>
             <article class="quiet-card">
+              <svg class="build-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="4" y="4" width="16" height="4.5" rx="1" />
+                <rect x="4" y="10.5" width="16" height="4.5" rx="1" />
+                <rect x="4" y="17" width="16" height="4.5" rx="1" />
+              </svg>
               <h3>Systems</h3>
               <p>APIs, integrations, backend services, and operational workflows.</p>
             </article>
             <article class="quiet-card">
+              <svg class="build-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="3.2" />
+                <path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" />
+              </svg>
               <h3>AI + Automation</h3>
               <p>Agents, research pipelines, document analysis, and workflow tooling.</p>
             </article>
@@ -351,49 +364,55 @@
       </section>
 
       <section class="section" id="about">
-        <div class="wrap about-block">
-          <div class="about-prose">
-            <div class="pixel-heart" aria-hidden="true">
-              <svg viewBox="0 0 7 6">
-                <rect x="1" y="0" width="2" height="1" />
-                <rect x="4" y="0" width="2" height="1" />
-                <rect x="0" y="1" width="7" height="2" />
-                <rect x="1" y="3" width="5" height="1" />
-                <rect x="2" y="4" width="3" height="1" />
-                <rect x="3" y="5" width="1" height="1" />
-              </svg>
-            </div>
+        <div class="wrap">
+          <div class="section-head">
             <h2>About</h2>
-            <p>
-              JamesWare is the independent software studio of James Jewhurst. I’m a software
-              architect and product-minded engineer who likes building useful systems from end to
-              end — from product and UX through architecture, implementation, and operations.
-            </p>
-            <p>
-              My professional work has included software platforms, APIs, integrations, automotive
-              systems, communications, developer tooling, and engineering infrastructure. JamesWare
-              is where I build the smaller tools, native apps, experiments, and ideas I want to
-              exist.
-            </p>
-            <p>
-              I care about software that is fast, understandable, thoughtful, and genuinely useful.
-              Deep experience building software for automotive operations sits underneath that —
-              shop management, scheduling, communications, integrations — without making JamesWare
-              an automotive-only company.
-            </p>
           </div>
-          <div class="term-window" aria-label="JamesWare terminal">
-            <div class="term-window__bar">
-              <span class="term-dot" aria-hidden="true"></span>
-              <span>guest@jamesware:~</span>
+          <div class="about-block">
+            <div class="about-prose">
+              <div class="pixel-heart" aria-hidden="true">
+                <svg viewBox="0 0 7 6">
+                  <rect x="1" y="0" width="2" height="1" />
+                  <rect x="4" y="0" width="2" height="1" />
+                  <rect x="0" y="1" width="7" height="2" />
+                  <rect x="1" y="3" width="5" height="1" />
+                  <rect x="2" y="4" width="3" height="1" />
+                  <rect x="3" y="5" width="1" height="1" />
+                </svg>
+              </div>
+              <p class="about-lede">
+                <span class="accent">JamesWare</span> is the independent software studio of James
+                Jewhurst. I’m a software architect and product-minded engineer who likes building
+                useful systems from end to end — from product and UX through architecture,
+                implementation, and operations.
+              </p>
+              <p>
+                My professional work has included software platforms, APIs, integrations, automotive
+                systems, communications, developer tooling, and engineering infrastructure. JamesWare
+                is where I build the smaller tools, native apps, experiments, and ideas I want to
+                exist.
+              </p>
+              <p>
+                I care about software that is fast, understandable, thoughtful, and genuinely useful.
+                Deep experience building software for automotive operations sits underneath that —
+                shop management, scheduling, communications, integrations — without making JamesWare
+                an automotive-only company.
+              </p>
+              <p class="about-meta">Software · Product · Architecture</p>
             </div>
-            <pre id="care-term">$ cat approach.md
+            <div class="term-window" aria-label="JamesWare terminal">
+              <div class="term-window__bar">
+                <span class="term-dot" aria-hidden="true"></span>
+                <span>guest@jamesware:~</span>
+              </div>
+              <pre id="care-term">$ cat approach.md
 Useful over impressive.
 Ship the small thing that works.
 $ background
 Software architecture, automotive
 systems, developer tooling, APIs.
 $ </pre>
+            </div>
           </div>
         </div>
       </section>

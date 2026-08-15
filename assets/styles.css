@@ -862,33 +862,36 @@ main {
 .work-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.75rem 2.5rem;
+  gap: 2.25rem 2.5rem;
 }
 
 .work-item {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.35rem 1rem;
-  align-items: start;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
 }
 
 .work-item .card-icon {
-  grid-row: 1 / -1;
+  flex: none;
+}
+
+.work-item__copy {
+  min-width: 0;
 }
 
 .work-item h3 {
-  margin: 0.15rem 0 0.2rem;
+  margin: 0.15rem 0 0.35rem;
   font-size: 1.12rem;
   color: var(--ink);
 }
 
 .work-item p {
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.5rem;
   font-size: 0.92rem;
 }
 
 .work-item__meta {
-  margin: 0 0 0.45rem;
+  margin: 0 0 0.6rem;
 }
 
 .card-icon {

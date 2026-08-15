@@ -316,7 +316,9 @@
   var HERO_PROJECTS = [
     { slug: "ai-meter", name: "ai meter", href: "ai-meter/index.html", desc: "local-first usage meter" },
     { slug: "daily-on-plan", name: "daily on plan", href: "daily-on-plan/index.html", desc: "on-device nutrition sheet" },
-    { slug: "bytequest", name: "bytequest", href: "bytequest/index.html", desc: "CLI adventure, placeholder" },
+    { slug: "budmath", name: "budmath", href: "budmath/index.html", desc: "ounces to grams, portions" },
+    { slug: "glauncher", name: "glauncher", href: "glauncher/index.html", desc: "windows group launcher" },
+    { slug: "doteq", name: "doteq", href: "doteq/index.html", desc: ".env sync for local dev" },
   ];
 
   var HERO_HELP = [

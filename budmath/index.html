@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Daily On Plan — JamesWare</title>
+    <title>BudMath — JamesWare</title>
     <meta
       name="description"
-      content="Stay on plan. One day at a time. A personal, on-device daily nutrition sheet — digitize the paper log, not become another calorie social app."
+      content="Ounces to grams, and the portion mix, without a spreadsheet. A small web calculator for dispensary measurement combinations."
     />
     <script>
       (function () {
@@ -94,135 +94,124 @@
         <nav class="crumb" aria-label="Breadcrumb">
           <a href="../index.html">JamesWare</a>
           <span aria-hidden="true">/</span>
-          <span>Daily On Plan</span>
+          <span>BudMath</span>
         </nav>
 
         <section class="product-hero">
           <div>
-            <p class="card-kicker">JamesWare · Personal utility</p>
-            <h1>Daily On Plan</h1>
-            <p class="product-tagline">Stay on plan. One day at a time.</p>
+            <p class="card-kicker">JamesWare · Utility</p>
+            <h1>BudMath</h1>
+            <p class="product-tagline">Ounces to grams, and the portion mix, without a spreadsheet.</p>
             <div class="badge-row">
-              <span class="status status--building">Building</span>
-              <span class="badge">iPhone</span>
-              <span class="badge">iPad</span>
-              <span class="badge">Watch</span>
-              <span class="badge">Mac</span>
+              <span class="status status--released">Released</span>
+              <span class="badge">Web</span>
+              <span class="badge">Tailwind</span>
+              <span class="badge">Vanilla JS</span>
             </div>
             <div class="cta-row">
-              <span class="btn btn--disabled" aria-disabled="true">TestFlight planned</span>
-              <span class="link-arrow" aria-disabled="true">Not on the App Store</span>
+              <a class="btn" href="https://www.budmath.com">Open BudMath <span aria-hidden="true">›</span></a>
+              <a class="btn" href="https://github.com/JewhurstEngineering/budmath">View source <span aria-hidden="true">›</span></a>
             </div>
           </div>
-          <figure class="device device--phone">
-            <!-- Drop a real capture at ../assets/products/daily-on-plan/hero.png -->
+          <figure class="device">
             <img
               class="device__photo"
-              src="../assets/products/daily-on-plan/hero.png"
-              alt="Daily On Plan on iPhone"
+              src="../assets/products/budmath/hero.png"
+              alt="BudMath calculator"
               hidden
             />
             <div class="device__mock" aria-hidden="true">
               <div class="device__chrome">
-                <span>today</span>
-                <span>on plan</span>
+                <span>calculator</span>
+                <span class="led"></span>
               </div>
-              <div class="ring" aria-hidden="true"></div>
-              <pre class="device__panel">Protein   142 / 160
-Ketosis   Y
-Followed  Y
+              <pre class="device__panel">BudMath
+──────────────
+1.00 oz
+──────────────
+ounces     1
+halves     2
+quarters   4
+eighths    8
+prerolls  28
 
-Water     6/8
-Lunch     eggs + greens</pre>
+28.00 g</pre>
             </div>
           </figure>
         </section>
-        <p class="shot-caption">Screenshot slot — replace assets/products/daily-on-plan/hero.png when you have a capture.</p>
+        <p class="shot-caption">Screenshot slot — replace assets/products/budmath/hero.png when you have a capture.</p>
 
         <section class="product-copy">
           <div class="prose-grid">
             <div>
               <h2>Problem</h2>
               <p>
-                Protein-forward / ketosis-style weight loss is easier on paper than in another
-                generic calorie social app. The sheet should stay yours.
+                Dispensary math is a handful of fixed fractions (oz, half, quarter, eighth, preroll)
+                that people still re-do in their head or a notes app.
               </p>
             </div>
             <div>
               <h2>What it does</h2>
               <p>
-                Digitizes the daily log: protein toward a single goal, ketosis as a self-report,
-                followed-plan Y/N with honest off-plan reason chips. Built first for one person.
+                A small web calculator: enter ounces, get grams (1 oz = 28 g) plus mixed
+                combinations. History of the last five runs in localStorage. Dark/light toggle.
               </p>
             </div>
             <div>
               <h2>Why it exists</h2>
-              <p>
-                Personal and sharp, not clinical. Daily ritual over social tracking. It should
-                feel like your sheet, not a network.
-              </p>
+              <p>One job, in the browser. No account, no shop, no inventory.</p>
             </div>
           </div>
 
           <div class="cap-grid">
             <h2>Capabilities</h2>
             <ul class="cap-list">
-              <li>Protein kcal vs a single protein goal (the ring is protein)</li>
-              <li>Ketosis Y/N — self-report; the app does not measure</li>
-              <li>Followed plan Y/N with honest off-plan reason chips</li>
-              <li>Hydration, optional habits, saved meals, food preferences</li>
-              <li>Week 1 / Week 2+ food guide</li>
-              <li>Weight and BMI with privacy collapse</li>
-              <li>Optional HealthKit on iPhone</li>
-              <li>Reports, CSV / PDF / Excel export, on-device backup</li>
-              <li>Suggest is a shuffle from prefers/excludes — not AI</li>
-              <li>App Intents / Shortcuts, Home Screen and Lock Screen widgets</li>
+              <li>Ounce → gram conversion</li>
+              <li>Breakdowns: ounces, halves, quarters, eighths, prerolls</li>
+              <li>Mixed combinations for flexible portioning</li>
+              <li>Last 5 calculations with timestamps; tap to rerun</li>
+              <li>Dark/light preference in localStorage</li>
+              <li>Mobile-friendly layout</li>
             </ul>
           </div>
 
           <div class="privacy">
-            <h2>Privacy</h2>
+            <h2>How it works</h2>
             <p>
-              The journal lives on iPhone, Watch, and Mac. Optional iCloud CloudKit syncs across
-              the user’s iCloud — not a Daily On Plan server. No ads, no analytics SDKs, no sale of
-              data. USDA API key stays in device Keychain. Notifications are local. Not a medical
-              device. Not Android.
+              Static HTML/CSS/JS (Tailwind). All math and history stay in the browser. No JamesWare
+              backend.
             </p>
           </div>
 
           <div class="state">
             <h2>Current state</h2>
             <p>
-              Building. Usable as a native app on James’s devices. Personal Xcode / sideload now;
-              TestFlight and Universal Purchase planned. Not App Store–released. On Plan is short
-              chrome (menu bar, spoken fallback). Daily On Plan is the shipping name.
+              Released at <a href="https://www.budmath.com">budmath.com</a>. Public repo under
+              Jewhurst Engineering. Small, finished utility — not a store.
             </p>
           </div>
 
           <div class="get-it">
             <h2>Get it</h2>
-            <p class="note">
-              No App Store listing yet. No fake download. When TestFlight exists, this button
-              becomes a real link.
-            </p>
+            <p class="note">Live on the web. Source is public.</p>
             <div class="cta-row">
-              <span class="btn btn--disabled" aria-disabled="true">TestFlight planned</span>
-              <span class="btn btn--disabled" aria-disabled="true">Universal Purchase planned</span>
+              <a class="btn" href="https://www.budmath.com">Open BudMath <span aria-hidden="true">›</span></a>
+              <a class="btn" href="https://github.com/JewhurstEngineering/budmath">GitHub <span aria-hidden="true">›</span></a>
             </div>
           </div>
 
           <div class="related">
             <h2>Also on the bench</h2>
             <div class="project-grid">
-              <article class="card" data-path="~/work/ai-meter">
-                <h3>AI Meter</h3>
-                <p>Local-first usage meter for Cursor, Claude, and Codex.</p>
-                <a class="more" href="../ai-meter/index.html">View Project <span aria-hidden="true">›</span></a>
+              <article class="card" data-path="~/work/daily-on-plan">
+                <h3>Daily On Plan</h3>
+                <p>Stay on plan. One day at a time.</p>
+                <a class="more" href="../daily-on-plan/index.html">View Project <span aria-hidden="true">›</span></a>
               </article>
-              <article class="card" data-path="~/work/budmath">
-                <h3>BudMath</h3>
-                <p>Ounces to grams, and the portion mix, without a spreadsheet.</p>
-                <a class="more" href="../budmath/index.html">View Project <span aria-hidden="true">›</span></a>
+              <article class="card" data-path="~/work/glauncher">
+                <h3>GLauncher</h3>
+                <p>Group the apps you always open together. Launch them as one.</p>
+                <a class="more" href="../glauncher/index.html">View Project <span aria-hidden="true">›</span></a>
               </article>
             </div>
           </div>
@@ -252,7 +241,7 @@ Lunch     eggs + greens</pre>
             <ul>
               <li><a href="../index.html#projects">Work</a></li>
               <li><a href="../index.html#about">About</a></li>
-              <li><a href="index.html">Daily On Plan</a></li>
+              <li><a href="index.html">BudMath</a></li>
             </ul>
           </div>
           <div>
@@ -263,7 +252,7 @@ Lunch     eggs + greens</pre>
             </ul>
           </div>
           <div class="stay">
-            <p>Your sheet. Not a network.</p>
+            <p>The portioning, not the shop.</p>
           </div>
         </div>
         <div class="footer-base">

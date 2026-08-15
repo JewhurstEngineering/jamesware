@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Daily On Plan — JamesWare</title>
+    <title>Doteq — JamesWare</title>
     <meta
       name="description"
-      content="Stay on plan. One day at a time. A personal, on-device daily nutrition sheet — digitize the paper log, not become another calorie social app."
+      content="Keep .env in sync with the example — keys only, never overwrite. A Python CLI for local-dev env hygiene."
     />
     <script>
       (function () {
@@ -94,135 +94,127 @@
         <nav class="crumb" aria-label="Breadcrumb">
           <a href="../index.html">JamesWare</a>
           <span aria-hidden="true">/</span>
-          <span>Daily On Plan</span>
+          <span>Doteq</span>
         </nav>
 
         <section class="product-hero">
           <div>
-            <p class="card-kicker">JamesWare · Personal utility</p>
-            <h1>Daily On Plan</h1>
-            <p class="product-tagline">Stay on plan. One day at a time.</p>
+            <p class="card-kicker">JamesWare · Dev tool</p>
+            <h1>Doteq</h1>
+            <p class="product-tagline">Keep <code>.env</code> in sync with the example — keys only, never overwrite.</p>
             <div class="badge-row">
-              <span class="status status--building">Building</span>
-              <span class="badge">iPhone</span>
-              <span class="badge">iPad</span>
-              <span class="badge">Watch</span>
-              <span class="badge">Mac</span>
+              <span class="status status--opensource">Open source</span>
+              <span class="badge">CLI</span>
+              <span class="badge">Python</span>
+              <span class="badge">MIT</span>
             </div>
             <div class="cta-row">
-              <span class="btn btn--disabled" aria-disabled="true">TestFlight planned</span>
-              <span class="link-arrow" aria-disabled="true">Not on the App Store</span>
+              <a class="btn" href="https://github.com/JewhurstEngineering/doteq">View source <span aria-hidden="true">›</span></a>
+              <a class="link-arrow" href="https://github.com/JewhurstEngineering/doteq#readme">README <span aria-hidden="true">›</span></a>
             </div>
           </div>
-          <figure class="device device--phone">
-            <!-- Drop a real capture at ../assets/products/daily-on-plan/hero.png -->
+          <figure class="device">
             <img
               class="device__photo"
-              src="../assets/products/daily-on-plan/hero.png"
-              alt="Daily On Plan on iPhone"
+              src="../assets/products/doteq/hero.png"
+              alt="Doteq dry-run in a terminal"
               hidden
             />
             <div class="device__mock" aria-hidden="true">
               <div class="device__chrome">
-                <span>today</span>
-                <span>on plan</span>
+                <span>tty</span>
+                <span class="led"></span>
               </div>
-              <div class="ring" aria-hidden="true"></div>
-              <pre class="device__panel">Protein   142 / 160
-Ketosis   Y
-Followed  Y
+              <pre class="device__panel">$ doteq --dry-run
+──────────────
+.env ← .env.example
 
-Water     6/8
-Lunch     eggs + greens</pre>
++ DATABASE_URL
++ REDIS_URL
+  existing  12
+  orphans   0
+
+status  would add 2</pre>
             </div>
           </figure>
         </section>
-        <p class="shot-caption">Screenshot slot — replace assets/products/daily-on-plan/hero.png when you have a capture.</p>
+        <p class="shot-caption">Screenshot slot — replace assets/products/doteq/hero.png when you have a capture.</p>
 
         <section class="product-copy">
           <div class="prose-grid">
             <div>
               <h2>Problem</h2>
               <p>
-                Protein-forward / ketosis-style weight loss is easier on paper than in another
-                generic calorie social app. The sheet should stay yours.
+                <code>.env.example</code> gains keys; local <code>.env</code> does not. Copy-paste
+                overwrites values you already set. CI then fails on a missing key nobody noticed.
               </p>
             </div>
             <div>
               <h2>What it does</h2>
               <p>
-                Digitizes the daily log: protein toward a single goal, ketosis as a self-report,
-                followed-plan Y/N with honest off-plan reason chips. Built first for one person.
+                Parses both files, appends missing keys, leaves existing values alone, keeps comments
+                and blank lines. Dry-run, orphan check, optional example-from-env, atomic write +
+                timestamped <code>600</code> backup.
               </p>
             </div>
             <div>
               <h2>Why it exists</h2>
-              <p>
-                Personal and sharp, not clinical. Daily ritual over social tracking. It should
-                feel like your sheet, not a network.
-              </p>
+              <p>Local-dev hygiene. Print key names and counts, never values.</p>
             </div>
           </div>
 
           <div class="cap-grid">
             <h2>Capabilities</h2>
             <ul class="cap-list">
-              <li>Protein kcal vs a single protein goal (the ring is protein)</li>
-              <li>Ketosis Y/N — self-report; the app does not measure</li>
-              <li>Followed plan Y/N with honest off-plan reason chips</li>
-              <li>Hydration, optional habits, saved meals, food preferences</li>
-              <li>Week 1 / Week 2+ food guide</li>
-              <li>Weight and BMI with privacy collapse</li>
-              <li>Optional HealthKit on iPhone</li>
-              <li>Reports, CSV / PDF / Excel export, on-device backup</li>
-              <li>Suggest is a shuffle from prefers/excludes — not AI</li>
-              <li>App Intents / Shortcuts, Home Screen and Lock Screen widgets</li>
+              <li>Sync missing keys; never overwrite</li>
+              <li>Preserve comments, blanks, quotes, <code>export KEY=</code>, basic multiline</li>
+              <li>Auto-detect <code>.env.example</code> or <code>example.env</code></li>
+              <li><code>--create-example</code> with empty values</li>
+              <li><code>--dry-run</code>, <code>--check-orphans</code></li>
+              <li>Atomic write + <code>.env.bak.YYYYMMDD-HHMMSS</code></li>
+              <li>JSON output when <code>CI</code> is set</li>
             </ul>
           </div>
 
           <div class="privacy">
-            <h2>Privacy</h2>
+            <h2>How it works</h2>
             <p>
-              The journal lives on iPhone, Watch, and Mac. Optional iCloud CloudKit syncs across
-              the user’s iCloud — not a Daily On Plan server. No ads, no analytics SDKs, no sale of
-              data. USDA API key stays in device Keychain. Notifications are local. Not a medical
-              device. Not Android.
+              Local CLI. No network except what you use to install it. Backups mode 600.
             </p>
           </div>
 
           <div class="state">
             <h2>Current state</h2>
-            <p>
-              Building. Usable as a native app on James’s devices. Personal Xcode / sideload now;
-              TestFlight and Universal Purchase planned. Not App Store–released. On Plan is short
-              chrome (menu bar, spoken fallback). Daily On Plan is the shipping name.
-            </p>
+            <p>Public MIT repo, small tool, usable. Not a hosted service.</p>
           </div>
 
           <div class="get-it">
             <h2>Get it</h2>
             <p class="note">
-              No App Store listing yet. No fake download. When TestFlight exists, this button
-              becomes a real link.
+              Install from the public repo. No PyPI package yet. The CLI never prints values, only
+              key names.
+            </p>
+            <p class="note">
+              <code>pip install git+https://github.com/JewhurstEngineering/doteq.git@main</code>
             </p>
             <div class="cta-row">
-              <span class="btn btn--disabled" aria-disabled="true">TestFlight planned</span>
-              <span class="btn btn--disabled" aria-disabled="true">Universal Purchase planned</span>
+              <a class="btn" href="https://github.com/JewhurstEngineering/doteq">View source <span aria-hidden="true">›</span></a>
+              <a class="link-arrow" href="https://github.com/JewhurstEngineering/doteq#readme">README <span aria-hidden="true">›</span></a>
             </div>
           </div>
 
           <div class="related">
             <h2>Also on the bench</h2>
             <div class="project-grid">
+              <article class="card" data-path="~/work/glauncher">
+                <h3>GLauncher</h3>
+                <p>Group the apps you always open together. Launch them as one.</p>
+                <a class="more" href="../glauncher/index.html">View Project <span aria-hidden="true">›</span></a>
+              </article>
               <article class="card" data-path="~/work/ai-meter">
                 <h3>AI Meter</h3>
                 <p>Local-first usage meter for Cursor, Claude, and Codex.</p>
                 <a class="more" href="../ai-meter/index.html">View Project <span aria-hidden="true">›</span></a>
-              </article>
-              <article class="card" data-path="~/work/budmath">
-                <h3>BudMath</h3>
-                <p>Ounces to grams, and the portion mix, without a spreadsheet.</p>
-                <a class="more" href="../budmath/index.html">View Project <span aria-hidden="true">›</span></a>
               </article>
             </div>
           </div>
@@ -252,7 +244,7 @@ Lunch     eggs + greens</pre>
             <ul>
               <li><a href="../index.html#projects">Work</a></li>
               <li><a href="../index.html#about">About</a></li>
-              <li><a href="index.html">Daily On Plan</a></li>
+              <li><a href="index.html">Doteq</a></li>
             </ul>
           </div>
           <div>
@@ -263,7 +255,7 @@ Lunch     eggs + greens</pre>
             </ul>
           </div>
           <div class="stay">
-            <p>Your sheet. Not a network.</p>
+            <p>Keys, not values.</p>
           </div>
         </div>
         <div class="footer-base">

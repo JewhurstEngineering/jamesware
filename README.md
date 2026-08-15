@@ -7,7 +7,10 @@ A zero-build website for **JamesWare** — retro CRT styling, five phosphor them
 - `index.html` — studio homepage
 - `ai-meter/index.html` — AI Meter product page (`jamesware.dev/ai-meter`)
 - `daily-on-plan/index.html` — Daily On Plan (`jamesware.dev/daily-on-plan`)
-- `bytequest/index.html` — fictional showcase and cloneable product template (`jamesware.dev/bytequest`)
+- `budmath/index.html` — BudMath (`jamesware.dev/budmath`)
+- `glauncher/index.html` — GLauncher (`jamesware.dev/glauncher`)
+- `doteq/index.html` — Doteq (`jamesware.dev/doteq`)
+- `bytequest/index.html` — cloneable product template (`jamesware.dev/bytequest`); not listed in Selected Work
 - `assets/styles.css` — layout, CRT effects, product pages
 - `assets/theme.js` — theme pick, ambient cycling, logo crossfade, favicon sync
 - `assets/brand/` — square and full logo PNGs per theme
@@ -56,6 +59,9 @@ Drop real screenshots at:
 ```text
 assets/products/ai-meter/hero.png
 assets/products/daily-on-plan/hero.png
+assets/products/budmath/hero.png
+assets/products/glauncher/hero.png
+assets/products/doteq/hero.png
 assets/products/bytequest/hero.png
 ```
 

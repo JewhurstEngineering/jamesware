@@ -62,15 +62,6 @@
   </head>
   <body>
     <div class="vignette" aria-hidden="true"></div>
-    <div class="scanlines" aria-hidden="true"></div>
-    <div class="bezel" aria-hidden="true">
-      <span class="bezel__corner bezel__corner--tl"></span>
-      <span class="bezel__corner bezel__corner--tr"></span>
-      <span class="bezel__corner bezel__corner--bl"></span>
-      <span class="bezel__corner bezel__corner--br"></span>
-      <span class="bezel__tag bezel__tag--rec">rec</span>
-      <span class="bezel__tag bezel__tag--id">jamesware.dev</span>
-    </div>
 
     <a class="skip" href="#main">Skip to content</a>
 
@@ -107,7 +98,7 @@
           <div class="shell" aria-label="JamesWare terminal">
             <div class="shell__bar">
               <span class="shell__dots" aria-hidden="true"></span>
-              <h1 class="shell__title">James<span class="accent">Ware</span><span class="shell__at">— terminal</span></h1>
+              <h1 class="shell__title">James<span class="accent">Ware</span></h1>
               <span class="logo-swap logo-swap--bar" data-logo="square">
                 <img class="logo-swap__a" alt="" width="20" height="20" />
                 <img class="logo-swap__b" alt="" width="20" height="20" />
@@ -132,10 +123,20 @@
                     <span class="shell__name">daily-on-plan/</span>
                     <span class="shell__desc">on-device nutrition sheet</span>
                   </a>
-                  <a class="shell__row" href="bytequest/index.html">
+                  <a class="shell__row" href="budmath/index.html">
                     <span class="shell__perm">drwxr-xr-x</span>
-                    <span class="shell__name">bytequest/</span>
-                    <span class="shell__desc">CLI adventure, placeholder</span>
+                    <span class="shell__name">budmath/</span>
+                    <span class="shell__desc">ounces to grams, portions</span>
+                  </a>
+                  <a class="shell__row" href="glauncher/index.html">
+                    <span class="shell__perm">drwxr-xr-x</span>
+                    <span class="shell__name">glauncher/</span>
+                    <span class="shell__desc">windows group launcher</span>
+                  </a>
+                  <a class="shell__row" href="doteq/index.html">
+                    <span class="shell__perm">drwxr-xr-x</span>
+                    <span class="shell__name">doteq/</span>
+                    <span class="shell__desc">.env sync for local dev</span>
                   </a>
                   <a class="shell__row" href="#about">
                     <span class="shell__perm">-rw-r--r--</span>
@@ -182,7 +183,6 @@
         <div class="wrap">
           <div class="section-head">
             <h2>Selected Work</h2>
-            <span class="section-rule" aria-hidden="true"></span>
           </div>
           <p class="lede">A small set of things worth looking at. Useful over impressive.</p>
           <div class="project-grid project-grid--featured">
@@ -231,25 +231,63 @@
               <p>Stay on plan. One day at a time. A personal, on-device daily nutrition sheet.</p>
               <a class="more" href="daily-on-plan/index.html">View Project <span aria-hidden="true">›</span></a>
             </article>
-            <article class="card" data-path="~/work/bytequest">
+            <article class="card" data-path="~/work/budmath">
               <div class="card-head">
                 <div class="card-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24">
-                    <rect x="3" y="8" width="18" height="9" rx="4" />
-                    <path d="M8 10.5v4M6 12.5h4" />
-                    <circle cx="16" cy="11.2" r="0.9" fill="currentColor" />
-                    <circle cx="18.1" cy="13.3" r="0.9" fill="currentColor" />
+                    <path d="M7 20V9M17 20V4" />
+                    <path d="M4.5 9h5M14.5 4h5" />
+                    <path d="M4.5 14.5h5M14.5 12h5" />
                   </svg>
                 </div>
-                <h3>ByteQuest</h3>
+                <h3>BudMath</h3>
               </div>
               <div class="card-meta">
-                <span class="status status--experiment">Experiment</span>
-                <span class="badge">CLI</span>
-                <span class="badge">macOS</span>
+                <span class="status status--released">Released</span>
+                <span class="badge">Web</span>
+                <span class="badge">JS</span>
               </div>
-              <p>A CLI adventure game for nostalgic developers. Placeholder showcase.</p>
-              <a class="more" href="bytequest/index.html">View Project <span aria-hidden="true">›</span></a>
+              <p>Ounces to grams, and the portion mix, without a spreadsheet.</p>
+              <a class="more" href="budmath/index.html">View Project <span aria-hidden="true">›</span></a>
+            </article>
+          </div>
+          <div class="project-grid project-grid--support">
+            <article class="card" data-path="~/work/glauncher">
+              <div class="card-head">
+                <div class="card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="3" y="5" width="12" height="9" rx="1.5" />
+                    <rect x="9" y="10" width="12" height="9" rx="1.5" />
+                    <path d="M13.5 13.2l4 2.3-4 2.3z" />
+                  </svg>
+                </div>
+                <h3>GLauncher</h3>
+              </div>
+              <div class="card-meta">
+                <span class="status status--released">Released</span>
+                <span class="badge">Windows</span>
+              </div>
+              <p>Group the apps you always open together. Launch them as one.</p>
+              <a class="more" href="glauncher/index.html">View Project <span aria-hidden="true">›</span></a>
+            </article>
+            <article class="card" data-path="~/work/doteq">
+              <div class="card-head">
+                <div class="card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="4" y="4" width="10" height="13" rx="1.5" />
+                    <rect x="10" y="7" width="10" height="13" rx="1.5" />
+                    <path d="M13 11h4M13 14h4" />
+                  </svg>
+                </div>
+                <h3>Doteq</h3>
+              </div>
+              <div class="card-meta">
+                <span class="status status--opensource">Open source</span>
+                <span class="badge">CLI</span>
+                <span class="badge">Python</span>
+              </div>
+              <p>Keep .env in sync with the example — keys only, never overwrite.</p>
+              <a class="more" href="doteq/index.html">View Project <span aria-hidden="true">›</span></a>
             </article>
           </div>
         </div>
@@ -259,7 +297,6 @@
         <div class="wrap">
           <div class="section-head">
             <h2>Workbench</h2>
-            <span class="section-rule" aria-hidden="true"></span>
           </div>
           <p class="lede">Experiments, prototypes, and things I’m figuring out. Not products.</p>
           <div class="workbench-grid">
@@ -291,7 +328,6 @@
         <div class="wrap">
           <div class="section-head">
             <h2>What I Build</h2>
-            <span class="section-rule" aria-hidden="true"></span>
           </div>
           <div class="build-grid">
             <article class="quiet-card">

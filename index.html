@@ -55,7 +55,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Share+Tech+Mono&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=VT323&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/styles.css" />
@@ -63,6 +63,14 @@
   <body>
     <div class="vignette" aria-hidden="true"></div>
     <div class="scanlines" aria-hidden="true"></div>
+    <div class="bezel" aria-hidden="true">
+      <span class="bezel__corner bezel__corner--tl"></span>
+      <span class="bezel__corner bezel__corner--tr"></span>
+      <span class="bezel__corner bezel__corner--bl"></span>
+      <span class="bezel__corner bezel__corner--br"></span>
+      <span class="bezel__tag bezel__tag--rec">rec</span>
+      <span class="bezel__tag bezel__tag--id">jamesware.dev</span>
+    </div>
 
     <a class="skip" href="#main">Skip to content</a>
 
@@ -96,67 +104,68 @@
       <section class="hero" id="top">
         <div class="floor-grid" aria-hidden="true"></div>
         <div class="wrap">
-          <div class="hero-copy">
-            <div class="hero-brand">
-              <span class="logo-swap logo-swap--hero" data-logo="square">
-                <img class="logo-swap__a" alt="JamesWare logo" width="110" height="110" />
-                <img class="logo-swap__b" alt="" width="110" height="110" />
+          <div class="shell" aria-label="JamesWare terminal">
+            <div class="shell__bar">
+              <span class="shell__dots" aria-hidden="true"></span>
+              <h1 class="shell__title">James<span class="accent">Ware</span><span class="shell__at">— terminal</span></h1>
+              <span class="logo-swap logo-swap--bar" data-logo="square">
+                <img class="logo-swap__a" alt="" width="20" height="20" />
+                <img class="logo-swap__b" alt="" width="20" height="20" />
               </span>
-              <div class="hero-brand__text">
-                <h1 class="hero-title">James<span class="accent">Ware</span></h1>
-                <p class="hero-tag">Made with care, by JamesWare</p>
+              <span class="shell__led" aria-hidden="true"></span>
+            </div>
+            <div class="shell__screen">
+              <div class="shell__intro" id="hero-intro">
+                <pre class="shell__term" id="hero-term"><span class="term-line term-line--cmd">guest@jamesware:~$ whoami</span>
+<span class="term-line term-line--out">independent software studio — apps, tools, useful things</span>
+<span class="term-line term-line--cmd">guest@jamesware:~$ cat mission.txt</span>
+<span class="term-line term-line--out">Useful over impressive. Ship the small thing that works.</span>
+<span class="term-line term-line--cmd">guest@jamesware:~$ </span></pre>
+                <div class="shell__ls">
+                  <p class="shell__ls-label">$ ls ~/work</p>
+                  <a class="shell__row" href="ai-meter/index.html">
+                    <span class="shell__perm">drwxr-xr-x</span>
+                    <span class="shell__name">ai-meter/</span>
+                    <span class="shell__desc">local-first usage meter</span>
+                  </a>
+                  <a class="shell__row" href="daily-on-plan/index.html">
+                    <span class="shell__perm">drwxr-xr-x</span>
+                    <span class="shell__name">daily-on-plan/</span>
+                    <span class="shell__desc">on-device nutrition sheet</span>
+                  </a>
+                  <a class="shell__row" href="bytequest/index.html">
+                    <span class="shell__perm">drwxr-xr-x</span>
+                    <span class="shell__name">bytequest/</span>
+                    <span class="shell__desc">CLI adventure, placeholder</span>
+                  </a>
+                </div>
+                <div class="shell__prompt-row">
+                  <!-- EDIT ME: real GitHub URL -->
+                  <a class="btn" href="https://github.com/EDIT-ME">github</a>
+                  <a class="link-arrow" href="#about">more about jamesware <span aria-hidden="true">›</span></a>
+                </div>
+              </div>
+              <div class="shell__console" id="hero-console">
+                <p class="shell__hint" id="hero-hint">
+                  This terminal is live — type <code>help</code> to look around, <code>exit</code> to reset.
+                </p>
+                <div class="shell__output" id="hero-output" aria-live="polite"></div>
+                <form class="shell__input-row" id="hero-form">
+                  <label class="shell__prompt-tag" for="hero-input">guest@jamesware:~$</label>
+                  <input
+                    class="shell__input"
+                    id="hero-input"
+                    type="text"
+                    autocomplete="off"
+                    autocapitalize="off"
+                    autocorrect="off"
+                    spellcheck="false"
+                    placeholder="help"
+                    aria-label="JamesWare terminal command input"
+                  />
+                </form>
               </div>
             </div>
-            <p class="hero-lede">
-              Independent software. Apps, tools, and useful things.
-            </p>
-            <p class="lede">
-              An independent software studio for native apps, developer tools, experiments, and
-              software that solves real problems.
-            </p>
-            <div class="cta-row">
-              <a class="btn" href="#projects">View Work <span aria-hidden="true">›</span></a>
-              <!-- EDIT ME: real GitHub URL -->
-              <a class="link-arrow" href="https://github.com/EDIT-ME">GitHub <span aria-hidden="true">›</span></a>
-            </div>
-          </div>
-
-          <div class="hero-stage">
-            <figure class="machine" aria-label="Retro computer running JamesWare Terminal">
-              <div class="monitor">
-                <div class="monitor__bezel">
-                  <div class="monitor__screen">
-                    <div class="monitor__glare" aria-hidden="true"></div>
-                    <pre class="monitor__term" id="hero-term"><span class="term-line term-line--cmd">jamesware@dev:~$ whoami</span>
-<span class="term-line term-line--out">JamesWare</span>
-<span class="term-line term-line--cmd">jamesware@dev:~$ mission</span>
-<span class="term-line term-line--out">Building useful things with care.</span>
-<span class="term-line term-line--cmd">jamesware@dev:~$ status</span>
-<span class="term-line term-line--out">Currently making software.</span>
-<span class="term-line term-line--cmd">jamesware@dev:~$ </span></pre>
-                  </div>
-                </div>
-                <div class="monitor__chin">
-                  <span class="monitor__logo">JamesWare</span>
-                  <span class="led" aria-hidden="true"></span>
-                </div>
-              </div>
-              <div class="drive" aria-hidden="true">
-                <div class="drive__slot"></div>
-                <span class="led"></span>
-              </div>
-              <div class="keys" aria-hidden="true">
-                <div class="keys__row">
-                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                </div>
-                <div class="keys__row">
-                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                </div>
-                <div class="keys__row keys__row--space">
-                  <span></span><span></span><span></span>
-                </div>
-              </div>
-            </figure>
           </div>
         </div>
       </section>
@@ -172,7 +181,7 @@
           </div>
           <p class="lede">A small set of things worth looking at. Useful over impressive.</p>
           <div class="project-grid project-grid--featured">
-            <article class="card card--flagship">
+            <article class="card card--flagship" data-path="~/work/ai-meter">
               <p class="card-kicker">Flagship</p>
               <div class="card-head">
                 <div class="card-icon" aria-hidden="true">
@@ -197,7 +206,7 @@
               </p>
               <a class="more" href="ai-meter/index.html">View Project <span aria-hidden="true">›</span></a>
             </article>
-            <article class="card">
+            <article class="card" data-path="~/work/daily-on-plan">
               <div class="card-head">
                 <div class="card-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24">
@@ -217,7 +226,7 @@
               <p>Stay on plan. One day at a time. A personal, on-device daily nutrition sheet.</p>
               <a class="more" href="daily-on-plan/index.html">View Project <span aria-hidden="true">›</span></a>
             </article>
-            <article class="card">
+            <article class="card" data-path="~/work/bytequest">
               <div class="card-head">
                 <div class="card-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24">
@@ -335,7 +344,7 @@
           <div class="term-window" aria-label="JamesWare terminal">
             <div class="term-window__bar">
               <span class="term-dot" aria-hidden="true"></span>
-              <span>jamesware@dev ~</span>
+              <span>guest@jamesware:~</span>
             </div>
             <pre id="care-term">$ cat approach.md
 Useful over impressive.

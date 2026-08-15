@@ -5,11 +5,11 @@
   var CYCLE_MS = 60000;
   var FAVICON_SELECTOR = 'link[rel="icon"]';
   var THEME_COLORS = {
-    green: { phosphor: "#68e878", dim: "#183820", ink: "#d8efe0" },
-    orange: { phosphor: "#d88030", dim: "#803018", ink: "#f3e4d4" },
-    blue: { phosphor: "#4d82ff", dim: "#101830", ink: "#d4def5" },
-    purple: { phosphor: "#7850f0", dim: "#301850", ink: "#e6dcf5" },
-    red: { phosphor: "#d83030", dim: "#601018", ink: "#f5dcdc" },
+    green: { phosphor: "#5cff7a", dim: "#0c2410", ink: "#cff6d6" },
+    orange: { phosphor: "#ffa23d", dim: "#3a1d08", ink: "#f6dec0" },
+    blue: { phosphor: "#4d9cff", dim: "#0b1b3a", ink: "#cfe0fa" },
+    purple: { phosphor: "#a366ff", dim: "#260c3a", ink: "#e4d4fa" },
+    red: { phosphor: "#ff5252", dim: "#3a0c0c", ink: "#f8d6d6" },
   };
 
   var reducedMotion = window.matchMedia(
@@ -172,29 +172,10 @@
 
   async function typeText(el, text, speed) {
     var i;
-    var fromHero = !!(el && (el.id === "hero-term" || (el.closest && el.closest("#hero-term"))));
     for (i = 0; i < text.length; i += 1) {
       el.appendChild(document.createTextNode(text.charAt(i)));
-      if (fromHero) pressKeyForChar(text.charAt(i));
       await sleep(speed);
     }
-  }
-
-  function pressKeyForChar(ch) {
-    if (reducedMotion) return;
-    var keys = document.querySelectorAll(".keys__row span");
-    if (!keys.length) return;
-    var target = null;
-    if (ch === " ") {
-      target = document.querySelector(".keys__row--space span:nth-child(2)");
-    }
-    if (!target) {
-      target = keys[Math.floor(Math.random() * keys.length)];
-    }
-    target.classList.add("is-down");
-    setTimeout(function () {
-      target.classList.remove("is-down");
-    }, 90);
   }
 
   function cursorNode() {
@@ -266,20 +247,18 @@
     var el = document.getElementById("hero-term");
     if (!el) return;
     var session = [
-      { cls: "cmd", text: "jamesware@dev:~$ whoami" },
-      { cls: "out", text: "JamesWare" },
-      { cls: "cmd", text: "jamesware@dev:~$ mission" },
-      { cls: "out", text: "Building useful things with care." },
-      { cls: "cmd", text: "jamesware@dev:~$ status" },
-      { cls: "out", text: "Currently making software." },
-      { cls: "cmd", text: "jamesware@dev:~$ " },
+      { cls: "cmd", text: "guest@jamesware:~$ whoami" },
+      { cls: "out", text: "independent software studio — apps, tools, useful things" },
+      { cls: "cmd", text: "guest@jamesware:~$ cat mission.txt" },
+      { cls: "out", text: "Useful over impressive. Ship the small thing that works." },
+      { cls: "cmd", text: "guest@jamesware:~$ " },
     ];
     el.textContent = "";
     if (reducedMotion) {
       await playTerm(el, session);
       return;
     }
-    await typeText(lineSpan(el, "muted"), "JW-BIOS 2.4 ... 64K RAM OK", 6);
+    await typeText(lineSpan(el, "muted"), "JW-BIOS 2.6 ... 64K RAM OK", 6);
     await sleep(260);
     el.appendChild(document.createTextNode("\n"));
     await typeText(lineSpan(el, "muted"), "LOADING JAMESWARE.SYS ...", 6);
@@ -292,13 +271,13 @@
     if (!el) return;
     await playTerm(el, [
       { cls: "muted", text: "Last login: " + lastLoginStamp() + " on ttys001" },
-      { cls: "cmd", text: "$ whoami" },
-      { cls: "out", text: "JamesWare" },
-      { cls: "cmd", text: "$ mission" },
-      { cls: "out", text: "Building useful things with care." },
-      { cls: "cmd", text: "$ status" },
-      { cls: "out", text: "Currently making software." },
-      { cls: "cmd", text: "$ " },
+      { cls: "cmd", text: "guest@jamesware:~$ cat approach.md" },
+      { cls: "out", text: "Useful over impressive." },
+      { cls: "out", text: "Ship the small thing that works." },
+      { cls: "cmd", text: "guest@jamesware:~$ background" },
+      { cls: "out", text: "Software architecture, automotive" },
+      { cls: "out", text: "systems, developer tooling, APIs." },
+      { cls: "cmd", text: "guest@jamesware:~$ " },
     ]);
   }
 
@@ -324,6 +303,201 @@
       { threshold: 0.35 }
     );
     io.observe(care);
+  }
+
+  /* ---------- hero console ---------- */
+
+  var HERO_PROJECTS = [
+    { slug: "ai-meter", name: "ai meter", href: "ai-meter/index.html", desc: "local-first usage meter" },
+    { slug: "daily-on-plan", name: "daily on plan", href: "daily-on-plan/index.html", desc: "on-device nutrition sheet" },
+    { slug: "bytequest", name: "bytequest", href: "bytequest/index.html", desc: "CLI adventure, placeholder" },
+  ];
+
+  var HERO_HELP = [
+    "commands:",
+    "  help              this list",
+    "  whoami            who is jamesware",
+    "  about             jump to the about section",
+    "  work | ls         list projects",
+    "  open <project>    open a project page (alias: cd)",
+    "  theme <color>     green | orange | blue | purple | red",
+    "  contact           github + email",
+    "  clear             clear the screen",
+    "  exit              log out and reset",
+  ];
+
+  function outLine(cls, text) {
+    var div = document.createElement("div");
+    div.className = "shell__out-line" + (cls ? " shell__out-line--" + cls : "");
+    div.textContent = text;
+    return div;
+  }
+
+  function findProject(name) {
+    var q = (name || "").toLowerCase().replace(/\/$/, "");
+    var matches = HERO_PROJECTS.filter(function (p) {
+      return p.slug === q || p.name === q || p.slug.replace(/-/g, "") === q.replace(/[\s-]/g, "");
+    });
+    return matches[0] || null;
+  }
+
+  function runHeroCommand(raw, ctx) {
+    var input = raw.trim();
+    var parts = input.split(/\s+/).filter(Boolean);
+    var cmd = (parts[0] || "").toLowerCase();
+    var arg = parts.slice(1).join(" ");
+    var lines = [];
+
+    switch (cmd) {
+      case "":
+        break;
+      case "help":
+        HERO_HELP.forEach(function (t) {
+          lines.push(outLine("out", t));
+        });
+        break;
+      case "whoami":
+        lines.push(outLine("out", "guest"));
+        break;
+      case "about":
+        lines.push(outLine("out", "Independent software studio of James Jewhurst."));
+        lines.push(outLine("muted", "scrolling to about ..."));
+        ctx.scrollToId("about");
+        break;
+      case "work":
+      case "ls":
+      case "projects":
+        HERO_PROJECTS.forEach(function (p) {
+          var name = p.slug + "/";
+          var pad = name.length < 20 ? new Array(20 - name.length).join(" ") : " ";
+          lines.push(outLine("out", "drwxr-xr-x  " + name + pad + p.desc));
+        });
+        lines.push(outLine("muted", "type: open <project>"));
+        break;
+      case "open":
+      case "cd":
+        var proj = findProject(arg);
+        if (proj) {
+          lines.push(outLine("out", "opening " + proj.slug + " ..."));
+          ctx.navigate(proj.href);
+        } else if (!arg) {
+          lines.push(outLine("err", "usage: " + cmd + " <project>. try 'work' to list them"));
+        } else {
+          lines.push(outLine("err", "no such project: " + arg + ". try 'work'"));
+        }
+        break;
+      case "theme":
+        var t = arg.toLowerCase();
+        if (THEMES.indexOf(t) >= 0) {
+          applyTheme(t, { pauseAmbient: true });
+          lines.push(outLine("out", "phosphor set to " + t));
+        } else {
+          lines.push(outLine("err", "usage: theme <green|orange|blue|purple|red>"));
+        }
+        break;
+      case "contact":
+        lines.push(outLine("out", "github: github.com/EDIT-ME"));
+        lines.push(outLine("out", "email:  hello@jamesware.dev"));
+        break;
+      case "date":
+        lines.push(outLine("out", new Date().toString()));
+        break;
+      case "sudo":
+        lines.push(outLine("err", "guest is not in the sudoers file. this incident will be reported."));
+        break;
+      case "clear":
+        return null;
+      case "exit":
+      case "quit":
+      case "logout":
+        lines.push(outLine("muted", "logging out ..."));
+        ctx.exit();
+        break;
+      default:
+        lines.push(outLine("err", cmd + ": command not found. try 'help'"));
+    }
+    return lines;
+  }
+
+  function bindHeroConsole() {
+    var form = document.getElementById("hero-form");
+    var input = document.getElementById("hero-input");
+    var output = document.getElementById("hero-output");
+    var consoleEl = document.getElementById("hero-console");
+    var intro = document.getElementById("hero-intro");
+    if (!form || !input || !output) return;
+
+    var history = [];
+    var historyIndex = -1;
+
+    var ctx = {
+      scrollToId: function (id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+      },
+      navigate: function (href) {
+        setTimeout(function () {
+          window.location.href = href;
+        }, reducedMotion ? 0 : 320);
+      },
+      exit: function () {
+        input.disabled = true;
+        setTimeout(function () {
+          window.location.reload();
+        }, reducedMotion ? 0 : 420);
+      },
+    };
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var val = input.value;
+      input.value = "";
+      if (history[history.length - 1] !== val && val.trim()) history.push(val);
+      historyIndex = -1;
+      if (!val.trim()) return;
+
+      if (intro && !intro.hidden) intro.hidden = true;
+
+      output.textContent = "";
+      output.appendChild(outLine("cmd", "guest@jamesware:~$ " + val));
+      var result = runHeroCommand(val, ctx);
+      if (result === null) {
+        output.textContent = "";
+      } else {
+        result.forEach(function (line) {
+          output.appendChild(line);
+        });
+      }
+      output.scrollTop = output.scrollHeight;
+
+      if (!reducedMotion) {
+        output.classList.remove("is-flash");
+        void output.offsetWidth;
+        output.classList.add("is-flash");
+      }
+    });
+
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowUp") {
+        if (!history.length) return;
+        historyIndex = historyIndex < 0 ? history.length - 1 : Math.max(0, historyIndex - 1);
+        input.value = history[historyIndex] || "";
+        e.preventDefault();
+      } else if (e.key === "ArrowDown") {
+        if (!history.length) return;
+        if (historyIndex < 0) return;
+        historyIndex = historyIndex + 1 >= history.length ? -1 : historyIndex + 1;
+        input.value = historyIndex < 0 ? "" : history[historyIndex];
+        e.preventDefault();
+      }
+    });
+
+    if (consoleEl) {
+      consoleEl.addEventListener("click", function (e) {
+        if (e.target !== input) input.focus();
+      });
+    }
   }
 
   function bindSwitcher() {
@@ -354,6 +528,7 @@
     applyTheme(currentTheme(), { immediate: true });
     bindSwitcher();
     bindProductShots();
+    bindHeroConsole();
     startCycle();
     startTyping();
   }

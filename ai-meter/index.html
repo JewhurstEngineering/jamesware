@@ -55,7 +55,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Share+Tech+Mono&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=VT323&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../assets/styles.css" />
@@ -63,6 +63,14 @@
   <body>
     <div class="vignette" aria-hidden="true"></div>
     <div class="scanlines" aria-hidden="true"></div>
+    <div class="bezel" aria-hidden="true">
+      <span class="bezel__corner bezel__corner--tl"></span>
+      <span class="bezel__corner bezel__corner--tr"></span>
+      <span class="bezel__corner bezel__corner--bl"></span>
+      <span class="bezel__corner bezel__corner--br"></span>
+      <span class="bezel__tag bezel__tag--rec">rec</span>
+      <span class="bezel__tag bezel__tag--id">jamesware.dev</span>
+    </div>
     <a class="skip" href="#main">Skip to content</a>
 
     <header class="site-header">
@@ -224,12 +232,12 @@ Pace      slightly over
           <div class="related">
             <h2>Also on the bench</h2>
             <div class="project-grid">
-              <article class="card">
+              <article class="card" data-path="~/work/daily-on-plan">
                 <h3>Daily On Plan</h3>
                 <p>Stay on plan. One day at a time.</p>
                 <a class="more" href="../daily-on-plan/index.html">View Project <span aria-hidden="true">›</span></a>
               </article>
-              <article class="card">
+              <article class="card" data-path="~/work/bytequest">
                 <h3>ByteQuest</h3>
                 <p>A CLI adventure for nostalgic developers.</p>
                 <a class="more" href="../bytequest/index.html">View Project <span aria-hidden="true">›</span></a>

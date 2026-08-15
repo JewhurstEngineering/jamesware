@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="green" data-asset-root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Meter — JamesWare</title>
+    <meta
+      name="description"
+      content="A quiet, local-first usage meter for Cursor, Claude, and Codex. Mac menu bar, iPhone, and Apple Watch. No account. No dashboard refreshing."
+    />
+    <script>
+      (function () {
+        var themes = ["green", "orange", "blue", "purple", "red"];
+        var last = null;
+        try {
+          last = localStorage.getItem("jamesware-theme");
+        } catch (e) {}
+        var pool = themes.filter(function (name) {
+          return name !== last;
+        });
+        var theme = pool[Math.floor(Math.random() * pool.length)];
+        document.documentElement.setAttribute("data-theme", theme);
+        try {
+          localStorage.setItem("jamesware-theme", theme);
+        } catch (e) {}
+        window.jwSetLogos = function () {
+          var activeTheme = document.documentElement.getAttribute("data-theme") || "green";
+          var root = document.documentElement.getAttribute("data-asset-root") || "";
+          if (root && root.charAt(root.length - 1) !== "/") root += "/";
+          document.querySelectorAll("[data-logo]").forEach(function (el) {
+            var src =
+              root +
+              "assets/brand/jamesware-" +
+              el.getAttribute("data-logo") +
+              "-" +
+              activeTheme +
+              ".png";
+            el.querySelectorAll("img").forEach(function (img) {
+              if (!img.dataset.fallbackBound) {
+                img.dataset.fallbackBound = "true";
+                img.addEventListener("error", function () {
+                  img.style.visibility = "hidden";
+                });
+                img.addEventListener("load", function () {
+                  img.style.visibility = "visible";
+                });
+              }
+              if (!img.getAttribute("src")) img.src = src;
+            });
+          });
+        };
+      })();
+    </script>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/styles.css" />
+  </head>
+  <body>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="scanlines" aria-hidden="true"></div>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="../index.html">
+          <span class="logo-swap logo-swap--square" data-logo="square">
+            <img class="logo-swap__a" alt="JamesWare" width="40" height="40" />
+            <img class="logo-swap__b" alt="" width="40" height="40" />
+          </span>
+          <span class="wordmark">James<span class="accent">Ware</span></span>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <a href="../index.html#projects">Work</a>
+          <a href="../index.html#about">About</a>
+          <!-- EDIT ME: real GitHub URL -->
+          <a href="https://github.com/EDIT-ME">GitHub</a>
+          <a class="prompt-btn" href="../index.html#projects" aria-label="Open work">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M2 3h2l4 5-4 5H2l4-5-4-5zm7 8h5v2H9v-2z" />
+            </svg>
+          </a>
+        </nav>
+      </div>
+    </header>
+    <script>
+      jwSetLogos();
+    </script>
+
+    <main id="main">
+      <div class="wrap">
+        <nav class="crumb" aria-label="Breadcrumb">
+          <a href="../index.html">JamesWare</a>
+          <span aria-hidden="true">/</span>
+          <span>AI Meter</span>
+        </nav>
+
+        <section class="product-hero">
+          <div>
+            <p class="card-kicker">JamesWare · Utility</p>
+            <h1>AI Meter</h1>
+            <p class="product-tagline">
+              A quiet, local-first usage meter for Cursor, Claude, and Codex — Mac menu bar,
+              iPhone, and Apple Watch. No account. No dashboard refreshing.
+            </p>
+            <div class="badge-row">
+              <span class="status status--building">Building</span>
+              <span class="badge">macOS 14+</span>
+              <span class="badge">iPhone</span>
+              <span class="badge">Apple Watch</span>
+              <span class="badge">Swift</span>
+            </div>
+            <div class="cta-row">
+              <!-- EDIT ME: real org/user. Repo is still named cursor-usage-tracker. -->
+              <a class="btn" href="https://github.com/EDIT-ME/cursor-usage-tracker">View source <span aria-hidden="true">›</span></a>
+              <span class="btn btn--disabled" aria-disabled="true">TestFlight coming</span>
+            </div>
+          </div>
+          <figure class="device">
+            <!-- Drop a real capture at ../assets/products/ai-meter/hero.png -->
+            <img
+              class="device__photo"
+              src="../assets/products/ai-meter/hero.png"
+              alt="AI Meter menu bar and widgets"
+              hidden
+            />
+            <div class="device__mock" aria-hidden="true">
+              <div class="device__chrome">
+                <span>menu bar</span>
+                <span class="led"></span>
+              </div>
+              <pre class="device__panel">AI Meter
+──────────────
+Cursor Pro+    62%
+Claude Code    4h 12m
+Codex          ok
+
+Included  $48 / $80
+On-demand unlimited
+Pace      slightly over
+
+●  ●  ○   warn at 80%</pre>
+            </div>
+          </figure>
+        </section>
+        <p class="shot-caption">Screenshot slot — replace assets/products/ai-meter/hero.png when you have a capture.</p>
+
+        <section class="product-copy">
+          <div class="prose-grid">
+            <div>
+              <h2>Problem</h2>
+              <p>
+                People who live in AI coding tools hate opening dashboards to see if they still
+                have included usage left. The number should be as glanceable as a battery meter.
+              </p>
+            </div>
+            <div>
+              <h2>What it does</h2>
+              <p>
+                A menu-bar extra and widgets that show Cursor, Claude Code, and Codex usage from
+                sessions already on the machine. iPhone is Cursor-only. Tokens stay in Keychain.
+              </p>
+            </div>
+            <div>
+              <h2>Why it exists</h2>
+              <p>
+                It should feel like an instrument on a developer’s workbench — unofficial,
+                local-first, precise — not another SaaS analytics portal.
+              </p>
+            </div>
+          </div>
+
+          <div class="cap-grid">
+            <h2>Capabilities</h2>
+            <ul class="cap-list">
+              <li>Cursor Models / Other Models / Total included usage</li>
+              <li>Subscription spend vs included cap, bonus credits</li>
+              <li>On-demand usage, cap or unlimited</li>
+              <li>Per-model cost for the billing window</li>
+              <li>Spend by cycle and a linear pace projection</li>
+              <li>Menu-bar dots and optional local notifications</li>
+              <li>Mac-only Cursor Agents: This Mac, CLI, Cloud</li>
+              <li>Claude Code and Codex rolling windows on Mac</li>
+              <li>Combined or separate menu-bar status items</li>
+              <li>Export the current snapshot as CSV/JSON (no credentials)</li>
+            </ul>
+          </div>
+
+          <div class="privacy">
+            <h2>How it works</h2>
+            <p>
+              Local-first. Cursor uses the same personal session APIs as the dashboard — not HTML
+              scraping, not a public individual usage API. Claude and Codex read local OAuth
+              credentials already created by those CLIs. Watch gets a sanitized snapshot only. No
+              JamesWare account and no product server. No cookies or JWTs on the wrist.
+            </p>
+          </div>
+
+          <div class="state">
+            <h2>Current state</h2>
+            <p>
+              Pre-1.0. Native apps exist and run. Not on the Mac App Store — sandbox would block
+              local IDE credentials. iPhone and Watch are aimed at TestFlight. The GitHub repo is
+              still named <code>cursor-usage-tracker</code>; the shipping name is AI Meter.
+            </p>
+          </div>
+
+          <div class="get-it">
+            <h2>Get it</h2>
+            <p class="note">
+              No Mac App Store. No fake download button. Source is public when the repo is; TestFlight
+              when it exists.
+            </p>
+            <div class="cta-row">
+              <a class="btn" href="https://github.com/EDIT-ME/cursor-usage-tracker">GitHub <span aria-hidden="true">›</span></a>
+              <span class="btn btn--disabled" aria-disabled="true">TestFlight coming</span>
+            </div>
+          </div>
+
+          <div class="related">
+            <h2>Also on the bench</h2>
+            <div class="project-grid">
+              <article class="card">
+                <h3>Daily On Plan</h3>
+                <p>Stay on plan. One day at a time.</p>
+                <a class="more" href="../daily-on-plan/index.html">View Project <span aria-hidden="true">›</span></a>
+              </article>
+              <article class="card">
+                <h3>ByteQuest</h3>
+                <p>A CLI adventure for nostalgic developers.</p>
+                <a class="more" href="../bytequest/index.html">View Project <span aria-hidden="true">›</span></a>
+              </article>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <span class="logo-swap logo-swap--footer" data-logo="square">
+              <img class="logo-swap__a" alt="JamesWare" width="48" height="48" />
+              <img class="logo-swap__b" alt="" width="48" height="48" />
+            </span>
+            <script>
+              jwSetLogos();
+            </script>
+            <div>
+              <p class="footer-wordmark">James<span class="accent">Ware</span></p>
+              <p class="footer-tagline">Made with care, by JamesWare.</p>
+              <p class="footer-tagline">A Jewhurst Engineering company.</p>
+            </div>
+          </div>
+          <div>
+            <h3>Navigation</h3>
+            <ul>
+              <li><a href="../index.html#projects">Work</a></li>
+              <li><a href="../index.html#about">About</a></li>
+              <li><a href="index.html">AI Meter</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Connect</h3>
+            <ul>
+              <li><a href="https://github.com/EDIT-ME">GitHub</a></li>
+              <li><a href="mailto:hello@jamesware.dev">Email</a></li>
+            </ul>
+          </div>
+          <div class="stay">
+            <p>An instrument on a workbench.</p>
+          </div>
+        </div>
+        <div class="footer-base">
+          <p>© 2026 JamesWare. Built by hand. Hosted on GitHub.</p>
+          <div class="theme-switcher" role="group" aria-label="Color theme">
+            <span>Phosphor</span>
+            <button class="dot" type="button" data-theme-pick="green" aria-label="Green phosphor" aria-pressed="false"></button>
+            <button class="dot" type="button" data-theme-pick="orange" aria-label="Amber phosphor" aria-pressed="false"></button>
+            <button class="dot" type="button" data-theme-pick="blue" aria-label="Blue phosphor" aria-pressed="false"></button>
+            <button class="dot" type="button" data-theme-pick="purple" aria-label="Purple phosphor" aria-pressed="false"></button>
+            <button class="dot" type="button" data-theme-pick="red" aria-label="Red phosphor" aria-pressed="false"></button>
+          </div>
+          <p>Made with care.</p>
+        </div>
+      </div>
+    </footer>
+    <script src="../assets/theme.js"></script>
+  </body>
+</html>

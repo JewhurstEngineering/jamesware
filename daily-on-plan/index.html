@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="green" data-asset-root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Daily On Plan — JamesWare</title>
+    <meta
+      name="description"
+      content="Stay on plan. One day at a time. A personal, on-device daily nutrition sheet — digitize the paper log, not become another calorie social app."
+    />
+    <script>
+      (function () {
+        var themes = ["green", "orange", "blue", "purple", "red"];
+        var last = null;
+        try {
+          last = localStorage.getItem("jamesware-theme");
+        } catch (e) {}
+        var pool = themes.filter(function (name) {
+          return name !== last;
+        });
+        var theme = pool[Math.floor(Math.random() * pool.length)];
+        document.documentElement.setAttribute("data-theme", theme);
+        try {
+          localStorage.setItem("jamesware-theme", theme);
+        } catch (e) {}
+        window.jwSetLogos = function () {
+          var activeTheme = document.documentElement.getAttribute("data-theme") || "green";
+          var root = document.documentElement.getAttribute("data-asset-root") || "";
+          if (root && root.charAt(root.length - 1) !== "/") root += "/";
+          document.querySelectorAll("[data-logo]").forEach(function (el) {
+            var src =
+              root +
+              "assets/brand/jamesware-" +
+              el.getAttribute("data-logo") +
+              "-" +
+              activeTheme +
+              ".png";
+            el.querySelectorAll("img").forEach(function (img) {
+              if (!img.dataset.fallbackBound) {
+                img.dataset.fallbackBound = "true";
+                img.addEventListener("error", function () {
+                  img.style.visibility = "hidden";
+                });
+                img.addEventListener("load", function () {
+                  img.style.visibility = "visible";
+                });
+              }
+              if (!img.getAttribute("src")) img.src = src;
+            });
+          });
+        };
+      })();
+    </script>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/styles.css" />
+  </head>
+  <body>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="scanlines" aria-hidden="true"></div>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="../index.html">
+          <span class="logo-swap logo-swap--square" data-logo="square">
+            <img class="logo-swap__a" alt="JamesWare" width="40" height="40" />
+            <img class="logo-swap__b" alt="" width="40" height="40" />
+          </span>
+          <span class="wordmark">James<span class="accent">Ware</span></span>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <a href="../index.html#projects">Work</a>
+          <a href="../index.html#about">About</a>
+          <a href="https://github.com/EDIT-ME">GitHub</a>
+          <a class="prompt-btn" href="../index.html#projects" aria-label="Open work">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M2 3h2l4 5-4 5H2l4-5-4-5zm7 8h5v2H9v-2z" />
+            </svg>
+          </a>
+        </nav>
+      </div>
+    </header>
+    <script>
+      jwSetLogos();
+    </script>
+
+    <main id="main">
+      <div class="wrap">
+        <nav class="crumb" aria-label="Breadcrumb">
+          <a href="../index.html">JamesWare</a>
+          <span aria-hidden="true">/</span>
+          <span>Daily On Plan</span>
+        </nav>
+
+        <section class="product-hero">
+          <div>
+            <p class="card-kicker">JamesWare · Personal utility</p>
+            <h1>Daily On Plan</h1>
+            <p class="product-tagline">Stay on plan. One day at a time.</p>
+            <div class="badge-row">
+              <span class="status status--building">Building</span>
+              <span class="badge">iPhone</span>
+              <span class="badge">iPad</span>
+              <span class="badge">Watch</span>
+              <span class="badge">Mac</span>
+            </div>
+            <div class="cta-row">
+              <span class="btn btn--disabled" aria-disabled="true">TestFlight planned</span>
+              <span class="link-arrow" aria-disabled="true">Not on the App Store</span>
+            </div>
+          </div>
+          <figure class="device device--phone">
+            <!-- Drop a real capture at ../assets/products/daily-on-plan/hero.png -->
+            <img
+              class="device__photo"
+              src="../assets/products/daily-on-plan/hero.png"
+              alt="Daily On Plan on iPhone"
+              hidden
+            />
+            <div class="device__mock" aria-hidden="true">
+              <div class="device__chrome">
+                <span>today</span>
+                <span>on plan</span>
+              </div>
+              <div class="device__panel">
+                <div class="ring" aria-hidden="true"></div>
+                protein 142 / 160
+                ketosis  Y
+                followed Y
+
+                water  6/8
+                lunch  eggs + greens
+              </div>
+            </div>
+          </figure>
+        </section>
+        <p class="shot-caption">Screenshot slot — replace assets/products/daily-on-plan/hero.png when you have a capture.</p>
+
+        <section class="product-copy">
+          <div class="prose-grid">
+            <div>
+              <h2>Problem</h2>
+              <p>
+                Protein-forward / ketosis-style weight loss is easier on paper than in another
+                generic calorie social app. The sheet should stay yours.
+              </p>
+            </div>
+            <div>
+              <h2>What it does</h2>
+              <p>
+                Digitizes the daily log: protein toward a single goal, ketosis as a self-report,
+                followed-plan Y/N with honest off-plan reason chips. Built first for one person.
+              </p>
+            </div>
+            <div>
+              <h2>Why it exists</h2>
+              <p>
+                Personal and sharp, not clinical. Daily ritual over social tracking. It should
+                feel like your sheet, not a network.
+              </p>
+            </div>
+          </div>
+
+          <div class="cap-grid">
+            <h2>Capabilities</h2>
+            <ul class="cap-list">
+              <li>Protein kcal vs a single protein goal (the ring is protein)</li>
+              <li>Ketosis Y/N — self-report; the app does not measure</li>
+              <li>Followed plan Y/N with honest off-plan reason chips</li>
+              <li>Hydration, optional habits, saved meals, food preferences</li>
+              <li>Week 1 / Week 2+ food guide</li>
+              <li>Weight and BMI with privacy collapse</li>
+              <li>Optional HealthKit on iPhone</li>
+              <li>Reports, CSV / PDF / Excel export, on-device backup</li>
+              <li>Suggest is a shuffle from prefers/excludes — not AI</li>
+              <li>App Intents / Shortcuts, Home Screen and Lock Screen widgets</li>
+            </ul>
+          </div>
+
+          <div class="privacy">
+            <h2>Privacy</h2>
+            <p>
+              The journal lives on iPhone, Watch, and Mac. Optional iCloud CloudKit syncs across
+              the user’s iCloud — not a Daily On Plan server. No ads, no analytics SDKs, no sale of
+              data. USDA API key stays in device Keychain. Notifications are local. Not a medical
+              device. Not Android.
+            </p>
+          </div>
+
+          <div class="state">
+            <h2>Current state</h2>
+            <p>
+              Building. Usable as a native app on James’s devices. Personal Xcode / sideload now;
+              TestFlight and Universal Purchase planned. Not App Store–released. On Plan is short
+              chrome (menu bar, spoken fallback). Daily On Plan is the shipping name.
+            </p>
+          </div>
+
+          <div class="get-it">
+            <h2>Get it</h2>
+            <p class="note">
+              No App Store listing yet. No fake download. When TestFlight exists, this button
+              becomes a real link.
+            </p>
+            <div class="cta-row">
+              <span class="btn btn--disabled" aria-disabled="true">TestFlight planned</span>
+              <span class="btn btn--disabled" aria-disabled="true">Universal Purchase planned</span>
+            </div>
+          </div>
+
+          <div class="related">
+            <h2>Also on the bench</h2>
+            <div class="project-grid">
+              <article class="card">
+                <h3>AI Meter</h3>
+                <p>Local-first usage meter for Cursor, Claude, and Codex.</p>
+                <a class="more" href="../ai-meter/index.html">View Project <span aria-hidden="true">›</span></a>
+              </article>
+              <article class="card">
+                <h3>ByteQuest</h3>
+                <p>A CLI adventure for nostalgic developers.</p>
+                <a class="more" href="../bytequest/index.html">View Project <span aria-hidden="true">›</span></a>
+              </article>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <span class="logo-swap logo-swap--footer" data-logo="square">
+              <img class="logo-swap__a" alt="JamesWare" width="48" height="48" />
+              <img class="logo-swap__b" alt="" width="48" height="48" />
+            </span>
+            <script>
+              jwSetLogos();
+            </script>
+            <div>
+              <p class="footer-wordmark">James<span class="accent">Ware</span></p>
+              <p class="footer-tagline">Made with care, by JamesWare.</p>
+              <p class="footer-tagline">A Jewhurst Engineering company.</p>
+            </div>
+          </div>
+          <div>
+            <h3>Navigation</h3>
+            <ul>
+              <li><a href="../index.html#projects">Work</a></li>
+              <li><a href="../index.html#about">About</a></li>
+              <li><a href="index.html">Daily On Plan</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Connect</h3>
+            <ul>
+              <li><a href="https://github.com/EDIT-ME">GitHub</a></li>
+              <li><a href="mailto:hello@jamesware.dev">Email</a></li>
+            </ul>
+          </div>
+          <div class="stay">
+            <p>Your sheet. Not a network.</p>
+          </div>
+        </div>
+        <div class="footer-base">
+          <p>© 2026 JamesWare. Built by hand. Hosted on GitHub.</p>
+          <div class="theme-switcher" role="group" aria-label="Color theme">
+            <span>Phosphor</span>
+            <button class="dot" type="button" data-theme-pick="green" aria-label="Green phosphor" aria-pressed="false"></button>
+            <button class="dot" type="button" data-theme-pick="orange" aria-label="Amber phosphor" aria-pressed="false"></button>
+            <button class="dot" type="button" data-theme-pick="blue" aria-label="Blue phosphor" aria-pressed="false"></button>
+            <button class="dot" type="button" data-theme-pick="purple" aria-label="Purple phosphor" aria-pressed="false"></button>
+            <button class="dot" type="button" data-theme-pick="red" aria-label="Red phosphor" aria-pressed="false"></button>
+          </div>
+          <p>Made with care.</p>
+        </div>
+      </div>
+    </footer>
+    <script src="../assets/theme.js"></script>
+  </body>
+</html>

@@ -1,26 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="green">
+<html lang="en" data-theme="green" data-asset-root="">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>JamesWare — Thoughtful software. Classic interfaces.</title>
+    <title>JamesWare — Independent software. Apps, tools, and useful things.</title>
     <meta
       name="description"
-      content="Independent software from JamesWare. Thoughtful apps, tools, and classic interfaces, built with care."
+      content="JamesWare is an independent software studio for native apps, developer tools, experiments, and software that solves real problems."
     />
     <script>
       (function () {
         var themes = ["green", "orange", "blue", "purple", "red"];
-        var saved = null;
+        var last = null;
         try {
-          saved = localStorage.getItem("jamesware-theme");
+          last = localStorage.getItem("jamesware-theme");
         } catch (e) {}
-        var theme = themes.indexOf(saved) >= 0 ? saved : "green";
+        var pool = themes.filter(function (name) {
+          return name !== last;
+        });
+        var theme = pool[Math.floor(Math.random() * pool.length)];
         document.documentElement.setAttribute("data-theme", theme);
+        try {
+          localStorage.setItem("jamesware-theme", theme);
+        } catch (e) {}
         window.jwSetLogos = function () {
           var activeTheme = document.documentElement.getAttribute("data-theme") || "green";
+          var root = document.documentElement.getAttribute("data-asset-root") || "";
+          if (root && root.charAt(root.length - 1) !== "/") root += "/";
           document.querySelectorAll("[data-logo]").forEach(function (el) {
             var src =
+              root +
               "assets/brand/jamesware-" +
               el.getAttribute("data-logo") +
               "-" +
@@ -46,7 +55,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Share+Tech+Mono&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Share+Tech+Mono&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/styles.css" />
@@ -67,12 +76,11 @@
           <span class="wordmark">James<span class="accent">Ware</span></span>
         </a>
         <nav class="nav" aria-label="Primary">
-          <a href="#projects">Projects</a>
+          <a href="#projects">Work</a>
           <a href="#about">About</a>
-          <!-- EDIT ME: point Blog somewhere real (or remove it) -->
-          <a href="#contact">Blog</a>
-          <a href="#contact">Contact</a>
-          <a class="prompt-btn" href="#projects" aria-label="Open projects">
+          <!-- EDIT ME: replace with the real JamesWare GitHub org or user -->
+          <a href="https://github.com/EDIT-ME">GitHub</a>
+          <a class="prompt-btn" href="#projects" aria-label="Open work">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
               <path d="M2 3h2l4 5-4 5H2l4-5-4-5zm7 8h5v2H9v-2z" />
             </svg>
@@ -96,16 +104,20 @@
               </span>
               <div class="hero-brand__text">
                 <h1 class="hero-title">James<span class="accent">Ware</span></h1>
-                <p class="hero-tag">Made with care by JamesWare</p>
+                <p class="hero-tag">Made with care, by JamesWare</p>
               </div>
             </div>
             <p class="hero-lede">
-              Thoughtful software. Classic interfaces.<br />
-              Built with care, shipped with pride.
+              Independent software. Apps, tools, and useful things.
+            </p>
+            <p class="lede">
+              An independent software studio for native apps, developer tools, experiments, and
+              software that solves real problems.
             </p>
             <div class="cta-row">
-              <a class="btn" href="#projects">View Projects <span aria-hidden="true">›</span></a>
-              <a class="link-arrow" href="#about">About Me <span aria-hidden="true">›</span></a>
+              <a class="btn" href="#projects">View Work <span aria-hidden="true">›</span></a>
+              <!-- EDIT ME: real GitHub URL -->
+              <a class="link-arrow" href="https://github.com/EDIT-ME">GitHub <span aria-hidden="true">›</span></a>
             </div>
           </div>
 
@@ -115,7 +127,13 @@
                 <div class="monitor__bezel">
                   <div class="monitor__screen">
                     <div class="monitor__glare" aria-hidden="true"></div>
-                    <pre class="monitor__term" id="hero-term"></pre>
+                    <pre class="monitor__term" id="hero-term"><span class="term-line term-line--cmd">jamesware@dev:~$ whoami</span>
+<span class="term-line term-line--out">JamesWare</span>
+<span class="term-line term-line--cmd">jamesware@dev:~$ mission</span>
+<span class="term-line term-line--out">Building useful things with care.</span>
+<span class="term-line term-line--cmd">jamesware@dev:~$ status</span>
+<span class="term-line term-line--out">Currently making software.</span>
+<span class="term-line term-line--cmd">jamesware@dev:~$ </span></pre>
                   </div>
                 </div>
                 <div class="monitor__chin">
@@ -146,38 +164,54 @@
         jwSetLogos();
       </script>
 
-      <!-- EDIT ME: replace placeholder projects, descriptions, and links -->
       <section class="section" id="projects">
         <div class="wrap">
           <div class="section-head">
-            <h2>Featured Projects</h2>
+            <h2>Selected Work</h2>
             <span class="section-rule" aria-hidden="true"></span>
-            <a href="#projects">View all projects <span aria-hidden="true">›</span></a>
           </div>
-          <div class="project-grid">
-            <article class="card">
+          <p class="lede">A small set of things worth looking at. Useful over impressive.</p>
+          <div class="project-grid project-grid--featured">
+            <article class="card card--flagship">
+              <p class="card-kicker">Flagship</p>
               <div class="card-head">
                 <div class="card-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24">
-                    <path d="M3 5h4l6 7-6 7H3l6-7-6-7zm11 12h7v2h-7z" />
+                    <path d="M4 4h16v3H4V4zm0 5h16v11H4V9zm3 3v5h2v-5H7zm4 0v5h6v-5h-6z" />
                   </svg>
                 </div>
-                <h3>Terminus</h3>
+                <h3>AI Meter</h3>
               </div>
-              <p>A modern terminal emulator with retro soul.</p>
-              <a class="more" href="#projects">View Project <span aria-hidden="true">›</span></a>
+              <div class="card-meta">
+                <span class="status status--building">Building</span>
+                <span class="badge">macOS</span>
+                <span class="badge">iPhone</span>
+                <span class="badge">Watch</span>
+                <span class="badge">Swift</span>
+              </div>
+              <p>
+                A quiet, local-first usage meter for Cursor, Claude, and Codex — menu bar, iPhone,
+                and Apple Watch. No account. No dashboard refreshing.
+              </p>
+              <a class="more" href="ai-meter/index.html">View Project <span aria-hidden="true">›</span></a>
             </article>
             <article class="card">
               <div class="card-head">
                 <div class="card-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24">
-                    <path d="M4 3h12l4 4v14H4V3zm12 1.8V8h3.2L16 4.8zM7 12h10v2H7v-2zm0 4h7v2H7v-2z" />
+                    <path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 3a6 6 0 0 1 0 12V6z" />
                   </svg>
                 </div>
-                <h3>Archivist</h3>
+                <h3>Daily On Plan</h3>
               </div>
-              <p>Version control for humans. Lightweight and reliable.</p>
-              <a class="more" href="#projects">View Project <span aria-hidden="true">›</span></a>
+              <div class="card-meta">
+                <span class="status status--building">Building</span>
+                <span class="badge">iPhone</span>
+                <span class="badge">Watch</span>
+                <span class="badge">Mac</span>
+              </div>
+              <p>Stay on plan. One day at a time. A personal, on-device daily nutrition sheet.</p>
+              <a class="more" href="daily-on-plan/index.html">View Project <span aria-hidden="true">›</span></a>
             </article>
             <article class="card">
               <div class="card-head">
@@ -188,16 +222,80 @@
                 </div>
                 <h3>ByteQuest</h3>
               </div>
-              <p>A CLI adventure game for nostalgic developers.</p>
-              <a class="more" href="#projects">View Project <span aria-hidden="true">›</span></a>
+              <div class="card-meta">
+                <span class="status status--experiment">Experiment</span>
+                <span class="badge">CLI</span>
+                <span class="badge">macOS</span>
+              </div>
+              <p>A CLI adventure game for nostalgic developers. Placeholder showcase.</p>
+              <a class="more" href="bytequest/index.html">View Project <span aria-hidden="true">›</span></a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="workbench">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>Workbench</h2>
+            <span class="section-rule" aria-hidden="true"></span>
+          </div>
+          <p class="lede">Experiments, prototypes, and things I’m figuring out. Not products.</p>
+          <div class="workbench-grid">
+            <article class="quiet-card">
+              <div class="card-meta">
+                <span class="status status--internal">In use · internal</span>
+              </div>
+              <h3>Product Analysis Pipeline</h3>
+              <p>
+                A cited, gated workflow that turns product evidence into a local model, then a
+                Linear dry-run — and only writes tickets when a human says so.
+              </p>
+            </article>
+            <article class="quiet-card">
+              <div class="card-meta">
+                <span class="status status--planned">Planned</span>
+              </div>
+              <h3>Scout</h3>
+              <p>
+                Always-on research for independent automotive repair. Evidence first. Humans still
+                decide the roadmap.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="build">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>What I Build</h2>
+            <span class="section-rule" aria-hidden="true"></span>
+          </div>
+          <div class="build-grid">
+            <article class="quiet-card">
+              <h3>Native Apps</h3>
+              <p>macOS, iPhone, iPad, Apple Watch, widgets, and focused utilities.</p>
+            </article>
+            <article class="quiet-card">
+              <h3>Developer Tools</h3>
+              <p>Things that make building, monitoring, or understanding software easier.</p>
+            </article>
+            <article class="quiet-card">
+              <h3>Systems</h3>
+              <p>APIs, integrations, backend services, and operational workflows.</p>
+            </article>
+            <article class="quiet-card">
+              <h3>AI + Automation</h3>
+              <p>Agents, research pipelines, document analysis, and workflow tooling.</p>
             </article>
           </div>
         </div>
       </section>
 
       <section class="section" id="about">
-        <div class="wrap care">
-          <div class="care-copy">
+        <div class="wrap about-block">
+          <div class="about-prose">
             <div class="pixel-heart" aria-hidden="true">
               <svg viewBox="0 0 7 6">
                 <rect x="1" y="0" width="2" height="1" />
@@ -208,19 +306,37 @@
                 <rect x="3" y="5" width="1" height="1" />
               </svg>
             </div>
-            <h2>Made with care</h2>
+            <h2>About</h2>
             <p>
-              Every project is built with attention to detail, a love for clean interfaces, and a
-              deep respect for the craft.
+              JamesWare is the independent software studio of James Jewhurst. I’m a software
+              architect and product-minded engineer who likes building useful systems from end to
+              end — from product and UX through architecture, implementation, and operations.
             </p>
-            <p>Thank you for being here.</p>
+            <p>
+              My professional work has included software platforms, APIs, integrations, automotive
+              systems, communications, developer tooling, and engineering infrastructure. JamesWare
+              is where I build the smaller tools, native apps, experiments, and ideas I want to
+              exist.
+            </p>
+            <p>
+              I care about software that is fast, understandable, thoughtful, and genuinely useful.
+              Deep experience building software for automotive operations sits underneath that —
+              shop management, scheduling, communications, integrations — without making JamesWare
+              an automotive-only company.
+            </p>
           </div>
           <div class="term-window" aria-label="JamesWare terminal">
             <div class="term-window__bar">
               <span class="term-dot" aria-hidden="true"></span>
-              <span>jamesware@terminal ~</span>
+              <span>jamesware@dev ~</span>
             </div>
-            <pre id="care-term"></pre>
+            <pre id="care-term">$ whoami
+JamesWare
+$ mission
+Building useful things with care.
+$ status
+Currently making software.
+$ </pre>
           </div>
         </div>
       </section>
@@ -239,25 +355,24 @@
             </script>
             <div>
               <p class="footer-wordmark">James<span class="accent">Ware</span></p>
-              <p class="footer-tagline">Made with care by JamesWare</p>
+              <p class="footer-tagline">Made with care, by JamesWare.</p>
+              <p class="footer-tagline">A Jewhurst Engineering company.</p>
             </div>
           </div>
           <div>
             <h3>Navigation</h3>
             <ul>
-              <li><a href="#projects">Projects</a></li>
+              <li><a href="#projects">Work</a></li>
+              <li><a href="#workbench">Workbench</a></li>
               <li><a href="#about">About</a></li>
-              <!-- EDIT ME: point Blog somewhere real (or remove it) -->
-              <li><a href="#contact">Blog</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="ai-meter/index.html">AI Meter</a></li>
             </ul>
           </div>
           <div>
             <h3>Connect</h3>
-            <!-- EDIT ME: replace GitHub, X, and email with your real links -->
+            <!-- EDIT ME: replace GitHub and email with your real links -->
             <ul>
               <li><a href="https://github.com/EDIT-ME">GitHub</a></li>
-              <li><a href="https://x.com/EDIT-ME">X (Twitter)</a></li>
               <li><a href="mailto:hello@jamesware.dev">Email</a></li>
             </ul>
           </div>
@@ -272,7 +387,7 @@
         </div>
 
         <div class="footer-base">
-          <p>© 2026 JamesWare. All rights reserved.</p>
+          <p>© 2026 JamesWare. Built by hand. Hosted on GitHub.</p>
           <div class="theme-switcher" role="group" aria-label="Color theme">
             <span>Phosphor</span>
             <button class="dot" type="button" data-theme-pick="green" aria-label="Green phosphor" aria-pressed="false"></button>
@@ -281,7 +396,7 @@
             <button class="dot" type="button" data-theme-pick="purple" aria-label="Purple phosphor" aria-pressed="false"></button>
             <button class="dot" type="button" data-theme-pick="red" aria-label="Red phosphor" aria-pressed="false"></button>
           </div>
-          <p>Crafted with care. Built for the long term.</p>
+          <p>Made with care.</p>
         </div>
       </div>
     </footer>

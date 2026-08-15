@@ -19,6 +19,12 @@
   var cycleTimer = null;
   var typingStarted = false;
 
+  function assetRoot() {
+    var root = document.documentElement.getAttribute("data-asset-root") || "";
+    if (root && root.charAt(root.length - 1) !== "/") root += "/";
+    return root;
+  }
+
   function currentTheme() {
     return document.documentElement.getAttribute("data-theme") || "green";
   }
@@ -30,7 +36,7 @@
   }
 
   function brandSrc(kind, theme) {
-    return "assets/brand/jamesware-" + kind + "-" + theme + ".png";
+    return assetRoot() + "assets/brand/jamesware-" + kind + "-" + theme + ".png";
   }
 
   function preloadBrands() {
@@ -127,6 +133,9 @@
     options = options || {};
     if (THEMES.indexOf(theme) < 0) theme = "green";
     document.documentElement.setAttribute("data-theme", theme);
+    try {
+      localStorage.setItem("jamesware-theme", theme);
+    } catch (e) {}
     paintLogos(theme, !!options.immediate);
     paintDots(theme);
     requestAnimationFrame(function () {
@@ -163,10 +172,29 @@
 
   async function typeText(el, text, speed) {
     var i;
+    var fromHero = !!(el && (el.id === "hero-term" || (el.closest && el.closest("#hero-term"))));
     for (i = 0; i < text.length; i += 1) {
       el.appendChild(document.createTextNode(text.charAt(i)));
+      if (fromHero) pressKeyForChar(text.charAt(i));
       await sleep(speed);
     }
+  }
+
+  function pressKeyForChar(ch) {
+    if (reducedMotion) return;
+    var keys = document.querySelectorAll(".keys__row span");
+    if (!keys.length) return;
+    var target = null;
+    if (ch === " ") {
+      target = document.querySelector(".keys__row--space span:nth-child(2)");
+    }
+    if (!target) {
+      target = keys[Math.floor(Math.random() * keys.length)];
+    }
+    target.classList.add("is-down");
+    setTimeout(function () {
+      target.classList.remove("is-down");
+    }, 90);
   }
 
   function cursorNode() {
@@ -201,89 +229,77 @@
     );
   }
 
-  async function runHeroTerm() {
-    var el = document.getElementById("hero-term");
-    if (!el) return;
-    var boot = [
-      "JW-BIOS 2.4 ... 64K RAM OK",
-      "LOADING JAMESWARE.SYS ...",
-    ];
-    var lines = [
-      "JamesWare Terminal v1.0",
-      "-----------------------",
-      "> Welcome to JamesWare",
-      "> Building software with",
-      "  timeless design and",
-      "  modern engineering.",
-      "> ",
-    ];
+  function lineSpan(el, cls) {
+    var span = document.createElement("span");
+    span.className = "term-line term-line--" + cls;
+    el.appendChild(span);
+    return span;
+  }
+
+  async function playTerm(el, script) {
     el.textContent = "";
     if (reducedMotion) {
-      el.textContent = lines.join("\n");
+      script.forEach(function (step, i) {
+        if (i) el.appendChild(document.createTextNode("\n"));
+        lineSpan(el, step.cls).textContent = step.text;
+      });
       el.appendChild(cursorNode());
       return;
     }
     var i;
-    for (i = 0; i < boot.length; i += 1) {
-      await typeText(el, (i ? "\n" : "") + boot[i], 6);
-      await sleep(260);
-    }
-    await sleep(420);
-    el.textContent = "";
-    for (i = 0; i < lines.length; i += 1) {
-      await typeText(el, (i ? "\n" : "") + lines[i], i < 2 ? 10 : 18);
-      await sleep(i === 1 ? 320 : 160);
+    for (i = 0; i < script.length; i += 1) {
+      var step = script[i];
+      if (i) el.appendChild(document.createTextNode("\n"));
+      var span = lineSpan(el, step.cls);
+      if (step.cls === "cmd") {
+        await typeText(span, step.text, 28);
+        await sleep(200);
+      } else {
+        span.textContent = step.text;
+        await sleep(280);
+      }
     }
     el.appendChild(cursorNode());
+  }
+
+  async function runHeroTerm() {
+    var el = document.getElementById("hero-term");
+    if (!el) return;
+    var session = [
+      { cls: "cmd", text: "jamesware@dev:~$ whoami" },
+      { cls: "out", text: "JamesWare" },
+      { cls: "cmd", text: "jamesware@dev:~$ mission" },
+      { cls: "out", text: "Building useful things with care." },
+      { cls: "cmd", text: "jamesware@dev:~$ status" },
+      { cls: "out", text: "Currently making software." },
+      { cls: "cmd", text: "jamesware@dev:~$ " },
+    ];
+    el.textContent = "";
+    if (reducedMotion) {
+      await playTerm(el, session);
+      return;
+    }
+    await typeText(lineSpan(el, "muted"), "JW-BIOS 2.4 ... 64K RAM OK", 6);
+    await sleep(260);
+    el.appendChild(document.createTextNode("\n"));
+    await typeText(lineSpan(el, "muted"), "LOADING JAMESWARE.SYS ...", 6);
+    await sleep(420);
+    await playTerm(el, session);
   }
 
   async function runCareTerm() {
     var el = document.getElementById("care-term");
     if (!el) return;
-    var script = [
+    await playTerm(el, [
       { cls: "muted", text: "Last login: " + lastLoginStamp() + " on ttys001" },
       { cls: "cmd", text: "$ whoami" },
-      { cls: "out", text: "jamesware" },
-      { cls: "cmd", text: "$ what_do_you_build" },
-      { cls: "out", text: "Thoughtful software with timeless design." },
-      { cls: "cmd", text: "$ cat philosophy.txt" },
-      { cls: "out", text: "  Simplicity is complex." },
-      { cls: "out", text: "  Details matter." },
-      { cls: "out", text: "  Build it like it's yours." },
+      { cls: "out", text: "JamesWare" },
+      { cls: "cmd", text: "$ mission" },
+      { cls: "out", text: "Building useful things with care." },
+      { cls: "cmd", text: "$ status" },
+      { cls: "out", text: "Currently making software." },
       { cls: "cmd", text: "$ " },
-    ];
-    el.textContent = "";
-
-    function lineSpan(cls) {
-      var span = document.createElement("span");
-      span.className = "term-line term-line--" + cls;
-      el.appendChild(span);
-      return span;
-    }
-
-    if (reducedMotion) {
-      script.forEach(function (step, i) {
-        if (i) el.appendChild(document.createTextNode("\n"));
-        lineSpan(step.cls).textContent = step.text;
-      });
-      el.appendChild(cursorNode());
-      return;
-    }
-
-    var i;
-    for (i = 0; i < script.length; i += 1) {
-      var step = script[i];
-      if (i) el.appendChild(document.createTextNode("\n"));
-      var span = lineSpan(step.cls);
-      if (step.cls === "cmd") {
-        await typeText(span, step.text, 30);
-        await sleep(200);
-      } else {
-        span.textContent = step.text;
-        await sleep(300);
-      }
-    }
-    el.appendChild(cursorNode());
+    ]);
   }
 
   function startTyping() {
@@ -318,11 +334,26 @@
     });
   }
 
+  function bindProductShots() {
+    document.querySelectorAll(".device__photo").forEach(function (img) {
+      function show() {
+        img.hidden = false;
+        if (img.parentElement) img.parentElement.classList.add("has-photo");
+      }
+      img.addEventListener("load", show);
+      img.addEventListener("error", function () {
+        img.hidden = true;
+      });
+      if (img.complete && img.naturalWidth) show();
+    });
+  }
+
   function ready() {
     document.documentElement.classList.add("theme-ready");
     preloadBrands();
     applyTheme(currentTheme(), { immediate: true });
     bindSwitcher();
+    bindProductShots();
     startCycle();
     startTyping();
   }

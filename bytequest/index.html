@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="green" data-asset-root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--
+      CLONE THIS PAGE for the next JamesWare product.
+      Replace every string marked REPLACE, the slug folder name, screenshot path,
+      CTAs, and related links. Status pills: RELEASED | BUILDING | EXPERIMENT | OPEN SOURCE | ARCHIVED.
+    -->
+    <title>ByteQuest — JamesWare</title>
+    <meta
+      name="description"
+      content="A CLI adventure game for nostalgic developers. Placeholder JamesWare showcase — clone this page for the next real product."
+    />
+    <script>
+      (function () {
+        var themes = ["green", "orange", "blue", "purple", "red"];
+        var last = null;
+        try {
+          last = localStorage.getItem("jamesware-theme");
+        } catch (e) {}
+        var pool = themes.filter(function (name) {
+          return name !== last;
+        });
+        var theme = pool[Math.floor(Math.random() * pool.length)];
+        document.documentElement.setAttribute("data-theme", theme);
+        try {
+          localStorage.setItem("jamesware-theme", theme);
+        } catch (e) {}
+        window.jwSetLogos = function () {
+          var activeTheme = document.documentElement.getAttribute("data-theme") || "green";
+          var root = document.documentElement.getAttribute("data-asset-root") || "";
+          if (root && root.charAt(root.length - 1) !== "/") root += "/";
+          document.querySelectorAll("[data-logo]").forEach(function (el) {
+            var src =
+              root +
+              "assets/brand/jamesware-" +
+              el.getAttribute("data-logo") +
+              "-" +
+              activeTheme +
+              ".png";
+            el.querySelectorAll("img").forEach(function (img) {
+              if (!img.dataset.fallbackBound) {
+                img.dataset.fallbackBound = "true";
+                img.addEventListener("error", function () {
+                  img.style.visibility = "hidden";
+                });
+                img.addEventListener("load", function () {
+                  img.style.visibility = "visible";
+                });
+              }
+              if (!img.getAttribute("src")) img.src = src;
+            });
+          });
+        };
+      })();
+    </script>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/styles.css" />
+  </head>
+  <body>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="scanlines" aria-hidden="true"></div>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="../index.html">
+          <span class="logo-swap logo-swap--square" data-logo="square">
+            <img class="logo-swap__a" alt="JamesWare" width="40" height="40" />
+            <img class="logo-swap__b" alt="" width="40" height="40" />
+          </span>
+          <span class="wordmark">James<span class="accent">Ware</span></span>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <a href="../index.html#projects">Work</a>
+          <a href="../index.html#about">About</a>
+          <a href="https://github.com/EDIT-ME">GitHub</a>
+          <a class="prompt-btn" href="../index.html#projects" aria-label="Open work">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M2 3h2l4 5-4 5H2l4-5-4-5zm7 8h5v2H9v-2z" />
+            </svg>
+          </a>
+        </nav>
+      </div>
+    </header>
+    <script>
+      jwSetLogos();
+    </script>
+
+    <main id="main">
+      <div class="wrap">
+        <nav class="crumb" aria-label="Breadcrumb">
+          <a href="../index.html">JamesWare</a>
+          <span aria-hidden="true">/</span>
+          <span><!-- REPLACE name -->ByteQuest</span>
+        </nav>
+
+        <section class="product-hero">
+          <div>
+            <p class="card-kicker">JamesWare · Experiment</p>
+            <h1><!-- REPLACE name -->ByteQuest</h1>
+            <p class="product-tagline">
+              <!-- REPLACE tagline -->A CLI adventure game for nostalgic developers.
+            </p>
+            <div class="badge-row">
+              <span class="status status--experiment">Experiment</span>
+              <span class="badge">CLI</span>
+              <span class="badge">macOS</span>
+              <span class="badge">Go</span>
+            </div>
+            <div class="cta-row">
+              <span class="btn btn--disabled" aria-disabled="true">Coming soon</span>
+              <a class="link-arrow" href="../index.html#projects">Back to work <span aria-hidden="true">›</span></a>
+            </div>
+          </div>
+          <figure class="device">
+            <!-- REPLACE screenshot: ../assets/products/bytequest/hero.png -->
+            <img
+              class="device__photo"
+              src="../assets/products/bytequest/hero.png"
+              alt="ByteQuest terminal"
+              hidden
+            />
+            <div class="device__mock" aria-hidden="true">
+              <div class="device__chrome">
+                <span>tty</span>
+                <span>score 1200</span>
+              </div>
+              <pre class="device__panel">$ bytequest
+
+  You stand in a dim machine room.
+  A phosphor terminal hums.
+
+  > look
+  A boxed workstation. A 3.5" disk
+  labeled KEEP.
+
+  > take disk
+  Taken.
+
+  >_</pre>
+            </div>
+          </figure>
+        </section>
+        <p class="shot-caption">Screenshot slot — replace assets/products/bytequest/hero.png when you have a capture.</p>
+
+        <section class="product-copy">
+          <div class="prose-grid">
+            <div>
+              <h2>Problem</h2>
+              <p>
+                <!-- REPLACE -->Most “retro games” are nostalgia skins on modern engines. The fun of
+                an old machine was the constraint: a prompt, a verb, a room.
+              </p>
+            </div>
+            <div>
+              <h2>What it does</h2>
+              <p>
+                <!-- REPLACE -->A small text adventure you run in a terminal. Rooms, inventory,
+                a save file next to the binary. No account. No live service.
+              </p>
+            </div>
+            <div>
+              <h2>Why it exists</h2>
+              <p>
+                <!-- REPLACE -->To keep a slot on this site that looks like a finished product page
+                — and to be the template for the next real JamesWare app. Clone this folder.
+              </p>
+            </div>
+          </div>
+
+          <div class="cap-grid">
+            <h2>Capabilities</h2>
+            <ul class="cap-list">
+              <!-- REPLACE list -->
+              <li>Parser with a short, honest verb set</li>
+              <li>Save / load as a local file</li>
+              <li>Map that fits on one screen</li>
+              <li>Score, but not a leaderboard</li>
+              <li>Runs in a normal terminal</li>
+              <li>No telemetry</li>
+            </ul>
+          </div>
+
+          <div class="privacy">
+            <h2>How it works</h2>
+            <p>
+              <!-- REPLACE -->Everything stays on the machine. There is no JamesWare backend and no
+              ByteQuest account. If this page becomes a real product, keep that sentence true or
+              delete it.
+            </p>
+          </div>
+
+          <div class="state">
+            <h2>Current state</h2>
+            <p>
+              <!-- REPLACE -->Fictional showcase. Not a shipping game. Use this page as the Coming
+              Soon shell: copy <code>bytequest/</code>, rename the slug, fill the REPLACE comments,
+              point the homepage card at the new folder.
+            </p>
+          </div>
+
+          <div class="get-it">
+            <h2>Get it</h2>
+            <p class="note">
+              No download yet. When the next product is real, this strip becomes GitHub, TestFlight,
+              or an App Store link — only the ones that exist.
+            </p>
+            <div class="cta-row">
+              <span class="btn btn--disabled" aria-disabled="true">Coming soon</span>
+            </div>
+          </div>
+
+          <div class="related">
+            <h2>Also on the bench</h2>
+            <div class="project-grid">
+              <article class="card">
+                <h3>AI Meter</h3>
+                <p>Local-first usage meter for Cursor, Claude, and Codex.</p>
+                <a class="more" href="../ai-meter/index.html">View Project <span aria-hidden="true">›</span></a>
+              </article>
+              <article class="card">
+                <h3>Daily On Plan</h3>
+                <p>Stay on plan. One day at a time.</p>
+                <a class="more" href="../daily-on-plan/index.html">View Project <span aria-hidden="true">›</span></a>
+              </article>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <span class="logo-swap logo-swap--footer" data-logo="square">
+              <img class="logo-swap__a" alt="JamesWare" width="48" height="48" />
+              <img class="logo-swap__b" alt="" width="48" height="48" />
+            </span>
+            <script>
+              jwSetLogos();
+            </script>
+            <div>
+              <p class="footer-wordmark">James<span class="accent">Ware</span></p>
+              <p class="footer-tagline">Made with care, by JamesWare.</p>
+              <p class="footer-tagline">A Jewhurst Engineering company.</p>
+            </div>
+          </div>
+          <div>
+            <h3>Navigation</h3>
+            <ul>
+              <li><a href="../index.html#projects">Work</a></li>
+              <li><a href="../index.html#about">About</a></li>
+              <li><a href="index.html">ByteQuest</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Connect</h3>
+            <ul>
+              <li><a href="https://github.com/EDIT-ME">GitHub</a></li>
+              <li><a href="mailto:hello@jamesware.dev">Email</a></li>
+            </ul>
+          </div>
+          <div class="stay">
+            <p>Clone this page for the next product.</p>
+          </div>
+        </div>
+        <div class="footer-base">
+          <p>© 2026 JamesWare. Built by hand. Hosted on GitHub.</p>
+          <div class="theme-switcher" role="group" aria-label="Color theme">
+            <span>Phosphor</span>
+            <button class="dot" type="button" data-theme-pick="green" aria-label="Green phosphor" aria-pressed="false"></button>
+            <button class="dot" type="button" data-theme-pick="orange" aria-label="Amber phosphor" aria-pressed="false"></button>
+            <button class="dot" type="button" data-theme-pick="blue" aria-label="Blue phosphor" aria-pressed="false"></button>
+            <button class="dot" type="button" data-theme-pick="purple" aria-label="Purple phosphor" aria-pressed="false"></button>
+            <button class="dot" type="button" data-theme-pick="red" aria-label="Red phosphor" aria-pressed="false"></button>
+          </div>
+          <p>Made with care.</p>
+        </div>
+      </div>
+    </footer>
+    <script src="../assets/theme.js"></script>
+  </body>
+</html>

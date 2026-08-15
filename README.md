@@ -1,18 +1,20 @@
 # JamesWare
 
-A zero-build, single-page website for **JamesWare** — retro CRT styling, five rotating phosphor themes, hosted on GitHub Pages at `jamesware.dev`.
+A zero-build website for **JamesWare** — retro CRT styling, five phosphor themes, hosted on GitHub Pages at `jamesware.dev`.
 
 ## Files
 
-- `index.html` — page markup, inline computer illustration, `EDIT ME` placeholders
-- `assets/styles.css` — layout, CRT effects, theme color variables
-- `assets/theme.js` — random theme on load, ambient cycling, logo crossfade, favicon sync
-- `assets/brand/` — square and full logo PNGs, one pair per theme (`green`, `orange`, `blue`, `purple`, `red`)
-- `favicon.svg` — fallback favicon (the live tab icon is recolored in JS to match the theme)
-- `CNAME` — custom domain: `jamesware.dev`
-- `.nojekyll` — tells GitHub Pages to serve the site as plain static files
+- `index.html` — studio homepage
+- `ai-meter/index.html` — AI Meter product page (`jamesware.dev/ai-meter`)
+- `daily-on-plan/index.html` — Daily On Plan (`jamesware.dev/daily-on-plan`)
+- `bytequest/index.html` — fictional showcase and cloneable product template (`jamesware.dev/bytequest`)
+- `assets/styles.css` — layout, CRT effects, product pages
+- `assets/theme.js` — theme pick, ambient cycling, logo crossfade, favicon sync
+- `assets/brand/` — square and full logo PNGs per theme
+- `assets/products/{slug}/` — drop `hero.png` here for real screenshots
+- `favicon.svg`, `CNAME`, `.nojekyll`
 
-The design comps (`initial-side-design-idea-*.png`) are reference only and are not used by the site.
+The design comps (`initial-side-design-idea-*.png`) are reference only.
 
 ## Theme behavior
 
@@ -41,13 +43,21 @@ No code changes are required for that swap.
 
 ## Before publishing
 
-Search `index.html` for:
+Search the site for:
 
 ```text
 EDIT ME
 ```
 
-Replace the placeholder GitHub / X URLs and project cards with your real ones.
+Replace the placeholder GitHub URLs. Product pages do not claim App Store or TestFlight links that do not exist yet.
+
+Drop real screenshots at:
+
+```text
+assets/products/ai-meter/hero.png
+assets/products/daily-on-plan/hero.png
+assets/products/bytequest/hero.png
+```
 
 If `hello@jamesware.dev` is not configured yet, either set it up with your email provider or change/remove the mailto links.
 

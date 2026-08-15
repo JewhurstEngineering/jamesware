@@ -246,24 +246,30 @@
   async function runHeroTerm() {
     var el = document.getElementById("hero-term");
     if (!el) return;
+    var ls = document.getElementById("hero-ls");
     var session = [
       { cls: "cmd", text: "guest@jamesware:~$ whoami" },
       { cls: "out", text: "independent software studio — apps, tools, useful things" },
       { cls: "cmd", text: "guest@jamesware:~$ cat mission.txt" },
       { cls: "out", text: "Useful over impressive. Ship the small thing that works." },
-      { cls: "cmd", text: "guest@jamesware:~$ " },
+      { cls: "cmd", text: "guest@jamesware:~$ ls" },
     ];
     el.textContent = "";
     if (reducedMotion) {
       await playTerm(el, session);
       return;
     }
+    if (ls) ls.style.opacity = "0";
     await typeText(lineSpan(el, "muted"), "JW-BIOS 2.6 ... 64K RAM OK", 6);
     await sleep(260);
     el.appendChild(document.createTextNode("\n"));
     await typeText(lineSpan(el, "muted"), "LOADING JAMESWARE.SYS ...", 6);
     await sleep(420);
     await playTerm(el, session);
+    if (ls) {
+      await sleep(150);
+      ls.style.opacity = "1";
+    }
   }
 
   async function runCareTerm() {
@@ -372,7 +378,9 @@
           var pad = name.length < 20 ? new Array(20 - name.length).join(" ") : " ";
           lines.push(outLine("out", "drwxr-xr-x  " + name + pad + p.desc));
         });
-        lines.push(outLine("muted", "type: open <project>"));
+        lines.push(outLine("out", "-rw-r--r--  about.md            more about jamesware"));
+        lines.push(outLine("out", "lrwxrwxrwx  github              source, follow along"));
+        lines.push(outLine("muted", "type: open <project> | about | contact"));
         break;
       case "open":
       case "cd":
@@ -396,14 +404,14 @@
         }
         break;
       case "contact":
-        lines.push(outLine("out", "github: github.com/EDIT-ME"));
-        lines.push(outLine("out", "email:  hello@jamesware.dev"));
+        lines.push(outLine("out", "github: github.com/JewhurstEngineering"));
+        lines.push(outLine("out", "email:  jameswaredotdev@gmail.com"));
         break;
       case "date":
         lines.push(outLine("out", new Date().toString()));
         break;
       case "sudo":
-        lines.push(outLine("err", "guest is not in the sudoers file. this incident will be reported."));
+        lines.push(outLine("err", "Ha, yeah right, you are not in the sudoers file. this incident will be recorded and reported."));
         break;
       case "clear":
         return null;

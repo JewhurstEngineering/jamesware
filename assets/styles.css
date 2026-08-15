@@ -572,13 +572,8 @@ h3 {
 .shell__ls {
   position: relative;
   z-index: 1;
-  margin-bottom: 1.3rem;
-}
-
-.shell__ls-label {
-  margin: 0 0 0.5rem;
-  color: var(--muted);
-  font-size: 0.88rem;
+  margin-bottom: 0.4rem;
+  transition: opacity 0.4s ease;
 }
 
 .shell__row {
@@ -724,17 +719,6 @@ h3 {
 .shell__input::placeholder {
   color: var(--muted);
   opacity: 0.7;
-}
-
-.shell__prompt-row {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1.5rem;
-  padding-top: 1.1rem;
-  border-top: 1px dashed color-mix(in srgb, var(--phosphor) 24%, transparent);
 }
 
 @keyframes crt-on {
@@ -1659,6 +1643,7 @@ code {
   .shell__screen,
   .shell__screen::after,
   .shell__output.is-flash,
+  .shell__ls,
   .term-cursor,
   .led,
   .shell__led,

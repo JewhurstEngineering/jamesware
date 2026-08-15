@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="green">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JamesWare — Thoughtful software. Classic interfaces.</title>
+    <meta
+      name="description"
+      content="Independent software from JamesWare. Thoughtful apps, tools, and classic interfaces, built with care."
+    />
+    <script>
+      (function () {
+        var themes = ["green", "orange", "blue", "purple", "red"];
+        var saved = null;
+        try {
+          saved = localStorage.getItem("jamesware-theme");
+        } catch (e) {}
+        var theme = themes.indexOf(saved) >= 0 ? saved : "green";
+        document.documentElement.setAttribute("data-theme", theme);
+        window.jwSetLogos = function () {
+          var activeTheme = document.documentElement.getAttribute("data-theme") || "green";
+          document.querySelectorAll("[data-logo]").forEach(function (el) {
+            var src =
+              "assets/brand/jamesware-" +
+              el.getAttribute("data-logo") +
+              "-" +
+              activeTheme +
+              ".png";
+            el.querySelectorAll("img").forEach(function (img) {
+              if (!img.dataset.fallbackBound) {
+                img.dataset.fallbackBound = "true";
+                img.addEventListener("error", function () {
+                  img.style.visibility = "hidden";
+                });
+                img.addEventListener("load", function () {
+                  img.style.visibility = "visible";
+                });
+              }
+              if (!img.getAttribute("src")) img.src = src;
+            });
+          });
+        };
+      })();
+    </script>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="scanlines" aria-hidden="true"></div>
+
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="#top">
+          <span class="logo-swap logo-swap--square" data-logo="square">
+            <img class="logo-swap__a" alt="JamesWare" width="40" height="40" />
+            <img class="logo-swap__b" alt="" width="40" height="40" />
+          </span>
+          <span class="wordmark">James<span class="accent">Ware</span></span>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <a href="#projects">Projects</a>
+          <a href="#about">About</a>
+          <!-- EDIT ME: point Blog somewhere real (or remove it) -->
+          <a href="#contact">Blog</a>
+          <a href="#contact">Contact</a>
+          <a class="prompt-btn" href="#projects" aria-label="Open projects">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M2 3h2l4 5-4 5H2l4-5-4-5zm7 8h5v2H9v-2z" />
+            </svg>
+          </a>
+        </nav>
+      </div>
+    </header>
+    <script>
+      jwSetLogos();
+    </script>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="floor-grid" aria-hidden="true"></div>
+        <div class="wrap">
+          <div class="hero-copy">
+            <div class="hero-brand">
+              <span class="logo-swap logo-swap--hero" data-logo="square">
+                <img class="logo-swap__a" alt="JamesWare logo" width="110" height="110" />
+                <img class="logo-swap__b" alt="" width="110" height="110" />
+              </span>
+              <div class="hero-brand__text">
+                <h1 class="hero-title">James<span class="accent">Ware</span></h1>
+                <p class="hero-tag">Made with care by JamesWare</p>
+              </div>
+            </div>
+            <p class="hero-lede">
+              Thoughtful software. Classic interfaces.<br />
+              Built with care, shipped with pride.
+            </p>
+            <div class="cta-row">
+              <a class="btn" href="#projects">View Projects <span aria-hidden="true">›</span></a>
+              <a class="link-arrow" href="#about">About Me <span aria-hidden="true">›</span></a>
+            </div>
+          </div>
+
+          <div class="hero-stage">
+            <figure class="machine" aria-label="Retro computer running JamesWare Terminal">
+              <div class="monitor">
+                <div class="monitor__bezel">
+                  <div class="monitor__screen">
+                    <div class="monitor__glare" aria-hidden="true"></div>
+                    <pre class="monitor__term" id="hero-term"></pre>
+                  </div>
+                </div>
+                <div class="monitor__chin">
+                  <span class="monitor__logo">JamesWare</span>
+                  <span class="led" aria-hidden="true"></span>
+                </div>
+              </div>
+              <div class="drive" aria-hidden="true">
+                <div class="drive__slot"></div>
+                <span class="led"></span>
+              </div>
+              <div class="keys" aria-hidden="true">
+                <div class="keys__row">
+                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="keys__row">
+                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="keys__row keys__row--space">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+            </figure>
+          </div>
+        </div>
+      </section>
+      <script>
+        jwSetLogos();
+      </script>
+
+      <!-- EDIT ME: replace placeholder projects, descriptions, and links -->
+      <section class="section" id="projects">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>Featured Projects</h2>
+            <span class="section-rule" aria-hidden="true"></span>
+            <a href="#projects">View all projects <span aria-hidden="true">›</span></a>
+          </div>
+          <div class="project-grid">
+            <article class="card">
+              <div class="card-head">
+                <div class="card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M3 5h4l6 7-6 7H3l6-7-6-7zm11 12h7v2h-7z" />
+                  </svg>
+                </div>
+                <h3>Terminus</h3>
+              </div>
+              <p>A modern terminal emulator with retro soul.</p>
+              <a class="more" href="#projects">View Project <span aria-hidden="true">›</span></a>
+            </article>
+            <article class="card">
+              <div class="card-head">
+                <div class="card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M4 3h12l4 4v14H4V3zm12 1.8V8h3.2L16 4.8zM7 12h10v2H7v-2zm0 4h7v2H7v-2z" />
+                  </svg>
+                </div>
+                <h3>Archivist</h3>
+              </div>
+              <p>Version control for humans. Lightweight and reliable.</p>
+              <a class="more" href="#projects">View Project <span aria-hidden="true">›</span></a>
+            </article>
+            <article class="card">
+              <div class="card-head">
+                <div class="card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M6 10h2V8h2V6h4v2h2v2h2v2h-2v6h-2v-2H8v2H6v-6H4v-2h2zm4 2v2h4v-2h-4zM8 4h2v2H8V4zm6 0h2v2h-2V4z" />
+                  </svg>
+                </div>
+                <h3>ByteQuest</h3>
+              </div>
+              <p>A CLI adventure game for nostalgic developers.</p>
+              <a class="more" href="#projects">View Project <span aria-hidden="true">›</span></a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="wrap care">
+          <div class="care-copy">
+            <div class="pixel-heart" aria-hidden="true">
+              <svg viewBox="0 0 7 6">
+                <rect x="1" y="0" width="2" height="1" />
+                <rect x="4" y="0" width="2" height="1" />
+                <rect x="0" y="1" width="7" height="2" />
+                <rect x="1" y="3" width="5" height="1" />
+                <rect x="2" y="4" width="3" height="1" />
+                <rect x="3" y="5" width="1" height="1" />
+              </svg>
+            </div>
+            <h2>Made with care</h2>
+            <p>
+              Every project is built with attention to detail, a love for clean interfaces, and a
+              deep respect for the craft.
+            </p>
+            <p>Thank you for being here.</p>
+          </div>
+          <div class="term-window" aria-label="JamesWare terminal">
+            <div class="term-window__bar">
+              <span class="term-dot" aria-hidden="true"></span>
+              <span>jamesware@terminal ~</span>
+            </div>
+            <pre id="care-term"></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="contact">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <span class="logo-swap logo-swap--footer" data-logo="square">
+              <img class="logo-swap__a" alt="JamesWare" width="48" height="48" />
+              <img class="logo-swap__b" alt="" width="48" height="48" />
+            </span>
+            <script>
+              jwSetLogos();
+            </script>
+            <div>
+              <p class="footer-wordmark">James<span class="accent">Ware</span></p>
+              <p class="footer-tagline">Made with care by JamesWare</p>
+            </div>
+          </div>
+          <div>
+            <h3>Navigation</h3>
+            <ul>
+              <li><a href="#projects">Projects</a></li>
+              <li><a href="#about">About</a></li>
+              <!-- EDIT ME: point Blog somewhere real (or remove it) -->
+              <li><a href="#contact">Blog</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Connect</h3>
+            <!-- EDIT ME: replace GitHub, X, and email with your real links -->
+            <ul>
+              <li><a href="https://github.com/EDIT-ME">GitHub</a></li>
+              <li><a href="https://x.com/EDIT-ME">X (Twitter)</a></li>
+              <li><a href="mailto:hello@jamesware.dev">Email</a></li>
+            </ul>
+          </div>
+          <div class="stay">
+            <a class="prompt-btn" href="#top" aria-label="Back to top">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M2 3h2l4 5-4 5H2l4-5-4-5zm7 8h5v2H9v-2z" />
+              </svg>
+            </a>
+            <p>Stay curious.<br />Keep building.</p>
+          </div>
+        </div>
+
+        <div class="footer-base">
+          <p>© 2026 JamesWare. All rights reserved.</p>
+          <div class="theme-switcher" role="group" aria-label="Color theme">
+            <span>Phosphor</span>
+            <button class="dot" type="button" data-theme-pick="green" aria-label="Green phosphor" aria-pressed="false"></button>
+            <button class="dot" type="button" data-theme-pick="orange" aria-label="Amber phosphor" aria-pressed="false"></button>
+            <button class="dot" type="button" data-theme-pick="blue" aria-label="Blue phosphor" aria-pressed="false"></button>
+            <button class="dot" type="button" data-theme-pick="purple" aria-label="Purple phosphor" aria-pressed="false"></button>
+            <button class="dot" type="button" data-theme-pick="red" aria-label="Red phosphor" aria-pressed="false"></button>
+          </div>
+          <p>Crafted with care. Built for the long term.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/theme.js"></script>
+  </body>
+</html>

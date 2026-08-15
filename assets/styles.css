@@ -321,21 +321,16 @@ h3 {
 
 .floor-grid {
   position: absolute;
-  left: -12%;
-  right: -12%;
-  bottom: -4%;
-  height: 300px;
+  inset: auto 0 0;
+  height: 42%;
   z-index: 0;
   background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--phosphor) 55%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--phosphor) 55%, transparent) 1px, transparent 1px);
-  background-size: 46px 46px;
-  transform: perspective(460px) rotateX(62deg);
-  transform-origin: center bottom;
-  mask-image: linear-gradient(to bottom, transparent, #000 32%, #000 72%, transparent);
-  opacity: 0.35;
+    linear-gradient(to right, color-mix(in srgb, var(--phosphor) 35%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--phosphor) 35%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to top, #000, transparent 88%);
+  opacity: 0.22;
   pointer-events: none;
-  filter: drop-shadow(0 0 12px var(--glow));
 }
 
 .hero .wrap {
@@ -777,53 +772,130 @@ main {
   color: var(--phosphor);
 }
 
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-}
-
-.card {
+.hex-icon {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-  padding: 1.5rem 1.4rem;
-  background: color-mix(in srgb, var(--panel) 88%, black);
-  border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
-  border-radius: 14px;
-  min-height: 200px;
-  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  width: 92px;
+  height: 102px;
+  flex: none;
+  color: var(--phosphor);
 }
 
-.card:hover {
-  transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--phosphor) 40%, transparent);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+.hex-icon__shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: color-mix(in srgb, var(--panel) 92%, black);
+  stroke: color-mix(in srgb, var(--phosphor) 50%, transparent);
+  stroke-width: 1.6;
 }
 
-.card-head {
-  display: flex;
+.hex-icon__glyph {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 34px;
+  height: 34px;
+  margin: 34px auto 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hex-icon__glyph circle[fill="currentColor"] {
+  stroke: none;
+}
+
+.flagship {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1.05fr) minmax(240px, 0.95fr);
+  gap: 1.75rem 2rem;
   align-items: center;
-  gap: 0.95rem;
+  padding-bottom: 2.25rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
 }
 
-.card h3 {
-  font-size: 1.5rem;
+.flagship__copy h3 {
+  margin: 0 0 0.55rem;
+  font-size: clamp(1.85rem, 4vw, 2.55rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
   color: var(--ink);
 }
 
-.card p {
-  margin: 0;
+.flagship__copy p,
+.work-item p {
+  margin: 0 0 0.7rem;
   color: var(--muted);
-  flex: 1;
+}
+
+.flagship__meta,
+.work-item__meta {
+  margin: 0 0 0.85rem;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.flagship .card-meta {
+  margin-bottom: 0.85rem;
+}
+
+.flagship .status {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.flagship .more {
+  display: inline-block;
+}
+
+.work-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem 2.5rem;
+}
+
+.work-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35rem 1rem;
+  align-items: start;
+}
+
+.work-item .card-icon {
+  grid-row: 1 / -1;
+}
+
+.work-item h3 {
+  margin: 0.15rem 0 0.2rem;
+  font-size: 1.12rem;
+  color: var(--ink);
+}
+
+.work-item p {
+  margin: 0 0 0.35rem;
+  font-size: 0.92rem;
+}
+
+.work-item__meta {
+  margin: 0 0 0.45rem;
 }
 
 .card-icon {
   display: grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   flex: none;
   border: 1px solid color-mix(in srgb, var(--phosphor) 28%, transparent);
   border-radius: 10px;
@@ -832,8 +904,8 @@ main {
 }
 
 .card-icon svg {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.6;
@@ -845,7 +917,8 @@ main {
   stroke: none;
 }
 
-.card .more {
+.more {
+  color: var(--phosphor);
   font-size: 0.88rem;
   font-weight: 500;
 }
@@ -868,37 +941,37 @@ main {
   font-size: 0.74rem;
 }
 
-.status--experiment,
-.status--internal,
-.status--planned {
+.status--experiment {
   color: var(--muted);
   background: color-mix(in srgb, var(--ink) 6%, transparent);
   border-color: color-mix(in srgb, var(--muted) 35%, transparent);
 }
 
-.status--released,
-.status--opensource {
+.workbench-row .status {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--phosphor);
-  border-color: color-mix(in srgb, var(--phosphor) 40%, transparent);
+}
+
+.workbench-row .status--planned,
+.workbench-row .status--experiment,
+.workbench-row .status--internal {
+  color: var(--phosphor);
+  background: none;
+  border: 0;
 }
 
 .badge {
   color: var(--muted);
   background: color-mix(in srgb, var(--ink) 6%, transparent);
   border-color: color-mix(in srgb, var(--ink) 16%, transparent);
-}
-
-.project-grid--featured {
-  grid-template-columns: 1.35fr 1fr 1fr;
-}
-
-.project-grid--support {
-  margin-top: 1.25rem;
-  grid-template-columns: 1fr 1fr;
-}
-
-.card--flagship {
-  min-height: 260px;
 }
 
 .card-kicker {
@@ -951,8 +1024,7 @@ main {
 }
 
 .quiet-card {
-  padding: 1.1rem 0 0;
-  border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+  padding: 0;
 }
 
 .build-icon {
@@ -1004,10 +1076,24 @@ main {
 }
 
 .about-prose .about-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
   margin-top: 0.4rem;
   color: var(--muted);
   font-size: 0.86rem;
   letter-spacing: 0.02em;
+}
+
+.about-meta svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  fill: none;
+  stroke: var(--phosphor);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* ---------- product pages ---------- */
@@ -1031,16 +1117,18 @@ main {
 
 .product-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
-  gap: 2.5rem;
+  grid-template-columns: auto minmax(0, 1fr) minmax(260px, 0.9fr);
+  gap: 2rem 2.25rem;
   align-items: center;
   padding: 2.75rem 0 3.5rem;
 }
 
 .product-hero h1 {
   margin: 0.35rem 0 0.6rem;
-  font-family: "VT323", "IBM Plex Mono", ui-monospace, monospace;
-  font-size: clamp(2.6rem, 6vw, 4rem);
+  font-family: "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-size: clamp(2.1rem, 5vw, 3.1rem);
 }
 
 .product-tagline {
@@ -1148,8 +1236,8 @@ main {
   font-size: 0.86rem;
 }
 
-.related .project-grid {
-  grid-template-columns: 1fr 1fr;
+.related .work-list {
+  margin-top: 0.4rem;
 }
 
 .device {
@@ -1341,9 +1429,12 @@ code {
 }
 
 .footer-grid h3 {
-  font-size: 0.92rem;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
   font-weight: 600;
-  color: var(--ink);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--phosphor);
   margin-bottom: 0.85rem;
 }
 
@@ -1449,15 +1540,28 @@ code {
 @media (max-width: 900px) {
   .about-block,
   .footer-grid,
-  .project-grid,
-  .project-grid--featured,
-  .project-grid--support,
-  .workbench-grid,
+  .flagship,
+  .work-list,
   .build-grid,
   .product-hero,
-  .prose-grid,
-  .related .project-grid {
+  .prose-grid {
     grid-template-columns: 1fr;
+  }
+
+  .workbench-row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .hex-icon {
+    width: 72px;
+    height: 80px;
+  }
+
+  .hex-icon__glyph {
+    width: 26px;
+    height: 26px;
+    margin-top: 27px;
   }
 
   .cap-list {

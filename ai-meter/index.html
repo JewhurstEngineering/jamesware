@@ -140,34 +140,15 @@
               <span class="btn btn--disabled" aria-disabled="true">TestFlight coming</span>
             </div>
           </div>
-          <figure class="device">
-            <!-- Drop a real capture at ../assets/products/ai-meter/hero.png -->
+          <figure class="device device--shot">
             <img
               class="device__photo"
-              src="../assets/products/ai-meter/hero.png"
-              alt="AI Meter menu bar and widgets"
-              hidden
+              src="images/aimeter-popover-all.png"
+              alt="AI Meter All accounts popover showing Cursor, Claude, and ChatGPT usage"
+              fetchpriority="high"
             />
-            <div class="device__mock" aria-hidden="true">
-              <div class="device__chrome">
-                <span>menu bar</span>
-                <span class="led"></span>
-              </div>
-              <pre class="device__panel">AI Meter
-──────────────
-Cursor Pro+    62%
-Claude Code    4h 12m
-Codex          ok
-
-Included  $48 / $80
-On-demand unlimited
-Pace      slightly over
-
-●  ●  ○   warn at 80%</pre>
-            </div>
           </figure>
         </section>
-        <p class="shot-caption">Screenshot slot — replace assets/products/ai-meter/hero.png when you have a capture.</p>
 
         <section class="product-copy">
           <div class="prose-grid">
@@ -193,6 +174,246 @@ Pace      slightly over
               </p>
             </div>
           </div>
+
+          <section class="look" aria-labelledby="ai-meter-look">
+            <h2 id="ai-meter-look">Look</h2>
+
+            <div class="shot-group">
+              <h3 class="shot-group__title">The meter</h3>
+              <div class="shot-gallery shot-gallery--popover">
+                <figure class="shot">
+                  <img
+                    src="images/aimeter-popover-all.png"
+                    alt="AI Meter All accounts popover"
+                    loading="lazy"
+                  />
+                  <figcaption>All accounts</figcaption>
+                </figure>
+                <figure class="shot">
+                  <img
+                    src="images/aimeter-popover-cursor.png"
+                    alt="AI Meter Cursor usage popover"
+                    loading="lazy"
+                  />
+                  <figcaption>Cursor</figcaption>
+                </figure>
+                <figure class="shot">
+                  <img
+                    src="images/aimeter-popover-claude.png"
+                    alt="AI Meter Claude usage popover"
+                    loading="lazy"
+                  />
+                  <figcaption>Claude</figcaption>
+                </figure>
+                <figure class="shot">
+                  <img
+                    src="images/aimeter-popover-chatgpt.png"
+                    alt="AI Meter ChatGPT usage popover"
+                    loading="lazy"
+                  />
+                  <figcaption>ChatGPT</figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div class="shot-group">
+              <h3 class="shot-group__title">Settings</h3>
+              <div class="shot-carousel" data-shot-carousel aria-label="AI Meter settings screenshots">
+                <div class="shot-carousel__stage" aria-live="polite">
+                  <figure
+                    class="shot shot-carousel__slide is-active"
+                    id="settings-slide-general"
+                    data-shot-slide
+                    aria-label="1 of 8: General"
+                  >
+                    <img
+                      src="images/aimeter-settings-general.png"
+                      alt="AI Meter General settings"
+                      loading="lazy"
+                    />
+                    <figcaption>General</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="settings-slide-layout"
+                    data-shot-slide
+                    aria-label="2 of 8: Layout"
+                    hidden
+                  >
+                    <img
+                      src="images/aimeter-settings-layout.png"
+                      alt="AI Meter Layout settings"
+                      loading="lazy"
+                    />
+                    <figcaption>Layout</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="settings-slide-theme"
+                    data-shot-slide
+                    aria-label="3 of 8: Theme"
+                    hidden
+                  >
+                    <img
+                      src="images/aimeter-settings-theme.png"
+                      alt="AI Meter Theme settings"
+                      loading="lazy"
+                    />
+                    <figcaption>Theme</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="settings-slide-accessibility"
+                    data-shot-slide
+                    aria-label="4 of 8: Accessibility"
+                    hidden
+                  >
+                    <img
+                      src="images/aimeter-settings-accessibility.png"
+                      alt="AI Meter Accessibility settings"
+                      loading="lazy"
+                    />
+                    <figcaption>Accessibility</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="settings-slide-authentication"
+                    data-shot-slide
+                    aria-label="5 of 8: Authentication"
+                    hidden
+                  >
+                    <img
+                      src="images/aimeter-settings-authentication.png"
+                      alt="AI Meter Authentication settings"
+                      loading="lazy"
+                    />
+                    <figcaption>Authentication</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="settings-slide-included-usage"
+                    data-shot-slide
+                    aria-label="6 of 8: Included usage"
+                    hidden
+                  >
+                    <img
+                      src="images/aimeter-settings-includedusage.png"
+                      alt="AI Meter Included Usage settings"
+                      loading="lazy"
+                    />
+                    <figcaption>Included usage</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="settings-slide-paid-usage"
+                    data-shot-slide
+                    aria-label="7 of 8: Paid usage"
+                    hidden
+                  >
+                    <img
+                      src="images/aimeter-settings-paidusage.png"
+                      alt="AI Meter Paid Usage settings"
+                      loading="lazy"
+                    />
+                    <figcaption>Paid usage</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="settings-slide-about"
+                    data-shot-slide
+                    aria-label="8 of 8: About"
+                    hidden
+                  >
+                    <img
+                      src="images/aimeter-settings-about.png"
+                      alt="AI Meter About settings"
+                      loading="lazy"
+                    />
+                    <figcaption>About</figcaption>
+                  </figure>
+                </div>
+
+                <div class="shot-carousel__controls">
+                  <button type="button" data-carousel-prev aria-label="Previous settings screenshot">
+                    <span aria-hidden="true">←</span> Previous
+                  </button>
+                  <p aria-atomic="true">
+                    <span data-carousel-current>1</span> / 8 ·
+                    <strong data-carousel-label>General</strong>
+                  </p>
+                  <button type="button" data-carousel-next aria-label="Next settings screenshot">
+                    Next <span aria-hidden="true">→</span>
+                  </button>
+                </div>
+
+                <div class="shot-carousel__tabs" role="tablist" aria-label="Choose settings screen">
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="settings-slide-general"
+                    aria-selected="true"
+                    data-carousel-go="0"
+                  >General</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="settings-slide-layout"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="1"
+                  >Layout</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="settings-slide-theme"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="2"
+                  >Theme</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="settings-slide-accessibility"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="3"
+                  >Accessibility</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="settings-slide-authentication"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="4"
+                  >Authentication</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="settings-slide-included-usage"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="5"
+                  >Included usage</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="settings-slide-paid-usage"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="6"
+                  >Paid usage</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="settings-slide-about"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="7"
+                  >About</button>
+                </div>
+              </div>
+            </div>
+          </section>
 
           <div class="cap-grid">
             <h2>Capabilities</h2>

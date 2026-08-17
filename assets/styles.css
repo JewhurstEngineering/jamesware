@@ -716,8 +716,16 @@ html[data-mode="light"] .shell {
   white-space: nowrap;
 }
 
-.shell__input {
+.shell__input-track {
+  position: relative;
   flex: 1;
+  min-width: 0;
+  min-height: 1.2em;
+}
+
+.shell__input {
+  display: block;
+  width: 100%;
   min-width: 0;
   border: 0;
   background: none;
@@ -726,12 +734,39 @@ html[data-mode="light"] .shell {
   color: var(--ink);
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.94rem;
-  caret-color: var(--phosphor);
+  caret-color: transparent;
 }
 
 .shell__input::placeholder {
   color: var(--muted);
   opacity: 0.7;
+}
+
+.shell__input-track:focus-within .shell__input::placeholder {
+  opacity: 0;
+}
+
+.shell__input-measure {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  white-space: pre;
+  font: inherit;
+  pointer-events: none;
+}
+
+.shell__block-caret {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.shell__input:disabled ~ .shell__block-caret {
+  display: none;
 }
 
 @keyframes crt-on {
@@ -1278,6 +1313,7 @@ main {
 }
 
 .prose-grid h2,
+.look h2,
 .cap-grid h2,
 .get-it h2,
 .related h2,
@@ -1376,6 +1412,29 @@ main {
   object-fit: cover;
 }
 
+.device--shot {
+  display: grid;
+  min-height: 0;
+  padding: 0.65rem;
+  place-items: center;
+  background: #080b0a;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.device--shot .device__photo {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 34rem;
+  margin-inline: auto;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+.flagship .device--shot .device__photo {
+  max-height: 30rem;
+}
+
 .device.has-photo .device__mock {
   display: none;
 }
@@ -1442,6 +1501,172 @@ main {
   margin: 0.55rem 0 3rem;
   color: var(--muted);
   font-size: 0.82rem;
+}
+
+/* ---------- product screenshot galleries ---------- */
+
+.look {
+  margin-bottom: 2.75rem;
+}
+
+.shot-group + .shot-group {
+  margin-top: 2rem;
+}
+
+.shot-group__title {
+  margin: 0 0 0.75rem;
+  color: var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.shot-gallery {
+  display: grid;
+  gap: 1rem;
+  align-items: start;
+}
+
+.shot-gallery--popover {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.shot-gallery--windows,
+.shot-gallery--pair {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.shot {
+  display: grid;
+  align-self: start;
+  margin: 0;
+  padding: 0.55rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--panel) 94%, var(--bg));
+  box-shadow: 0 10px 28px color-mix(in srgb, black 14%, transparent);
+}
+
+html[data-mode="light"] .shot {
+  box-shadow: 0 10px 28px rgba(18, 32, 24, 0.09);
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 9px;
+  background: #080b0a;
+}
+
+.shot figcaption {
+  padding: 0.55rem 0.2rem 0.1rem;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+.shot-carousel {
+  width: min(100%, 920px);
+  margin-inline: auto;
+}
+
+.shot-carousel__stage {
+  display: grid;
+}
+
+.shot-carousel__slide[hidden] {
+  display: none;
+}
+
+.shot-carousel__controls {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.shot-carousel__controls button {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  width: max-content;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+  border-radius: 8px;
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.shot-carousel__controls button:last-child {
+  justify-self: end;
+}
+
+.shot-carousel__controls button:hover {
+  border-color: color-mix(in srgb, var(--phosphor) 55%, transparent);
+  color: var(--phosphor);
+}
+
+.shot-carousel__controls p {
+  margin: 0;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.shot-carousel__controls strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.shot-carousel__tabs {
+  display: flex;
+  gap: 0.35rem;
+  margin-top: 0.65rem;
+  padding-bottom: 0.4rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.shot-carousel__tabs button {
+  flex: none;
+  padding: 0.32rem 0.65rem;
+  border-radius: 999px;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.shot-carousel__tabs button:hover {
+  color: var(--ink);
+}
+
+.shot-carousel__tabs button[aria-selected="true"] {
+  background: color-mix(in srgb, var(--phosphor) 15%, transparent);
+  color: var(--phosphor);
+}
+
+.device__photo.shot--light,
+.shot img.shot--light {
+  display: none;
+}
+
+html[data-mode="light"] .device__photo.shot--dark,
+html[data-mode="light"] .shot img.shot--dark {
+  display: none;
+}
+
+html[data-mode="light"] .device__photo.shot--light,
+html[data-mode="light"] .shot img.shot--light {
+  display: block;
 }
 
 code {
@@ -1721,6 +1946,15 @@ html[data-mode="light"] .site-footer {
   }
 
   .cap-list {
+    grid-template-columns: 1fr;
+  }
+
+  .shot-gallery--popover {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .shot-gallery--windows,
+  .shot-gallery--pair {
     grid-template-columns: 1fr;
   }
 

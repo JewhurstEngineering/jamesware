@@ -255,14 +255,16 @@
     return span;
   }
 
-  async function playTerm(el, script) {
+  async function playTerm(el, script, options) {
+    options = options || {};
+    var showCursor = options.cursor !== false;
     el.textContent = "";
     if (reducedMotion) {
       script.forEach(function (step, i) {
         if (i) el.appendChild(document.createTextNode("\n"));
         lineSpan(el, step.cls).textContent = step.text;
       });
-      el.appendChild(cursorNode());
+      if (showCursor) el.appendChild(cursorNode());
       return;
     }
     var i;
@@ -278,7 +280,7 @@
         await sleep(280);
       }
     }
-    el.appendChild(cursorNode());
+    if (showCursor) el.appendChild(cursorNode());
   }
 
   async function runHeroTerm() {
@@ -294,7 +296,7 @@
     ];
     el.textContent = "";
     if (reducedMotion) {
-      await playTerm(el, session);
+      await playTerm(el, session, { cursor: false });
       return;
     }
     if (ls) ls.style.opacity = "0";
@@ -303,7 +305,7 @@
     el.appendChild(document.createTextNode("\n"));
     await typeText(lineSpan(el, "muted"), "LOADING JAMESWARE.SYS ...", 6);
     await sleep(420);
-    await playTerm(el, session);
+    await playTerm(el, session, { cursor: false });
     if (ls) {
       await sleep(150);
       ls.style.opacity = "1";
@@ -484,10 +486,37 @@
     var output = document.getElementById("hero-output");
     var consoleEl = document.getElementById("hero-console");
     var intro = document.getElementById("hero-intro");
+    var caret = document.querySelector(".shell__block-caret");
+    var track = input && input.closest(".shell__input-track");
     if (!form || !input || !output) return;
 
     var history = [];
     var historyIndex = -1;
+    var measure = null;
+
+    function syncBlockCaret() {
+      if (!caret || !track) return;
+      if (input.disabled) {
+        caret.hidden = true;
+        return;
+      }
+      caret.hidden = false;
+      if (!measure) {
+        measure = document.createElement("span");
+        measure.className = "shell__input-measure";
+        measure.setAttribute("aria-hidden", "true");
+        track.appendChild(measure);
+        var cs = window.getComputedStyle(input);
+        measure.style.font = cs.font;
+        measure.style.letterSpacing = cs.letterSpacing;
+      }
+      var pos = input.selectionStart;
+      if (typeof pos !== "number") pos = input.value.length;
+      measure.textContent = input.value.slice(0, pos);
+      var x = measure.offsetWidth - (input.scrollLeft || 0);
+      caret.style.left = Math.max(0, x) + "px";
+      caret.style.visibility = x < 0 || x > track.clientWidth - 2 ? "hidden" : "visible";
+    }
 
     var ctx = {
       scrollToId: function (id) {
@@ -502,6 +531,7 @@
       },
       exit: function () {
         input.disabled = true;
+        syncBlockCaret();
         setTimeout(function () {
           window.location.reload();
         }, reducedMotion ? 0 : 420);
@@ -514,6 +544,7 @@
       input.value = "";
       if (history[history.length - 1] !== val && val.trim()) history.push(val);
       historyIndex = -1;
+      syncBlockCaret();
       if (!val.trim()) return;
 
       if (intro && !intro.hidden) intro.hidden = true;
@@ -543,14 +574,24 @@
         historyIndex = historyIndex < 0 ? history.length - 1 : Math.max(0, historyIndex - 1);
         input.value = history[historyIndex] || "";
         e.preventDefault();
+        requestAnimationFrame(syncBlockCaret);
       } else if (e.key === "ArrowDown") {
         if (!history.length) return;
         if (historyIndex < 0) return;
         historyIndex = historyIndex + 1 >= history.length ? -1 : historyIndex + 1;
         input.value = historyIndex < 0 ? "" : history[historyIndex];
         e.preventDefault();
+        requestAnimationFrame(syncBlockCaret);
       }
     });
+
+    ["input", "keyup", "click", "select", "focus", "scroll"].forEach(function (evt) {
+      input.addEventListener(evt, syncBlockCaret);
+    });
+    document.addEventListener("selectionchange", function () {
+      if (document.activeElement === input) syncBlockCaret();
+    });
+    syncBlockCaret();
 
     if (consoleEl) {
       consoleEl.addEventListener("click", function (e) {
@@ -598,6 +639,85 @@
     });
   }
 
+  function bindShotCarousels() {
+    document.querySelectorAll("[data-shot-carousel]").forEach(function (carousel) {
+      var slides = Array.prototype.slice.call(
+        carousel.querySelectorAll("[data-shot-slide]")
+      );
+      var tabs = Array.prototype.slice.call(
+        carousel.querySelectorAll("[data-carousel-go]")
+      );
+      var previous = carousel.querySelector("[data-carousel-prev]");
+      var next = carousel.querySelector("[data-carousel-next]");
+      var current = carousel.querySelector("[data-carousel-current]");
+      var label = carousel.querySelector("[data-carousel-label]");
+      var tabList = carousel.querySelector(".shot-carousel__tabs");
+      var index = 0;
+
+      if (!slides.length) return;
+
+      function show(nextIndex, focusTab) {
+        index = (nextIndex + slides.length) % slides.length;
+        slides.forEach(function (slide, i) {
+          var active = i === index;
+          slide.hidden = !active;
+          slide.classList.toggle("is-active", active);
+        });
+        tabs.forEach(function (tab, i) {
+          var active = i === index;
+          tab.setAttribute("aria-selected", active ? "true" : "false");
+          tab.tabIndex = active ? 0 : -1;
+        });
+        if (current) current.textContent = String(index + 1);
+        if (label) {
+          var caption = slides[index].querySelector("figcaption");
+          label.textContent = caption ? caption.textContent.trim() : "";
+        }
+        if (tabs[index] && tabList) {
+          var left = tabs[index].offsetLeft - tabList.clientWidth / 2;
+          tabList.scrollTo({
+            left: Math.max(0, left),
+            behavior: reducedMotion ? "auto" : "smooth",
+          });
+        }
+        if (focusTab && tabs[index]) tabs[index].focus();
+      }
+
+      if (previous) {
+        previous.addEventListener("click", function () {
+          show(index - 1);
+        });
+      }
+      if (next) {
+        next.addEventListener("click", function () {
+          show(index + 1);
+        });
+      }
+      tabs.forEach(function (tab, i) {
+        tab.addEventListener("click", function () {
+          show(i);
+        });
+        tab.addEventListener("keydown", function (e) {
+          if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            show(index - 1, true);
+          } else if (e.key === "ArrowRight") {
+            e.preventDefault();
+            show(index + 1, true);
+          } else if (e.key === "Home") {
+            e.preventDefault();
+            show(0, true);
+          } else if (e.key === "End") {
+            e.preventDefault();
+            show(slides.length - 1, true);
+          }
+        });
+      });
+
+      show(0);
+    });
+  }
+
   function ready() {
     document.documentElement.classList.add("theme-ready");
     preloadBrands();
@@ -606,6 +726,7 @@
     bindSwitcher();
     bindSystemMode();
     bindProductShots();
+    bindShotCarousels();
     bindHeroConsole();
     startCycle();
     startTyping();

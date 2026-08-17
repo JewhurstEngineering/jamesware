@@ -15,7 +15,8 @@ A zero-build website for **JamesWare** — retro CRT styling, five phosphor acce
 - `assets/styles.css` — layout, CRT effects, product pages
 - `assets/theme.js` — phosphor pick, light/dark appearance, ambient cycling, logo crossfade, favicon sync
 - `assets/brand/` — square and full logo PNGs per theme
-- `assets/products/{slug}/` — drop `hero.png` here for real screenshots
+- `{slug}/images/` — product screenshot galleries, kept beside each product page
+- `assets/products/{slug}/` — fallback `hero.png` slot for products without a gallery yet
 - `favicon.svg`, `CNAME`, `.nojekyll`
 
 The design comps (`initial-side-design-idea-*.png`) are reference only.
@@ -59,12 +60,17 @@ EDIT ME
 
 Replace the placeholder GitHub URLs. Product pages do not claim App Store or TestFlight links that do not exist yet.
 
-Drop real screenshots at:
+AI Meter and BudMath use the captures kept beside their product pages:
 
 ```text
-assets/products/ai-meter/hero.png
+ai-meter/images/
+budmath/images/
+```
+
+Products without a screenshot gallery still use the fallback hero slot:
+
+```text
 assets/products/daily-on-plan/hero.png
-assets/products/budmath/hero.png
 assets/products/glauncher/hero.png
 assets/products/doteq/hero.png
 assets/products/cursor-stack/hero.png

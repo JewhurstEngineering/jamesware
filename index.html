@@ -174,17 +174,20 @@
                 <div class="shell__output" id="hero-output" aria-live="polite"></div>
                 <form class="shell__input-row" id="hero-form">
                   <label class="shell__prompt-tag" for="hero-input">guest@jamesware:~$</label>
-                  <input
-                    class="shell__input"
-                    id="hero-input"
-                    type="text"
-                    autocomplete="off"
-                    autocapitalize="off"
-                    autocorrect="off"
-                    spellcheck="false"
-                    placeholder="help"
-                    aria-label="JamesWare terminal command input"
-                  />
+                  <span class="shell__input-track">
+                    <input
+                      class="shell__input"
+                      id="hero-input"
+                      type="text"
+                      autocomplete="off"
+                      autocapitalize="off"
+                      autocorrect="off"
+                      spellcheck="false"
+                      placeholder="help"
+                      aria-label="JamesWare terminal command input"
+                    />
+                    <span class="term-cursor shell__block-caret" aria-hidden="true"></span>
+                  </span>
                 </form>
               </div>
             </div>
@@ -224,30 +227,13 @@
               </div>
               <a class="more" href="ai-meter/index.html">View project →</a>
             </div>
-            <figure class="device">
+            <figure class="device device--shot">
               <img
                 class="device__photo"
-                src="assets/products/ai-meter/hero.png"
-                alt="AI Meter menu bar and widgets"
-                hidden
+                src="ai-meter/images/aimeter-popover-all.png"
+                alt="AI Meter All accounts popover showing Cursor, Claude, and ChatGPT usage"
+                loading="lazy"
               />
-              <div class="device__mock" aria-hidden="true">
-                <div class="device__chrome">
-                  <span>menu bar</span>
-                  <span class="led"></span>
-                </div>
-                <pre class="device__panel">AI Meter
-──────────────
-Cursor Pro+    62%
-Claude Code    4h 12m
-Codex          ok
-
-Included  $48 / $80
-On-demand unlimited
-Pace      slightly over
-
-●  ●  ○   warn at 80%</pre>
-              </div>
             </figure>
           </article>
           <div class="work-list">

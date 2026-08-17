@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="green" data-asset-root="">
+<html lang="en" data-theme="green" data-mode="dark" data-asset-root="">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,6 +23,17 @@
         try {
           localStorage.setItem("jamesware-theme", theme);
         } catch (e) {}
+        var savedMode = null;
+        try {
+          savedMode = localStorage.getItem("jamesware-mode");
+        } catch (e) {}
+        var mode =
+          savedMode === "light" || savedMode === "dark"
+            ? savedMode
+            : window.matchMedia("(prefers-color-scheme: light)").matches
+              ? "light"
+              : "dark";
+        document.documentElement.setAttribute("data-mode", mode);
         window.jwSetLogos = function () {
           var activeTheme = document.documentElement.getAttribute("data-theme") || "green";
           var root = document.documentElement.getAttribute("data-asset-root") || "";
@@ -133,11 +144,16 @@
                     <span class="shell__name">glauncher/</span>
                     <span class="shell__desc">windows group launcher</span>
                   </a>
-                  <a class="shell__row" href="doteq/index.html">
+                  <a class="shell__row" href="cursor-stack/index.html">
+                    <span class="shell__perm">drwxr-xr-x</span>
+                    <span class="shell__name">cursor-stack/</span>
+                    <span class="shell__desc">tabbed cursor window stack</span>
+                  </a>
+                  <!-- <a class="shell__row" href="doteq/index.html">
                     <span class="shell__perm">drwxr-xr-x</span>
                     <span class="shell__name">doteq/</span>
                     <span class="shell__desc">.env sync for local dev</span>
-                  </a>
+                  </a> -->
                   <a class="shell__row" href="#about">
                     <span class="shell__perm">-rw-r--r--</span>
                     <span class="shell__name">about.md</span>
@@ -238,13 +254,28 @@ Pace      slightly over
             <article class="work-item">
               <div class="card-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24">
+                  <rect x="3" y="7" width="18" height="12" rx="1.5" />
+                  <path d="M6 7V5.5A1.5 1.5 0 0 1 7.5 4h4A1.5 1.5 0 0 1 13 5.5V7" />
+                  <path d="M7 11h4M7 14h7" />
+                </svg>
+              </div>
+              <div class="work-item__copy">
+                <h3>CursorStack</h3>
+                <p>Group Cursor windows into a logical tabbed stack. Real windows. A tab strip on top.</p>
+                <p class="work-item__meta">macOS · Swift</p>
+                <a class="more" href="cursor-stack/index.html">View project →</a>
+              </div>
+            </article>
+            <article class="work-item">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
                   <rect x="4" y="5" width="16" height="15" rx="2" />
                   <path d="M4 9.5h16" />
                   <path d="M9 13.5l2 2 4-4.5" />
                 </svg>
               </div>
               <div class="work-item__copy">
-  <h3>Daily On Plan</h3>
+                <h3>Daily On Plan</h3>
                 <p>Stay on plan. One day at a time. A personal, on-device daily nutrition sheet.</p>
                 <p class="work-item__meta">iPhone · Watch · Mac</p>
                 <a class="more" href="daily-on-plan/index.html">View project →</a>
@@ -477,13 +508,19 @@ $ </pre>
 
         <div class="footer-base">
           <p>© 2026 JamesWare. Built by hand. Hosted on GitHub.</p>
-          <div class="theme-switcher" role="group" aria-label="Color theme">
-            <span>Phosphor</span>
-            <button class="dot" type="button" data-theme-pick="green" aria-label="Green phosphor" aria-pressed="false"></button>
-            <button class="dot" type="button" data-theme-pick="orange" aria-label="Amber phosphor" aria-pressed="false"></button>
-            <button class="dot" type="button" data-theme-pick="blue" aria-label="Blue phosphor" aria-pressed="false"></button>
-            <button class="dot" type="button" data-theme-pick="purple" aria-label="Purple phosphor" aria-pressed="false"></button>
-            <button class="dot" type="button" data-theme-pick="red" aria-label="Red phosphor" aria-pressed="false"></button>
+          <div class="theme-controls">
+            <div class="appearance-switcher" role="group" aria-label="Appearance">
+              <button type="button" data-mode-pick="dark" aria-label="Dark appearance" aria-pressed="false">Dark</button>
+              <button type="button" data-mode-pick="light" aria-label="Light appearance" aria-pressed="false">Light</button>
+            </div>
+            <div class="theme-switcher" role="group" aria-label="Color theme">
+              <span>Phosphor</span>
+              <button class="dot" type="button" data-theme-pick="green" aria-label="Green phosphor" aria-pressed="false"></button>
+              <button class="dot" type="button" data-theme-pick="orange" aria-label="Amber phosphor" aria-pressed="false"></button>
+              <button class="dot" type="button" data-theme-pick="blue" aria-label="Blue phosphor" aria-pressed="false"></button>
+              <button class="dot" type="button" data-theme-pick="purple" aria-label="Purple phosphor" aria-pressed="false"></button>
+              <button class="dot" type="button" data-theme-pick="red" aria-label="Red phosphor" aria-pressed="false"></button>
+            </div>
           </div>
           <p>Made with care.</p>
         </div>

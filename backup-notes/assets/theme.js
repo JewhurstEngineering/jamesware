@@ -2,6 +2,7 @@
   "use strict";
 
   var THEMES = ["green", "orange", "blue", "purple", "red"];
+  var MODES = ["dark", "light"];
   var FAVICON_SELECTOR = 'link[rel="icon"]';
   var THEME_COLORS = {
     green: { phosphor: "#72f05d", dim: "#224b26", ink: "#f0edd7" },
@@ -14,10 +15,27 @@
   var reducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
+  var systemLight = window.matchMedia("(prefers-color-scheme: light)");
   var typingStarted = false;
 
   function currentTheme() {
     return document.documentElement.getAttribute("data-theme") || "green";
+  }
+
+  function savedMode() {
+    try {
+      var stored = localStorage.getItem("jamesware-mode");
+      if (stored === "light" || stored === "dark") return stored;
+    } catch (e) {}
+    return null;
+  }
+
+  function systemMode() {
+    return systemLight.matches ? "light" : "dark";
+  }
+
+  function resolveMode() {
+    return savedMode() || systemMode();
   }
 
   function brandSrc(kind, theme) {
@@ -112,6 +130,26 @@
       btn.classList.toggle("is-active", on);
       btn.setAttribute("aria-pressed", on ? "true" : "false");
     });
+  }
+
+  function paintModeButtons(mode) {
+    document.querySelectorAll("[data-mode-pick]").forEach(function (btn) {
+      var on = btn.getAttribute("data-mode-pick") === mode;
+      btn.classList.toggle("is-active", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  }
+
+  function applyMode(mode, options) {
+    options = options || {};
+    if (MODES.indexOf(mode) < 0) mode = "dark";
+    document.documentElement.setAttribute("data-mode", mode);
+    if (options.persist) {
+      try {
+        localStorage.setItem("jamesware-mode", mode);
+      } catch (e) {}
+    }
+    paintModeButtons(mode);
   }
 
   function applyTheme(theme, options) {
@@ -293,13 +331,32 @@
         applyTheme(btn.getAttribute("data-theme-pick"), { persist: true });
       });
     });
+    document.querySelectorAll("[data-mode-pick]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        applyMode(btn.getAttribute("data-mode-pick"), { persist: true });
+      });
+    });
+  }
+
+  function bindSystemMode() {
+    function onChange() {
+      if (savedMode()) return;
+      applyMode(systemMode());
+    }
+    if (typeof systemLight.addEventListener === "function") {
+      systemLight.addEventListener("change", onChange);
+    } else if (typeof systemLight.addListener === "function") {
+      systemLight.addListener(onChange);
+    }
   }
 
   function ready() {
     document.documentElement.classList.add("theme-ready");
     preloadBrands();
     applyTheme(currentTheme(), { immediate: true });
+    applyMode(resolveMode());
     bindSwitcher();
+    bindSystemMode();
     startTyping();
   }
 

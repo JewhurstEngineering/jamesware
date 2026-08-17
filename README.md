@@ -1,6 +1,6 @@
 # JamesWare
 
-A zero-build website for **JamesWare** — retro CRT styling, five phosphor themes, hosted on GitHub Pages at `jamesware.dev`.
+A zero-build website for **JamesWare** — retro CRT styling, five phosphor accents, light and dark appearance, hosted on GitHub Pages at `jamesware.dev`.
 
 ## Files
 
@@ -10,9 +10,10 @@ A zero-build website for **JamesWare** — retro CRT styling, five phosphor them
 - `budmath/index.html` — BudMath (`jamesware.dev/budmath`)
 - `glauncher/index.html` — GLauncher (`jamesware.dev/glauncher`)
 - `doteq/index.html` — Doteq (`jamesware.dev/doteq`)
+- `cursor-stack/index.html` — CursorStack (`jamesware.dev/cursor-stack`)
 - `bytequest/index.html` — cloneable product template (`jamesware.dev/bytequest`); not listed in Selected Work
 - `assets/styles.css` — layout, CRT effects, product pages
-- `assets/theme.js` — theme pick, ambient cycling, logo crossfade, favicon sync
+- `assets/theme.js` — phosphor pick, light/dark appearance, ambient cycling, logo crossfade, favicon sync
 - `assets/brand/` — square and full logo PNGs per theme
 - `assets/products/{slug}/` — drop `hero.png` here for real screenshots
 - `favicon.svg`, `CNAME`, `.nojekyll`
@@ -21,7 +22,11 @@ The design comps (`initial-side-design-idea-*.png`) are reference only.
 
 ## Theme behavior
 
-The page picks a random phosphor set on every reload (green, amber, blue, purple, red) and slowly crossfades to the next set about once a minute. The five dots in the footer switch themes manually and pause the ambient cycle for that session.
+Appearance and phosphor color are independent.
+
+**Appearance** is light or dark. On a first visit the site follows `prefers-color-scheme`. Choosing Dark or Light in the footer (or `mode light` / `mode dark` in the homepage terminal) is stored as `jamesware-mode` and used on later visits. Until that manual choice exists, OS appearance changes still update the page.
+
+**Phosphor** is the accent color. The page picks a random set on every reload (green, amber, blue, purple, red) and slowly crossfades to the next set about once a minute. The five dots in the footer switch accents manually and pause the ambient cycle for that session. Terminal and device screens stay dark in both appearances so the CRT treatment stays readable.
 
 `prefers-reduced-motion` turns off cycling, flicker, scanlines, and typing animations.
 
@@ -62,6 +67,7 @@ assets/products/daily-on-plan/hero.png
 assets/products/budmath/hero.png
 assets/products/glauncher/hero.png
 assets/products/doteq/hero.png
+assets/products/cursor-stack/hero.png
 assets/products/bytequest/hero.png
 ```
 

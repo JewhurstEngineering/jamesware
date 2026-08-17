@@ -110,6 +110,82 @@
   --glow-strong: rgba(240, 93, 98, 0.46);
 }
 
+:root[data-mode="light"],
+:root[data-mode="light"][data-theme="green"] {
+  --phosphor: #187a32;
+  --phosphor-soft: #3a9a4e;
+  --phosphor-dim: #d8efe0;
+  --bg: #f4f7f5;
+  --bg-deep: #eef3f0;
+  --ink: #17211a;
+  --muted: #5b6b60;
+  --panel: #ffffff;
+  --panel-2: #f7faf8;
+  --border: rgba(24, 122, 50, 0.28);
+  --glow: rgba(24, 122, 50, 0.16);
+  --glow-strong: rgba(24, 122, 50, 0.28);
+}
+
+:root[data-mode="light"][data-theme="orange"] {
+  --phosphor: #a34f0a;
+  --phosphor-soft: #d4782a;
+  --phosphor-dim: #f3e4d2;
+  --bg: #f7f4f0;
+  --bg-deep: #f1ebe4;
+  --ink: #21180f;
+  --muted: #6b5a48;
+  --panel: #ffffff;
+  --panel-2: #fbf8f4;
+  --border: rgba(184, 90, 12, 0.28);
+  --glow: rgba(184, 90, 12, 0.16);
+  --glow-strong: rgba(184, 90, 12, 0.28);
+}
+
+:root[data-mode="light"][data-theme="blue"] {
+  --phosphor: #1a5fbf;
+  --phosphor-soft: #3b7ad4;
+  --phosphor-dim: #d7e4f6;
+  --bg: #f3f5f8;
+  --bg-deep: #e8edf3;
+  --ink: #141a24;
+  --muted: #5a6578;
+  --panel: #ffffff;
+  --panel-2: #f6f8fb;
+  --border: rgba(26, 95, 191, 0.28);
+  --glow: rgba(26, 95, 191, 0.16);
+  --glow-strong: rgba(26, 95, 191, 0.28);
+}
+
+:root[data-mode="light"][data-theme="purple"] {
+  --phosphor: #6b2ec4;
+  --phosphor-soft: #8750d6;
+  --phosphor-dim: #e7dcf6;
+  --bg: #f5f3f8;
+  --bg-deep: #eeeaf4;
+  --ink: #1a1524;
+  --muted: #645c72;
+  --panel: #ffffff;
+  --panel-2: #f8f6fb;
+  --border: rgba(107, 46, 196, 0.28);
+  --glow: rgba(107, 46, 196, 0.16);
+  --glow-strong: rgba(107, 46, 196, 0.28);
+}
+
+:root[data-mode="light"][data-theme="red"] {
+  --phosphor: #c42a2a;
+  --phosphor-soft: #d85050;
+  --phosphor-dim: #f6dcdc;
+  --bg: #f7f3f3;
+  --bg-deep: #f1eaea;
+  --ink: #211414;
+  --muted: #6b5555;
+  --panel: #ffffff;
+  --panel-2: #fbf6f6;
+  --border: rgba(196, 42, 42, 0.28);
+  --glow: rgba(196, 42, 42, 0.16);
+  --glow-strong: rgba(196, 42, 42, 0.28);
+}
+
 html.theme-ready {
   transition:
     --phosphor 0.8s ease,
@@ -131,6 +207,10 @@ html {
   color: var(--ink);
   color-scheme: dark;
   scroll-behavior: smooth;
+}
+
+html[data-mode="light"] {
+  color-scheme: light;
 }
 
 body {
@@ -1277,6 +1357,35 @@ h3 {
 
 .footer-base p:last-child {
   text-align: right;
+}
+
+.theme-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.appearance-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.2rem;
+  border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
+  border-radius: 999px;
+}
+
+.appearance-switcher button {
+  padding: 0.22rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.appearance-switcher button.is-active,
+.appearance-switcher button[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--phosphor) 16%, transparent);
+  color: var(--ink);
 }
 
 .theme-switcher {

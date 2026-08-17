@@ -2,6 +2,7 @@
   "use strict";
 
   var THEMES = ["green", "orange", "blue", "purple", "red"];
+  var MODES = ["dark", "light"];
   var CYCLE_MS = 60000;
   var FAVICON_SELECTOR = 'link[rel="icon"]';
   var THEME_COLORS = {
@@ -15,6 +16,7 @@
   var reducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
+  var systemLight = window.matchMedia("(prefers-color-scheme: light)");
   var ambientPaused = reducedMotion;
   var cycleTimer = null;
   var typingStarted = false;
@@ -27,6 +29,22 @@
 
   function currentTheme() {
     return document.documentElement.getAttribute("data-theme") || "green";
+  }
+
+  function savedMode() {
+    try {
+      var stored = localStorage.getItem("jamesware-mode");
+      if (stored === "light" || stored === "dark") return stored;
+    } catch (e) {}
+    return null;
+  }
+
+  function systemMode() {
+    return systemLight.matches ? "light" : "dark";
+  }
+
+  function resolveMode() {
+    return savedMode() || systemMode();
   }
 
   function nextTheme(from) {
@@ -127,6 +145,26 @@
       btn.classList.toggle("is-active", on);
       btn.setAttribute("aria-pressed", on ? "true" : "false");
     });
+  }
+
+  function paintModeButtons(mode) {
+    document.querySelectorAll("[data-mode-pick]").forEach(function (btn) {
+      var on = btn.getAttribute("data-mode-pick") === mode;
+      btn.classList.toggle("is-active", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  }
+
+  function applyMode(mode, options) {
+    options = options || {};
+    if (MODES.indexOf(mode) < 0) mode = "dark";
+    document.documentElement.setAttribute("data-mode", mode);
+    if (options.persist) {
+      try {
+        localStorage.setItem("jamesware-mode", mode);
+      } catch (e) {}
+    }
+    paintModeButtons(mode);
   }
 
   function applyTheme(theme, options) {
@@ -318,6 +356,7 @@
     { slug: "daily-on-plan", name: "daily on plan", href: "daily-on-plan/index.html", desc: "on-device nutrition sheet" },
     { slug: "budmath", name: "budmath", href: "budmath/index.html", desc: "ounces to grams, portions" },
     { slug: "glauncher", name: "glauncher", href: "glauncher/index.html", desc: "windows group launcher" },
+    { slug: "cursor-stack", name: "cursor stack", href: "cursor-stack/index.html", desc: "tabbed cursor window stack" },
     { slug: "doteq", name: "doteq", href: "doteq/index.html", desc: ".env sync for local dev" },
   ];
 
@@ -329,6 +368,7 @@
     "  work | ls         list projects",
     "  open <project>    open a project page (alias: cd)",
     "  theme <color>     green | orange | blue | purple | red",
+    "  mode <appearance> light | dark",
     "  contact           github + email",
     "  clear             clear the screen",
     "  exit              log out and reset",
@@ -403,6 +443,15 @@
           lines.push(outLine("out", "phosphor set to " + t));
         } else {
           lines.push(outLine("err", "usage: theme <green|orange|blue|purple|red>"));
+        }
+        break;
+      case "mode":
+        var m = arg.toLowerCase();
+        if (MODES.indexOf(m) >= 0) {
+          applyMode(m, { persist: true });
+          lines.push(outLine("out", "appearance set to " + m));
+        } else {
+          lines.push(outLine("err", "usage: mode <light|dark>"));
         }
         break;
       case "contact":
@@ -516,6 +565,23 @@
         applyTheme(btn.getAttribute("data-theme-pick"), { pauseAmbient: true });
       });
     });
+    document.querySelectorAll("[data-mode-pick]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        applyMode(btn.getAttribute("data-mode-pick"), { persist: true });
+      });
+    });
+  }
+
+  function bindSystemMode() {
+    function onChange() {
+      if (savedMode()) return;
+      applyMode(systemMode());
+    }
+    if (typeof systemLight.addEventListener === "function") {
+      systemLight.addEventListener("change", onChange);
+    } else if (typeof systemLight.addListener === "function") {
+      systemLight.addListener(onChange);
+    }
   }
 
   function bindProductShots() {
@@ -536,7 +602,9 @@
     document.documentElement.classList.add("theme-ready");
     preloadBrands();
     applyTheme(currentTheme(), { immediate: true });
+    applyMode(resolveMode());
     bindSwitcher();
+    bindSystemMode();
     bindProductShots();
     bindHeroConsole();
     startCycle();

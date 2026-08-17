@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="green" data-asset-root="../">
+<html lang="en" data-theme="green" data-mode="dark" data-asset-root="../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,6 +23,17 @@
         try {
           localStorage.setItem("jamesware-theme", theme);
         } catch (e) {}
+        var savedMode = null;
+        try {
+          savedMode = localStorage.getItem("jamesware-mode");
+        } catch (e) {}
+        var mode =
+          savedMode === "light" || savedMode === "dark"
+            ? savedMode
+            : window.matchMedia("(prefers-color-scheme: light)").matches
+              ? "light"
+              : "dark";
+        document.documentElement.setAttribute("data-mode", mode);
         window.jwSetLogos = function () {
           var activeTheme = document.documentElement.getAttribute("data-theme") || "green";
           var root = document.documentElement.getAttribute("data-asset-root") || "";
@@ -284,13 +295,19 @@ status  would add 2</pre>
         </div>
         <div class="footer-base">
           <p>© 2026 JamesWare. Built by hand. Hosted on GitHub.</p>
-          <div class="theme-switcher" role="group" aria-label="Color theme">
-            <span>Phosphor</span>
-            <button class="dot" type="button" data-theme-pick="green" aria-label="Green phosphor" aria-pressed="false"></button>
-            <button class="dot" type="button" data-theme-pick="orange" aria-label="Amber phosphor" aria-pressed="false"></button>
-            <button class="dot" type="button" data-theme-pick="blue" aria-label="Blue phosphor" aria-pressed="false"></button>
-            <button class="dot" type="button" data-theme-pick="purple" aria-label="Purple phosphor" aria-pressed="false"></button>
-            <button class="dot" type="button" data-theme-pick="red" aria-label="Red phosphor" aria-pressed="false"></button>
+          <div class="theme-controls">
+            <div class="appearance-switcher" role="group" aria-label="Appearance">
+              <button type="button" data-mode-pick="dark" aria-label="Dark appearance" aria-pressed="false">Dark</button>
+              <button type="button" data-mode-pick="light" aria-label="Light appearance" aria-pressed="false">Light</button>
+            </div>
+            <div class="theme-switcher" role="group" aria-label="Color theme">
+              <span>Phosphor</span>
+              <button class="dot" type="button" data-theme-pick="green" aria-label="Green phosphor" aria-pressed="false"></button>
+              <button class="dot" type="button" data-theme-pick="orange" aria-label="Amber phosphor" aria-pressed="false"></button>
+              <button class="dot" type="button" data-theme-pick="blue" aria-label="Blue phosphor" aria-pressed="false"></button>
+              <button class="dot" type="button" data-theme-pick="purple" aria-label="Purple phosphor" aria-pressed="false"></button>
+              <button class="dot" type="button" data-theme-pick="red" aria-label="Red phosphor" aria-pressed="false"></button>
+            </div>
           </div>
           <p>Made with care.</p>
         </div>

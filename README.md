@@ -77,7 +77,7 @@ assets/products/cursor-stack/hero.png
 assets/products/bytequest/hero.png
 ```
 
-If `hello@jamesware.dev` is not configured yet, either set it up with your email provider or change/remove the mailto links.
+If `jameswaredotdev@gmail.com` is not configured yet, either set it up with your email provider or change/remove the mailto links.
 
 ## Publish with GitHub Pages
 

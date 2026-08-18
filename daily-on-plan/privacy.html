@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="green" data-mode="dark" data-asset-root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Policy — Daily On Plan</title>
+    <meta
+      name="description"
+      content="Privacy policy for Daily On Plan: on-device journal, optional Apple Health and iCloud, no accounts, no ads."
+    />
+    <script>
+      (function () {
+        var themes = ["green", "orange", "blue", "purple", "red"];
+        var last = null;
+        try {
+          last = localStorage.getItem("jamesware-theme");
+        } catch (e) {}
+        var pool = themes.filter(function (name) {
+          return name !== last;
+        });
+        var theme = pool[Math.floor(Math.random() * pool.length)];
+        document.documentElement.setAttribute("data-theme", theme);
+        try {
+          localStorage.setItem("jamesware-theme", theme);
+        } catch (e) {}
+        var savedMode = null;
+        try {
+          savedMode = localStorage.getItem("jamesware-mode");
+        } catch (e) {}
+        var mode =
+          savedMode === "light" || savedMode === "dark"
+            ? savedMode
+            : window.matchMedia("(prefers-color-scheme: light)").matches
+              ? "light"
+              : "dark";
+        document.documentElement.setAttribute("data-mode", mode);
+        window.jwSetLogos = function () {
+          var activeTheme = document.documentElement.getAttribute("data-theme") || "green";
+          var root = document.documentElement.getAttribute("data-asset-root") || "";
+          if (root && root.charAt(root.length - 1) !== "/") root += "/";
+          document.querySelectorAll("[data-logo]").forEach(function (el) {
+            var src =
+              root +
+              "assets/brand/jamesware-" +
+              el.getAttribute("data-logo") +
+              "-" +
+              activeTheme +
+              ".png";
+            el.querySelectorAll("img").forEach(function (img) {
+              if (!img.dataset.fallbackBound) {
+                img.dataset.fallbackBound = "true";
+                img.addEventListener("error", function () {
+                  img.style.visibility = "hidden";
+                });
+                img.addEventListener("load", function () {
+                  img.style.visibility = "visible";
+                });
+              }
+              if (!img.getAttribute("src")) img.src = src;
+            });
+          });
+        };
+      })();
+    </script>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/styles.css" />
+  </head>
+  <body>
+    <div class="vignette" aria-hidden="true"></div>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="../index.html">
+          <span class="logo-swap logo-swap--square" data-logo="square">
+            <img class="logo-swap__a" alt="JamesWare" width="40" height="40" />
+            <img class="logo-swap__b" alt="" width="40" height="40" />
+          </span>
+          <span class="wordmark">James<span class="accent">Ware</span></span>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <a href="../index.html#projects">Work</a>
+          <a href="../index.html#about">About</a>
+          <a href="https://github.com/JewhurstEngineering">GitHub</a>
+          <a class="prompt-btn" href="../index.html#projects" aria-label="Open work">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M2 3h2l4 5-4 5H2l4-5-4-5zm7 8h5v2H9v-2z" />
+            </svg>
+          </a>
+        </nav>
+      </div>
+    </header>
+    <script>
+      jwSetLogos();
+    </script>
+
+    <main id="main">
+      <div class="wrap">
+        <nav class="crumb" aria-label="Breadcrumb">
+          <a href="../index.html">JamesWare</a>
+          <span aria-hidden="true">/</span>
+          <a href="index.html">Daily On Plan</a>
+          <span aria-hidden="true">/</span>
+          <span>Privacy</span>
+        </nav>
+
+        <section class="product-hero">
+          <div>
+            <p class="card-kicker">JamesWare · Daily On Plan</p>
+            <h1>Privacy Policy</h1>
+            <p class="product-tagline">Last updated 14 August 2026</p>
+          </div>
+        </section>
+
+        <section class="product-copy">
+          <div class="privacy">
+            <p>
+              Daily On Plan (“the app”) is made by James Jewhurst / jamesware.dev. This policy
+              describes what the app stores, what it sends, and what it does not do.
+            </p>
+            <p>
+              The app is a personal daily nutrition sheet. It is <strong>not</strong> a medical
+              device and does not diagnose conditions, including ketosis.
+            </p>
+          </div>
+
+          <div class="privacy">
+            <h2>What stays on your devices</h2>
+            <p>
+              Most of what you log lives in the app on your iPhone, Apple Watch, and Mac: daily
+              plan, weight and measurements, feelings and notes, optional smoking and drinking
+              counts, saved meals, preferences, and settings. An optional USDA FoodData Central API
+              key stays in Keychain on that device only — not iCloud, not backups.
+            </p>
+            <p>
+              There is no Daily On Plan account. We do not run a backend that stores your journal.
+            </p>
+          </div>
+
+          <div class="privacy">
+            <h2>Apple Health</h2>
+            <p>
+              On iPhone, if you allow it, the app reads water, alcoholic drinks, body weight, steps,
+              and sleep from Apple Health, and writes water, alcoholic drinks, workouts, and body
+              weight when you log them. Cigarette counts stay in the app only. HealthKit has no
+              public nicotine type. Revoke access in iPhone Settings → Health → Data Access &amp;
+              Devices.
+            </p>
+          </div>
+
+          <div class="privacy">
+            <h2>iCloud</h2>
+            <p>
+              If iCloud is signed in, the journal can sync through Apple’s CloudKit
+              (<code>iCloud.com.dailyonplan.tracker</code>) across your iPhone and Mac. That data is
+              in <strong>your</strong> iCloud account, not on a Daily On Plan server. Turning off
+              iCloud for the app stops new sync.
+            </p>
+          </div>
+
+          <div class="privacy">
+            <h2>Camera and barcodes</h2>
+            <p>
+              The camera is used only to scan food-package barcodes. Frames are not uploaded to
+              Daily On Plan. A successful scan may look up the barcode on Open Food Facts.
+            </p>
+          </div>
+
+          <div class="privacy">
+            <h2>Network lookups (optional)</h2>
+            <p>
+              Open Food Facts receives your search text or barcode (no API key). USDA FoodData
+              Central is used only if you paste your own API key in Settings; that key never leaves
+              the device via iCloud or backup. The app uses HTTPS. It does not use advertising
+              SDKs, analytics SDKs, or App Tracking Transparency.
+            </p>
+          </div>
+
+          <div class="privacy">
+            <h2>Notifications</h2>
+            <p>
+              Reminders you enable are scheduled on-device. They are not sent through a Daily On
+              Plan push server.
+            </p>
+          </div>
+
+          <div class="privacy">
+            <h2>What we do not collect</h2>
+            <p>
+              No sign-in, email, or customer account. No advertising ID, fingerprinting, or
+              third-party ads. No sale of personal data. No sharing of your journal with other
+              users.
+            </p>
+          </div>
+
+          <div class="privacy">
+            <h2>Children</h2>
+            <p>
+              The app is not directed at children under 13. It can log alcohol and smoking if you
+              turn those sections on.
+            </p>
+          </div>
+
+          <div class="privacy">
+            <h2>Your choices</h2>
+            <p>
+              Delete the app to remove on-device data (use Backup first if you want a copy). Restore
+              from an in-app backup you exported. Revoke Health, camera, notification, and iCloud
+              access in system Settings.
+            </p>
+          </div>
+
+          <div class="privacy">
+            <h2>Contact</h2>
+            <p>
+              Questions about this policy:
+              <a href="mailto:hello@jamesware.dev">hello@jamesware.dev</a>
+              (James Jewhurst).
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <span class="logo-swap logo-swap--footer" data-logo="square">
+              <img class="logo-swap__a" alt="JamesWare" width="48" height="48" />
+              <img class="logo-swap__b" alt="" width="48" height="48" />
+            </span>
+            <script>
+              jwSetLogos();
+            </script>
+            <div>
+              <p class="footer-wordmark">James<span class="accent">Ware</span></p>
+              <p class="footer-tagline">Made with care, by JamesWare.</p>
+              <p class="footer-tagline">A Jewhurst Engineering company.</p>
+            </div>
+          </div>
+          <div>
+            <h3>Navigation</h3>
+            <ul>
+              <li><a href="../index.html#projects">Work</a></li>
+              <li><a href="../index.html#about">About</a></li>
+              <li><a href="index.html">Daily On Plan</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Connect</h3>
+            <ul>
+              <li><a href="https://github.com/JewhurstEngineering">GitHub</a></li>
+              <li><a href="mailto:hello@jamesware.dev">Email</a></li>
+            </ul>
+          </div>
+          <div class="stay">
+            <p>Your sheet. Not a network.</p>
+          </div>
+        </div>
+        <div class="footer-base">
+          <p>© 2026 JamesWare. Built by hand. Hosted on GitHub.</p>
+          <div class="theme-controls">
+            <div class="appearance-switcher" role="group" aria-label="Appearance">
+              <button type="button" data-mode-pick="dark" aria-label="Dark appearance" aria-pressed="false">Dark</button>
+              <button type="button" data-mode-pick="light" aria-label="Light appearance" aria-pressed="false">Light</button>
+            </div>
+            <div class="theme-switcher" role="group" aria-label="Color theme">
+              <span>Phosphor</span>
+              <button class="dot" type="button" data-theme-pick="green" aria-label="Green phosphor" aria-pressed="false"></button>
+              <button class="dot" type="button" data-theme-pick="orange" aria-label="Amber phosphor" aria-pressed="false"></button>
+              <button class="dot" type="button" data-theme-pick="blue" aria-label="Blue phosphor" aria-pressed="false"></button>
+              <button class="dot" type="button" data-theme-pick="purple" aria-label="Purple phosphor" aria-pressed="false"></button>
+              <button class="dot" type="button" data-theme-pick="red" aria-label="Red phosphor" aria-pressed="false"></button>
+            </div>
+          </div>
+          <p>Made with care.</p>
+        </div>
+      </div>
+    </footer>
+    <script src="../assets/theme.js"></script>
+  </body>
+</html>

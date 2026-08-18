@@ -961,6 +961,38 @@ main {
   stroke: none;
 }
 
+.product-logo-wrap {
+  position: relative;
+  width: 112px;
+  height: 112px;
+  flex: none;
+  overflow: hidden;
+  border-radius: 22%;
+}
+
+.product-logo {
+  display: block;
+  width: 112px;
+  height: 112px;
+  flex: none;
+  object-fit: contain;
+  border-radius: 22%;
+}
+
+.product-logo-wrap .product-logo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.product-logo-wrap--card,
+.product-logo--card {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+}
+
 .flagship {
   display: grid;
   grid-template-columns: auto minmax(0, 1.05fr) minmax(240px, 0.95fr);
@@ -1415,10 +1447,13 @@ main {
 .device--shot {
   display: grid;
   min-height: 0;
-  padding: 0.65rem;
+  padding: 0;
   place-items: center;
-  background: #080b0a;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
 }
 
 .device--shot .device__photo {
@@ -1535,6 +1570,17 @@ main {
 .shot-gallery--windows,
 .shot-gallery--pair {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.shot-gallery--phone {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.shot-carousel--phone .shot img {
+  width: auto;
+  max-width: 100%;
+  max-height: 42rem;
+  margin-inline: auto;
 }
 
 .shot {
@@ -1655,17 +1701,20 @@ html[data-mode="light"] .shot {
 }
 
 .device__photo.shot--light,
-.shot img.shot--light {
+.shot img.shot--light,
+.product-logo.shot--light {
   display: none;
 }
 
 html[data-mode="light"] .device__photo.shot--dark,
-html[data-mode="light"] .shot img.shot--dark {
+html[data-mode="light"] .shot img.shot--dark,
+html[data-mode="light"] .product-logo.shot--dark {
   display: none;
 }
 
 html[data-mode="light"] .device__photo.shot--light,
-html[data-mode="light"] .shot img.shot--light {
+html[data-mode="light"] .shot img.shot--light,
+html[data-mode="light"] .product-logo.shot--light {
   display: block;
 }
 
@@ -1939,6 +1988,12 @@ html[data-mode="light"] .site-footer {
     height: 80px;
   }
 
+  .product-logo-wrap:not(.product-logo-wrap--card),
+  .product-logo:not(.product-logo--card) {
+    width: 88px;
+    height: 88px;
+  }
+
   .hex-icon__glyph {
     width: 26px;
     height: 26px;
@@ -1949,7 +2004,8 @@ html[data-mode="light"] .site-footer {
     grid-template-columns: 1fr;
   }
 
-  .shot-gallery--popover {
+  .shot-gallery--popover,
+  .shot-gallery--phone {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 

@@ -109,16 +109,13 @@
         </nav>
 
         <section class="product-hero">
-          <div class="hex-icon" aria-hidden="true">
-            <svg class="hex-icon__shape" viewBox="0 0 72 80">
-              <polygon points="36,4 67,21 67,59 36,76 5,59 5,21" />
-            </svg>
-            <svg class="hex-icon__glyph" viewBox="0 0 24 24">
-              <rect x="4" y="5" width="16" height="15" rx="2" />
-              <path d="M4 9.5h16" />
-              <path d="M9 13.5l2 2 4-4.5" />
-            </svg>
-          </div>
+          <img
+            class="product-logo"
+            src="images/dailyonplan-logo.png"
+            alt=""
+            width="92"
+            height="92"
+          />
           <div>
             <p class="card-kicker">JamesWare · Personal utility</p>
             <h1>Daily On Plan</h1>
@@ -135,30 +132,15 @@
               <span class="link-arrow" aria-disabled="true">Not on the App Store</span>
             </div>
           </div>
-          <figure class="device device--phone">
-            <!-- Drop a real capture at ../assets/products/daily-on-plan/hero.png -->
+          <figure class="device device--shot">
             <img
               class="device__photo"
-              src="../assets/products/daily-on-plan/hero.png"
-              alt="Daily On Plan on iPhone"
-              hidden
+              src="images/dailyonplan-dailyandgoals.png"
+              alt="Daily On Plan Today screen with daily status and protein and hydration rings"
+              fetchpriority="high"
             />
-            <div class="device__mock" aria-hidden="true">
-              <div class="device__chrome">
-                <span>today</span>
-                <span>on plan</span>
-              </div>
-              <div class="ring" aria-hidden="true"></div>
-              <pre class="device__panel">Protein   142 / 160
-Ketosis   Y
-Followed  Y
-
-Water     6/8
-Lunch     eggs + greens</pre>
-            </div>
           </figure>
         </section>
-        <p class="shot-caption">Screenshot slot — replace assets/products/daily-on-plan/hero.png when you have a capture.</p>
 
         <section class="product-copy">
           <div class="prose-grid">
@@ -184,6 +166,250 @@ Lunch     eggs + greens</pre>
               </p>
             </div>
           </div>
+
+          <section class="look" aria-labelledby="daily-on-plan-look">
+            <h2 id="daily-on-plan-look">Look</h2>
+
+            <div class="shot-group">
+              <h3 class="shot-group__title">Today</h3>
+              <div class="shot-gallery shot-gallery--phone">
+                <figure class="shot">
+                  <img
+                    src="images/dailyonplan-dailyandgoals.png"
+                    alt="Daily On Plan Today screen with daily status and goals"
+                    loading="lazy"
+                  />
+                  <figcaption>Daily &amp; goals</figcaption>
+                </figure>
+                <figure class="shot">
+                  <img
+                    src="images/dailyonplan-goalsandfasting.png"
+                    alt="Daily On Plan goals rings and fasting timer"
+                    loading="lazy"
+                  />
+                  <figcaption>Goals &amp; fasting</figcaption>
+                </figure>
+                <figure class="shot">
+                  <img
+                    src="images/dailyonplan-hydration.png"
+                    alt="Daily On Plan hydration log"
+                    loading="lazy"
+                  />
+                  <figcaption>Hydration</figcaption>
+                </figure>
+                <figure class="shot">
+                  <img
+                    src="images/dailyonplan-proteinlog.png"
+                    alt="Daily On Plan protein log"
+                    loading="lazy"
+                  />
+                  <figcaption>Protein log</figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div class="shot-group">
+              <h3 class="shot-group__title">More screens</h3>
+              <div
+                class="shot-carousel shot-carousel--phone"
+                data-shot-carousel
+                aria-label="Daily On Plan screenshots"
+              >
+                <div class="shot-carousel__stage" aria-live="polite">
+                  <figure
+                    class="shot shot-carousel__slide is-active"
+                    id="look-slide-collapsed"
+                    data-shot-slide
+                    aria-label="1 of 8: Daily collapsed"
+                  >
+                    <img
+                      src="images/dailyonplan-dailyandgoalsover.png"
+                      alt="Daily On Plan Today with daily status collapsed"
+                      loading="lazy"
+                    />
+                    <figcaption>Daily collapsed</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="look-slide-hydration-press"
+                    data-shot-slide
+                    aria-label="2 of 8: Hydration long-press"
+                    hidden
+                  >
+                    <img
+                      src="images/dailyonplan-hydration-longpress.png"
+                      alt="Daily On Plan hydration long-press drink menu"
+                      loading="lazy"
+                    />
+                    <figcaption>Hydration long-press</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="look-slide-log-meal"
+                    data-shot-slide
+                    aria-label="3 of 8: Log meal"
+                    hidden
+                  >
+                    <img
+                      src="images/dailyonplan-proteinlog-logmeal.png"
+                      alt="Daily On Plan log meal food search"
+                      loading="lazy"
+                    />
+                    <figcaption>Log meal</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="look-slide-eating"
+                    data-shot-slide
+                    aria-label="4 of 8: What I've been eating"
+                    hidden
+                  >
+                    <img
+                      src="images/dailyonplan-whativebeeneating.png"
+                      alt="Daily On Plan What I've Been Eating day view"
+                      loading="lazy"
+                    />
+                    <figcaption>What I've been eating</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="look-slide-eating-under"
+                    data-shot-slide
+                    aria-label="5 of 8: Day under goal"
+                    hidden
+                  >
+                    <img
+                      src="images/dailyonplan-whativebeeneating-under.png"
+                      alt="Daily On Plan What I've Been Eating on a day under goal"
+                      loading="lazy"
+                    />
+                    <figcaption>Day under goal</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="look-slide-snapshot"
+                    data-shot-slide
+                    aria-label="6 of 8: Snapshot"
+                    hidden
+                  >
+                    <img
+                      src="images/dailyonplan-snapshot.png"
+                      alt="Daily On Plan Snapshot report"
+                      loading="lazy"
+                    />
+                    <figcaption>Snapshot</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="look-slide-export"
+                    data-shot-slide
+                    aria-label="7 of 8: Export"
+                    hidden
+                  >
+                    <img
+                      src="images/dailyonplan-export.png"
+                      alt="Daily On Plan export formats"
+                      loading="lazy"
+                    />
+                    <figcaption>Export</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="look-slide-backup"
+                    data-shot-slide
+                    aria-label="8 of 8: Backup &amp; restore"
+                    hidden
+                  >
+                    <img
+                      src="images/dailyonplan-backupandrestore.png"
+                      alt="Daily On Plan backup and restore"
+                      loading="lazy"
+                    />
+                    <figcaption>Backup &amp; restore</figcaption>
+                  </figure>
+                </div>
+
+                <div class="shot-carousel__controls">
+                  <button type="button" data-carousel-prev aria-label="Previous screenshot">
+                    <span aria-hidden="true">←</span> Previous
+                  </button>
+                  <p aria-atomic="true">
+                    <span data-carousel-current>1</span> / 8 ·
+                    <strong data-carousel-label>Daily collapsed</strong>
+                  </p>
+                  <button type="button" data-carousel-next aria-label="Next screenshot">
+                    Next <span aria-hidden="true">→</span>
+                  </button>
+                </div>
+
+                <div class="shot-carousel__tabs" role="tablist" aria-label="Choose screen">
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="look-slide-collapsed"
+                    aria-selected="true"
+                    data-carousel-go="0"
+                  >Daily collapsed</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="look-slide-hydration-press"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="1"
+                  >Hydration long-press</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="look-slide-log-meal"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="2"
+                  >Log meal</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="look-slide-eating"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="3"
+                  >What I've been eating</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="look-slide-eating-under"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="4"
+                  >Day under goal</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="look-slide-snapshot"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="5"
+                  >Snapshot</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="look-slide-export"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="6"
+                  >Export</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="look-slide-backup"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="7"
+                  >Backup &amp; restore</button>
+                </div>
+              </div>
+            </div>
+          </section>
 
           <div class="cap-grid">
             <h2>Capabilities</h2>
@@ -236,12 +462,21 @@ Lunch     eggs + greens</pre>
             <h2>Also on the bench</h2>
             <div class="work-list">
               <article class="work-item">
-                <div class="card-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M4 16a8 8 0 1 1 16 0" />
-                    <path d="M12 16l4-5" />
-                    <circle cx="12" cy="16" r="1.1" fill="currentColor" />
-                  </svg>
+                <div class="product-logo-wrap product-logo-wrap--card" aria-hidden="true">
+                  <img
+                    class="product-logo shot--dark"
+                    src="../ai-meter/images/jamesware-aimeter-logo-square.png"
+                    alt=""
+                    width="44"
+                    height="44"
+                  />
+                  <img
+                    class="product-logo shot--light"
+                    src="../ai-meter/images/jamesware-aimeter-logo-square-black.png"
+                    alt=""
+                    width="44"
+                    height="44"
+                  />
                 </div>
                 <h3>AI Meter</h3>
                 <p>Local-first usage meter for Cursor, Claude, and Codex.</p>

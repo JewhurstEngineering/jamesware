@@ -109,15 +109,21 @@
         </nav>
 
         <section class="product-hero">
-          <div class="hex-icon" aria-hidden="true">
-            <svg class="hex-icon__shape" viewBox="0 0 72 80">
-              <polygon points="36,4 67,21 67,59 36,76 5,59 5,21" />
-            </svg>
-            <svg class="hex-icon__glyph" viewBox="0 0 24 24">
-              <rect x="3" y="7" width="18" height="12" rx="1.5" />
-              <path d="M6 7V5.5A1.5 1.5 0 0 1 7.5 4h4A1.5 1.5 0 0 1 13 5.5V7" />
-              <path d="M7 11h4M7 14h7" />
-            </svg>
+          <div class="product-logo-wrap" aria-hidden="true">
+            <img
+              class="product-logo shot--dark"
+              src="images/cursorstack-logo-square-color.png"
+              alt=""
+              width="92"
+              height="92"
+            />
+            <img
+              class="product-logo shot--light"
+              src="images/cursorstack-logo-square-black.png"
+              alt=""
+              width="92"
+              height="92"
+            />
           </div>
           <div>
             <p class="card-kicker">JamesWare · macOS utility</p>
@@ -126,41 +132,25 @@
               Group Cursor windows into a logical tabbed stack. Real windows. A tab strip on top.
             </p>
             <div class="badge-row">
-              <span class="status status--building">Building</span>
+              <span class="status status--released">Released</span>
               <span class="badge">macOS 14+</span>
               <span class="badge">Swift</span>
+              <span class="badge">MIT</span>
             </div>
             <div class="cta-row">
-              <span class="btn btn--disabled" aria-disabled="true">Direct download planned</span>
-              <span class="link-arrow" aria-disabled="true">Not on the Mac App Store</span>
+              <a class="btn" href="https://github.com/JewhurstEngineering/cursor-stack/releases/latest">Download <span aria-hidden="true">›</span></a>
+              <a class="btn" href="https://github.com/JewhurstEngineering/cursor-stack">View source <span aria-hidden="true">›</span></a>
             </div>
           </div>
-          <figure class="device">
+          <figure class="device device--shot">
             <img
               class="device__photo"
-              src="../assets/products/cursor-stack/hero.png"
-              alt="CursorStack tab strip over Cursor windows"
-              hidden
+              src="images/cursorstack-windowbar.png"
+              alt="CursorStack tab strip above a Cursor window"
+              fetchpriority="high"
             />
-            <div class="device__mock" aria-hidden="true">
-              <div class="device__chrome">
-                <span>tab strip</span>
-                <span class="led"></span>
-              </div>
-              <pre class="device__panel">CursorStack
-──────────────
-[ jamesware ] [ budmath ] [ + ]
-
-⌃⌥ ]   next
-⌃⌥ [   prev
-⌃⌥ 1–9 jump
-
-dashed = reconnect
-after Cursor restarts</pre>
-            </div>
           </figure>
         </section>
-        <p class="shot-caption">Screenshot slot — replace assets/products/cursor-stack/hero.png when you have a capture.</p>
 
         <section class="product-copy">
           <div class="prose-grid">
@@ -185,6 +175,208 @@ after Cursor restarts</pre>
             </div>
           </div>
 
+          <section class="look" aria-labelledby="cursor-stack-look">
+            <h2 id="cursor-stack-look">Look</h2>
+
+            <div class="shot-group">
+              <h3 class="shot-group__title">The stack</h3>
+              <div class="shot-gallery shot-gallery--pair">
+                <figure class="shot">
+                  <img
+                    src="images/cursorstack-windowbar.png"
+                    alt="CursorStack tab strip above a Cursor window"
+                    loading="lazy"
+                  />
+                  <figcaption>Tab strip</figcaption>
+                </figure>
+                <figure class="shot">
+                  <img
+                    src="images/cursorstack-menubar.png"
+                    alt="CursorStack menu bar picker showing the current stack"
+                    loading="lazy"
+                  />
+                  <figcaption>Menu bar</figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div class="shot-group">
+              <h3 class="shot-group__title">Settings</h3>
+              <div class="shot-carousel" data-shot-carousel aria-label="CursorStack settings screenshots">
+                <div class="shot-carousel__stage" aria-live="polite">
+                  <figure
+                    class="shot shot-carousel__slide is-active"
+                    id="settings-slide-general"
+                    data-shot-slide
+                    aria-label="1 of 7: General"
+                  >
+                    <img
+                      src="images/cursorstack-settings-general.png"
+                      alt="CursorStack General settings"
+                      loading="lazy"
+                    />
+                    <figcaption>General</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="settings-slide-tabs"
+                    data-shot-slide
+                    aria-label="2 of 7: Tabs"
+                    hidden
+                  >
+                    <img
+                      src="images/cursorstack-settings-tabs.png"
+                      alt="CursorStack Tabs settings"
+                      loading="lazy"
+                    />
+                    <figcaption>Tabs</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="settings-slide-shortcuts"
+                    data-shot-slide
+                    aria-label="3 of 7: Shortcuts"
+                    hidden
+                  >
+                    <img
+                      src="images/cursorstack-settings-shortcuts.png"
+                      alt="CursorStack Shortcuts settings"
+                      loading="lazy"
+                    />
+                    <figcaption>Shortcuts</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="settings-slide-attention"
+                    data-shot-slide
+                    aria-label="4 of 7: Attention"
+                    hidden
+                  >
+                    <img
+                      src="images/cursorstack-settings-attention.png"
+                      alt="CursorStack Attention settings"
+                      loading="lazy"
+                    />
+                    <figcaption>Attention</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="settings-slide-advanced"
+                    data-shot-slide
+                    aria-label="5 of 7: Advanced"
+                    hidden
+                  >
+                    <img
+                      src="images/cursorstack-settings-advanced.png"
+                      alt="CursorStack Advanced settings"
+                      loading="lazy"
+                    />
+                    <figcaption>Advanced</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="settings-slide-add-windows"
+                    data-shot-slide
+                    aria-label="6 of 7: Add windows"
+                    hidden
+                  >
+                    <img
+                      src="images/cursorstack-settings-add-windows.png"
+                      alt="CursorStack Add windows picker"
+                      loading="lazy"
+                    />
+                    <figcaption>Add windows</figcaption>
+                  </figure>
+                  <figure
+                    class="shot shot-carousel__slide"
+                    id="settings-slide-manage-tabs"
+                    data-shot-slide
+                    aria-label="7 of 7: Manage groups"
+                    hidden
+                  >
+                    <img
+                      src="images/cursorstack-settings-manage-tabs.png"
+                      alt="CursorStack Manage Groups window"
+                      loading="lazy"
+                    />
+                    <figcaption>Manage groups</figcaption>
+                  </figure>
+                </div>
+
+                <div class="shot-carousel__controls">
+                  <button type="button" data-carousel-prev aria-label="Previous settings screenshot">
+                    <span aria-hidden="true">←</span> Previous
+                  </button>
+                  <p aria-atomic="true">
+                    <span data-carousel-current>1</span> / 7 ·
+                    <strong data-carousel-label>General</strong>
+                  </p>
+                  <button type="button" data-carousel-next aria-label="Next settings screenshot">
+                    Next <span aria-hidden="true">→</span>
+                  </button>
+                </div>
+
+                <div class="shot-carousel__tabs" role="tablist" aria-label="Choose settings screen">
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="settings-slide-general"
+                    aria-selected="true"
+                    data-carousel-go="0"
+                  >General</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="settings-slide-tabs"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="1"
+                  >Tabs</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="settings-slide-shortcuts"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="2"
+                  >Shortcuts</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="settings-slide-attention"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="3"
+                  >Attention</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="settings-slide-advanced"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="4"
+                  >Advanced</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="settings-slide-add-windows"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="5"
+                  >Add windows</button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-controls="settings-slide-manage-tabs"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-carousel-go="6"
+                  >Manage groups</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <div class="cap-grid">
             <h2>Capabilities</h2>
             <ul class="cap-list">
@@ -206,28 +398,29 @@ after Cursor restarts</pre>
               Accessibility window control. Not App Sandboxed — that API cannot run inside Apple’s
               sandbox, so this cannot ship on the Mac App Store. Clicking another app hides the strip
               like a normal window. The red close button quits CursorStack; Cursor windows stay open.
-              Nothing is uploaded. No account.
+              Nothing is uploaded. No account. The only network request is Sparkle checking the public
+              GitHub release feed for updates.
             </p>
           </div>
 
           <div class="state">
             <h2>Current state</h2>
             <p>
-              Building. Native app on macOS 14+. Usable locally; signed, notarized direct download
-              planned. Optional Notifications. Optional Screen Recording for experimental visual
-              attention. Source is not a public repo yet.
+              1.0. Open source under MIT. Signed, notarized builds on GitHub Releases for Apple
+              silicon, macOS 14+. Sparkle checks that feed for updates. Optional Notifications.
+              Optional Screen Recording for experimental visual attention. Not on the Mac App Store.
             </p>
           </div>
 
           <div class="get-it">
             <h2>Get it</h2>
             <p class="note">
-              No Mac App Store. Sandbox would block Accessibility. When a notarized build exists, this
-              becomes a real download — not a fake button.
+              No Mac App Store — sandbox would block Accessibility. Download the latest signed build
+              from GitHub Releases, then Install to Applications in Settings.
             </p>
             <div class="cta-row">
-              <span class="btn btn--disabled" aria-disabled="true">Direct download planned</span>
-              <span class="btn btn--disabled" aria-disabled="true">Source not public yet</span>
+              <a class="btn" href="https://github.com/JewhurstEngineering/cursor-stack/releases/latest">Download <span aria-hidden="true">›</span></a>
+              <a class="btn" href="https://github.com/JewhurstEngineering/cursor-stack">GitHub <span aria-hidden="true">›</span></a>
             </div>
           </div>
 
@@ -235,12 +428,21 @@ after Cursor restarts</pre>
             <h2>Also on the bench</h2>
             <div class="work-list">
               <article class="work-item">
-                <div class="card-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M4 16a8 8 0 1 1 16 0" />
-                    <path d="M12 16l4-5" />
-                    <circle cx="12" cy="16" r="1.1" fill="currentColor" />
-                  </svg>
+                <div class="product-logo-wrap product-logo-wrap--card" aria-hidden="true">
+                  <img
+                    class="product-logo shot--dark"
+                    src="../ai-meter/images/jamesware-aimeter-logo-square.png"
+                    alt=""
+                    width="44"
+                    height="44"
+                  />
+                  <img
+                    class="product-logo shot--light"
+                    src="../ai-meter/images/jamesware-aimeter-logo-square-black.png"
+                    alt=""
+                    width="44"
+                    height="44"
+                  />
                 </div>
                 <div class="work-item__copy">
                   <h3>AI Meter</h3>
